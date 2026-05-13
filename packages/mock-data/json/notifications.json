@@ -1,0 +1,272 @@
+[
+  {
+    "id": "not_0014",
+    "userId": "usr_0005",
+    "kind": "LOYALTY",
+    "title": "Loyalty tier unlocked",
+    "body": "You've reached 5 attempts - 5% loyalty discount unlocked on your next evaluation.",
+    "createdAt": "2026-05-13T15:30:00.000Z",
+    "readAt": "2026-05-09T15:30:00.000Z"
+  },
+  {
+    "id": "not_0018",
+    "userId": "usr_0009",
+    "kind": "FAIL",
+    "title": "Evaluation closed",
+    "body": "Your evaluation hit the EOD drawdown. Use your loyalty credit on the next attempt.",
+    "createdAt": "2026-05-13T15:30:00.000Z",
+    "readAt": "2026-05-10T15:30:00.000Z"
+  },
+  {
+    "id": "not_0017",
+    "userId": "usr_0012",
+    "kind": "ALERT",
+    "title": "Account approaching daily loss limit",
+    "body": "Within $120 of daily loss limit. Trade carefully.",
+    "createdAt": "2026-05-12T15:30:00.000Z",
+    "readAt": null
+  },
+  {
+    "id": "not_0006",
+    "userId": "usr_0012",
+    "kind": "ALERT",
+    "title": "Account approaching daily loss limit",
+    "body": "Within $120 of daily loss limit. Trade carefully.",
+    "createdAt": "2026-05-11T15:30:00.000Z",
+    "readAt": null
+  },
+  {
+    "id": "not_0009",
+    "userId": "usr_0011",
+    "kind": "LOYALTY",
+    "title": "Loyalty tier unlocked",
+    "body": "You've reached 5 attempts - 5% loyalty discount unlocked on your next evaluation.",
+    "createdAt": "2026-05-11T15:30:00.000Z",
+    "readAt": "2026-05-07T15:30:00.000Z"
+  },
+  {
+    "id": "not_0025",
+    "userId": "usr_0020",
+    "kind": "FAIL",
+    "title": "Evaluation closed",
+    "body": "Your evaluation hit the EOD drawdown. Use your loyalty credit on the next attempt.",
+    "createdAt": "2026-05-11T15:30:00.000Z",
+    "readAt": "2026-05-12T15:30:00.000Z"
+  },
+  {
+    "id": "not_0010",
+    "userId": "usr_0006",
+    "kind": "ALERT",
+    "title": "Account approaching daily loss limit",
+    "body": "Within $120 of daily loss limit. Trade carefully.",
+    "createdAt": "2026-05-10T15:30:00.000Z",
+    "readAt": "2026-05-10T15:30:00.000Z"
+  },
+  {
+    "id": "not_0011",
+    "userId": "usr_0016",
+    "kind": "FAIL",
+    "title": "Evaluation closed",
+    "body": "Your evaluation hit the EOD drawdown. Use your loyalty credit on the next attempt.",
+    "createdAt": "2026-05-10T15:30:00.000Z",
+    "readAt": "2026-05-06T15:30:00.000Z"
+  },
+  {
+    "id": "not_0026",
+    "userId": "usr_0020",
+    "kind": "ALERT",
+    "title": "Account approaching daily loss limit",
+    "body": "Within $120 of daily loss limit. Trade carefully.",
+    "createdAt": "2026-05-10T15:30:00.000Z",
+    "readAt": "2026-05-13T15:30:00.000Z"
+  },
+  {
+    "id": "not_0027",
+    "userId": "usr_0011",
+    "kind": "SYSTEM",
+    "title": "Platform maintenance scheduled",
+    "body": "Brief maintenance window Sunday 02:00 UTC.",
+    "createdAt": "2026-05-09T15:30:00.000Z",
+    "readAt": "2026-05-12T15:30:00.000Z"
+  },
+  {
+    "id": "not_0003",
+    "userId": "usr_0015",
+    "kind": "ALERT",
+    "title": "Account approaching daily loss limit",
+    "body": "Within $120 of daily loss limit. Trade carefully.",
+    "createdAt": "2026-05-07T15:30:00.000Z",
+    "readAt": "2026-05-11T15:30:00.000Z"
+  },
+  {
+    "id": "not_0030",
+    "userId": "usr_0014",
+    "kind": "PASS",
+    "title": "Evaluation passed",
+    "body": "Your funded account credentials are on the way. Check your email.",
+    "createdAt": "2026-05-05T15:30:00.000Z",
+    "readAt": null
+  },
+  {
+    "id": "not_0015",
+    "userId": "usr_0014",
+    "kind": "FAIL",
+    "title": "Evaluation closed",
+    "body": "Your evaluation hit the EOD drawdown. Use your loyalty credit on the next attempt.",
+    "createdAt": "2026-05-04T15:30:00.000Z",
+    "readAt": null
+  },
+  {
+    "id": "not_0013",
+    "userId": "usr_0004",
+    "kind": "PASS",
+    "title": "Evaluation passed",
+    "body": "Your funded account credentials are on the way. Check your email.",
+    "createdAt": "2026-05-03T15:30:00.000Z",
+    "readAt": null
+  },
+  {
+    "id": "not_0019",
+    "userId": "usr_0002",
+    "kind": "PASS",
+    "title": "Evaluation passed",
+    "body": "Your funded account credentials are on the way. Check your email.",
+    "createdAt": "2026-05-03T15:30:00.000Z",
+    "readAt": "2026-05-12T15:30:00.000Z"
+  },
+  {
+    "id": "not_0020",
+    "userId": "usr_0006",
+    "kind": "PAYOUT",
+    "title": "Payout disbursed",
+    "body": "Your payout of $2,000 has been sent via bank transfer. ETA 2–3 business days.",
+    "createdAt": "2026-05-03T15:30:00.000Z",
+    "readAt": null
+  },
+  {
+    "id": "not_0002",
+    "userId": "usr_0020",
+    "kind": "PAYOUT",
+    "title": "Payout disbursed",
+    "body": "Your payout of $2,000 has been sent via bank transfer. ETA 2–3 business days.",
+    "createdAt": "2026-05-02T15:30:00.000Z",
+    "readAt": "2026-05-08T15:30:00.000Z"
+  },
+  {
+    "id": "not_0005",
+    "userId": "usr_0011",
+    "kind": "PASS",
+    "title": "Evaluation passed",
+    "body": "Your funded account credentials are on the way. Check your email.",
+    "createdAt": "2026-05-02T15:30:00.000Z",
+    "readAt": null
+  },
+  {
+    "id": "not_0022",
+    "userId": "usr_0012",
+    "kind": "FAIL",
+    "title": "Evaluation closed",
+    "body": "Your evaluation hit the EOD drawdown. Use your loyalty credit on the next attempt.",
+    "createdAt": "2026-05-02T15:30:00.000Z",
+    "readAt": null
+  },
+  {
+    "id": "not_0024",
+    "userId": "usr_0012",
+    "kind": "LOYALTY",
+    "title": "Loyalty tier unlocked",
+    "body": "You've reached 5 attempts - 5% loyalty discount unlocked on your next evaluation.",
+    "createdAt": "2026-05-02T15:30:00.000Z",
+    "readAt": null
+  },
+  {
+    "id": "not_0028",
+    "userId": "usr_0007",
+    "kind": "SYSTEM",
+    "title": "Platform maintenance scheduled",
+    "body": "Brief maintenance window Sunday 02:00 UTC.",
+    "createdAt": "2026-05-02T15:30:00.000Z",
+    "readAt": null
+  },
+  {
+    "id": "not_0001",
+    "userId": "usr_0008",
+    "kind": "SYSTEM",
+    "title": "Platform maintenance scheduled",
+    "body": "Brief maintenance window Sunday 02:00 UTC.",
+    "createdAt": "2026-05-01T15:30:00.000Z",
+    "readAt": "2026-05-10T15:30:00.000Z"
+  },
+  {
+    "id": "not_0016",
+    "userId": "usr_0005",
+    "kind": "PAYOUT",
+    "title": "Payout disbursed",
+    "body": "Your payout of $2,000 has been sent via bank transfer. ETA 2–3 business days.",
+    "createdAt": "2026-05-01T15:30:00.000Z",
+    "readAt": null
+  },
+  {
+    "id": "not_0029",
+    "userId": "usr_0017",
+    "kind": "LOYALTY",
+    "title": "Loyalty tier unlocked",
+    "body": "You've reached 5 attempts - 5% loyalty discount unlocked on your next evaluation.",
+    "createdAt": "2026-05-01T15:30:00.000Z",
+    "readAt": null
+  },
+  {
+    "id": "not_0021",
+    "userId": "usr_0002",
+    "kind": "SYSTEM",
+    "title": "Platform maintenance scheduled",
+    "body": "Brief maintenance window Sunday 02:00 UTC.",
+    "createdAt": "2026-04-30T15:30:00.000Z",
+    "readAt": null
+  },
+  {
+    "id": "not_0004",
+    "userId": "usr_0015",
+    "kind": "FAIL",
+    "title": "Evaluation closed",
+    "body": "Your evaluation hit the EOD drawdown. Use your loyalty credit on the next attempt.",
+    "createdAt": "2026-04-29T15:30:00.000Z",
+    "readAt": null
+  },
+  {
+    "id": "not_0007",
+    "userId": "usr_0003",
+    "kind": "PAYOUT",
+    "title": "Payout disbursed",
+    "body": "Your payout of $2,000 has been sent via bank transfer. ETA 2–3 business days.",
+    "createdAt": "2026-04-29T15:30:00.000Z",
+    "readAt": "2026-05-09T15:30:00.000Z"
+  },
+  {
+    "id": "not_0008",
+    "userId": "usr_0016",
+    "kind": "PASS",
+    "title": "Evaluation passed",
+    "body": "Your funded account credentials are on the way. Check your email.",
+    "createdAt": "2026-04-29T15:30:00.000Z",
+    "readAt": "2026-05-11T15:30:00.000Z"
+  },
+  {
+    "id": "not_0012",
+    "userId": "usr_0007",
+    "kind": "FAIL",
+    "title": "Evaluation closed",
+    "body": "Your evaluation hit the EOD drawdown. Use your loyalty credit on the next attempt.",
+    "createdAt": "2026-04-29T15:30:00.000Z",
+    "readAt": "2026-05-12T15:30:00.000Z"
+  },
+  {
+    "id": "not_0023",
+    "userId": "usr_0015",
+    "kind": "PAYOUT",
+    "title": "Payout disbursed",
+    "body": "Your payout of $2,000 has been sent via bank transfer. ETA 2–3 business days.",
+    "createdAt": "2026-04-29T15:30:00.000Z",
+    "readAt": "2026-05-13T15:30:00.000Z"
+  }
+]

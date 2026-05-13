@@ -1,0 +1,182 @@
+[
+  {
+    "signupMonth": "2025-11",
+    "buckets": [
+      {
+        "bucket": "0-30d",
+        "valuePct": 9,
+        "count": 99
+      },
+      {
+        "bucket": "31-60d",
+        "valuePct": 6,
+        "count": 200
+      },
+      {
+        "bucket": "61-90d",
+        "valuePct": 3,
+        "count": 127
+      },
+      {
+        "bucket": "91-120d",
+        "valuePct": 12,
+        "count": 127
+      },
+      {
+        "bucket": "121d+",
+        "valuePct": 7,
+        "count": 50
+      }
+    ]
+  },
+  {
+    "signupMonth": "2025-12",
+    "buckets": [
+      {
+        "bucket": "0-30d",
+        "valuePct": 3,
+        "count": 61
+      },
+      {
+        "bucket": "31-60d",
+        "valuePct": 16,
+        "count": 81
+      },
+      {
+        "bucket": "61-90d",
+        "valuePct": 13,
+        "count": 199
+      },
+      {
+        "bucket": "91-120d",
+        "valuePct": 18,
+        "count": 29
+      },
+      {
+        "bucket": "121d+",
+        "valuePct": 7,
+        "count": 174
+      }
+    ]
+  },
+  {
+    "signupMonth": "2026-01",
+    "buckets": [
+      {
+        "bucket": "0-30d",
+        "valuePct": 17,
+        "count": 182
+      },
+      {
+        "bucket": "31-60d",
+        "valuePct": 16,
+        "count": 78
+      },
+      {
+        "bucket": "61-90d",
+        "valuePct": 17,
+        "count": 52
+      },
+      {
+        "bucket": "91-120d",
+        "valuePct": 17,
+        "count": 211
+      },
+      {
+        "bucket": "121d+",
+        "valuePct": 18,
+        "count": 210
+      }
+    ]
+  },
+  {
+    "signupMonth": "2026-02",
+    "buckets": [
+      {
+        "bucket": "0-30d",
+        "valuePct": 6,
+        "count": 170
+      },
+      {
+        "bucket": "31-60d",
+        "valuePct": 4,
+        "count": 126
+      },
+      {
+        "bucket": "61-90d",
+        "valuePct": 16,
+        "count": 32
+      },
+      {
+        "bucket": "91-120d",
+        "valuePct": 7,
+        "count": 129
+      },
+      {
+        "bucket": "121d+",
+        "valuePct": 2,
+        "count": 37
+      }
+    ]
+  },
+  {
+    "signupMonth": "2026-03",
+    "buckets": [
+      {
+        "bucket": "0-30d",
+        "valuePct": 6,
+        "count": 30
+      },
+      {
+        "bucket": "31-60d",
+        "valuePct": 18,
+        "count": 179
+      },
+      {
+        "bucket": "61-90d",
+        "valuePct": 18,
+        "count": 192
+      },
+      {
+        "bucket": "91-120d",
+        "valuePct": 13,
+        "count": 68
+      },
+      {
+        "bucket": "121d+",
+        "valuePct": 10,
+        "count": 77
+      }
+    ]
+  },
+  {
+    "signupMonth": "2026-04",
+    "buckets": [
+      {
+        "bucket": "0-30d",
+        "valuePct": 5,
+        "count": 173
+      },
+      {
+        "bucket": "31-60d",
+        "valuePct": 18,
+        "count": 217
+      },
+      {
+        "bucket": "61-90d",
+        "valuePct": 8,
+        "count": 134
+      },
+      {
+        "bucket": "91-120d",
+        "valuePct": 6,
+        "count": 188
+      },
+      {
+        "bucket": "121d+",
+        "valuePct": 18,
+        "count": 40
+      }
+    ]
+  }
+]

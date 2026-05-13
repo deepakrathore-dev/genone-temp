@@ -1,0 +1,1483 @@
+[
+  {
+    "id": "pay_00005",
+    "userId": "usr_0003",
+    "accountId": "acc_00004",
+    "sequence": 1,
+    "amountCents": 99635,
+    "status": "PROCESSED",
+    "requestedAt": "2026-05-12T15:30:00.000Z",
+    "approvedAt": "2026-05-12T15:30:00.000Z",
+    "processedAt": "2026-05-12T15:30:00.000Z",
+    "disbursedAt": null,
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00007",
+    "userId": "usr_0003",
+    "accountId": "acc_00004",
+    "sequence": 3,
+    "amountCents": 194716,
+    "status": "APPROVED",
+    "requestedAt": "2026-05-12T15:30:00.000Z",
+    "approvedAt": "2026-05-12T15:30:00.000Z",
+    "processedAt": null,
+    "disbursedAt": null,
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00029",
+    "userId": "usr_0011",
+    "accountId": "acc_00026",
+    "sequence": 1,
+    "amountCents": 180838,
+    "status": "DISBURSED",
+    "requestedAt": "2026-05-11T15:30:00.000Z",
+    "approvedAt": "2026-05-11T15:30:00.000Z",
+    "processedAt": "2026-05-11T15:30:00.000Z",
+    "disbursedAt": "2026-05-11T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00040",
+    "userId": "usr_0017",
+    "accountId": "acc_00037",
+    "sequence": 1,
+    "amountCents": 116073,
+    "status": "DISBURSED",
+    "requestedAt": "2026-05-11T15:30:00.000Z",
+    "approvedAt": "2026-05-11T15:30:00.000Z",
+    "processedAt": "2026-05-11T15:30:00.000Z",
+    "disbursedAt": "2026-05-11T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00041",
+    "userId": "usr_0017",
+    "accountId": "acc_00037",
+    "sequence": 2,
+    "amountCents": 122012,
+    "status": "DISBURSED",
+    "requestedAt": "2026-05-11T15:30:00.000Z",
+    "approvedAt": "2026-05-11T15:30:00.000Z",
+    "processedAt": "2026-05-11T15:30:00.000Z",
+    "disbursedAt": "2026-05-11T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "CRYPTO"
+  },
+  {
+    "id": "pay_00044",
+    "userId": "usr_0018",
+    "accountId": "acc_00041",
+    "sequence": 1,
+    "amountCents": 185628,
+    "status": "REQUESTED",
+    "requestedAt": "2026-05-11T15:30:00.000Z",
+    "approvedAt": null,
+    "processedAt": null,
+    "disbursedAt": null,
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "FAIL",
+      "greenDays": "PASS",
+      "consistency": "FAIL",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Veriff verification pending",
+        "buffer": "Buffer at 64% of target",
+        "greenDays": "3/5 green days accumulated",
+        "consistency": "Day 04/22 = 58% of cumulative profit",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "CRYPTO"
+  },
+  {
+    "id": "pay_00006",
+    "userId": "usr_0003",
+    "accountId": "acc_00004",
+    "sequence": 2,
+    "amountCents": 79035,
+    "status": "APPROVED",
+    "requestedAt": "2026-05-10T15:30:00.000Z",
+    "approvedAt": "2026-05-10T15:30:00.000Z",
+    "processedAt": null,
+    "disbursedAt": null,
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00022",
+    "userId": "usr_0008",
+    "accountId": "acc_00020",
+    "sequence": 2,
+    "amountCents": 198086,
+    "status": "DISBURSED",
+    "requestedAt": "2026-05-10T15:30:00.000Z",
+    "approvedAt": "2026-05-10T15:30:00.000Z",
+    "processedAt": "2026-05-10T15:30:00.000Z",
+    "disbursedAt": "2026-05-10T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "FAIL",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Veriff verification pending",
+        "buffer": "Buffer at 64% of target",
+        "greenDays": "3/5 green days accumulated",
+        "consistency": "Day 04/22 = 58% of cumulative profit",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00032",
+    "userId": "usr_0011",
+    "accountId": "acc_00027",
+    "sequence": 1,
+    "amountCents": 216420,
+    "status": "DISBURSED",
+    "requestedAt": "2026-05-10T15:30:00.000Z",
+    "approvedAt": "2026-05-10T15:30:00.000Z",
+    "processedAt": "2026-05-10T15:30:00.000Z",
+    "disbursedAt": "2026-05-10T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00036",
+    "userId": "usr_0016",
+    "accountId": "acc_00036",
+    "sequence": 1,
+    "amountCents": 130566,
+    "status": "DISBURSED",
+    "requestedAt": "2026-05-09T15:30:00.000Z",
+    "approvedAt": "2026-05-09T15:30:00.000Z",
+    "processedAt": "2026-05-09T15:30:00.000Z",
+    "disbursedAt": "2026-05-09T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "CRYPTO"
+  },
+  {
+    "id": "pay_00015",
+    "userId": "usr_0004",
+    "accountId": "acc_00010",
+    "sequence": 2,
+    "amountCents": 293709,
+    "status": "REQUESTED",
+    "requestedAt": "2026-05-08T15:30:00.000Z",
+    "approvedAt": null,
+    "processedAt": null,
+    "disbursedAt": null,
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00025",
+    "userId": "usr_0010",
+    "accountId": "acc_00022",
+    "sequence": 1,
+    "amountCents": 147251,
+    "status": "DISBURSED",
+    "requestedAt": "2026-05-08T15:30:00.000Z",
+    "approvedAt": "2026-05-08T15:30:00.000Z",
+    "processedAt": "2026-05-08T15:30:00.000Z",
+    "disbursedAt": "2026-05-08T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "FAIL",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Veriff verification pending",
+        "buffer": "Buffer at 64% of target",
+        "greenDays": "3/5 green days accumulated",
+        "consistency": "Day 04/22 = 58% of cumulative profit",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00035",
+    "userId": "usr_0016",
+    "accountId": "acc_00035",
+    "sequence": 1,
+    "amountCents": 180913,
+    "status": "REQUESTED",
+    "requestedAt": "2026-05-08T15:30:00.000Z",
+    "approvedAt": null,
+    "processedAt": null,
+    "disbursedAt": null,
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00002",
+    "userId": "usr_0002",
+    "accountId": "acc_00003",
+    "sequence": 2,
+    "amountCents": 75816,
+    "status": "DISBURSED",
+    "requestedAt": "2026-05-07T15:30:00.000Z",
+    "approvedAt": "2026-05-07T15:30:00.000Z",
+    "processedAt": "2026-05-07T15:30:00.000Z",
+    "disbursedAt": "2026-05-07T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "FAIL",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Veriff verification pending",
+        "buffer": "Buffer at 64% of target",
+        "greenDays": "3/5 green days accumulated",
+        "consistency": "Day 04/22 = 58% of cumulative profit",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00021",
+    "userId": "usr_0008",
+    "accountId": "acc_00020",
+    "sequence": 1,
+    "amountCents": 121842,
+    "status": "REJECTED",
+    "requestedAt": "2026-05-07T15:30:00.000Z",
+    "approvedAt": null,
+    "processedAt": null,
+    "disbursedAt": null,
+    "rejectionReason": "Insufficient green days",
+    "gateStatus": {
+      "kyc": "FAIL",
+      "buffer": "FAIL",
+      "greenDays": "FAIL",
+      "consistency": "PASS",
+      "fraudFlags": "FAIL",
+      "dailyCap": "FAIL",
+      "details": {
+        "kyc": "Veriff verification pending",
+        "buffer": "Buffer at 64% of target",
+        "greenDays": "3/5 green days accumulated",
+        "consistency": "Day 04/22 = 58% of cumulative profit",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00045",
+    "userId": "usr_0018",
+    "accountId": "acc_00042",
+    "sequence": 1,
+    "amountCents": 169255,
+    "status": "PROCESSED",
+    "requestedAt": "2026-05-06T15:30:00.000Z",
+    "approvedAt": "2026-05-06T15:30:00.000Z",
+    "processedAt": "2026-05-06T15:30:00.000Z",
+    "disbursedAt": null,
+    "gateStatus": {
+      "kyc": "FAIL",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "FAIL",
+      "dailyCap": "FAIL",
+      "details": {
+        "kyc": "Veriff verification pending",
+        "buffer": "Buffer at 64% of target",
+        "greenDays": "3/5 green days accumulated",
+        "consistency": "Day 04/22 = 58% of cumulative profit",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00024",
+    "userId": "usr_0008",
+    "accountId": "acc_00020",
+    "sequence": 4,
+    "amountCents": 134139,
+    "status": "REQUESTED",
+    "requestedAt": "2026-05-05T15:30:00.000Z",
+    "approvedAt": null,
+    "processedAt": null,
+    "disbursedAt": null,
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00049",
+    "userId": "usr_0020",
+    "accountId": "acc_00047",
+    "sequence": 1,
+    "amountCents": 295379,
+    "status": "DISBURSED",
+    "requestedAt": "2026-05-05T15:30:00.000Z",
+    "approvedAt": "2026-05-05T15:30:00.000Z",
+    "processedAt": "2026-05-05T15:30:00.000Z",
+    "disbursedAt": "2026-05-05T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "FAIL",
+      "buffer": "FAIL",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Veriff verification pending",
+        "buffer": "Buffer at 64% of target",
+        "greenDays": "3/5 green days accumulated",
+        "consistency": "Day 04/22 = 58% of cumulative profit",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00026",
+    "userId": "usr_0010",
+    "accountId": "acc_00022",
+    "sequence": 2,
+    "amountCents": 185509,
+    "status": "DISBURSED",
+    "requestedAt": "2026-05-02T15:30:00.000Z",
+    "approvedAt": "2026-05-02T15:30:00.000Z",
+    "processedAt": "2026-05-02T15:30:00.000Z",
+    "disbursedAt": "2026-05-02T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "FAIL",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Veriff verification pending",
+        "buffer": "Buffer at 64% of target",
+        "greenDays": "3/5 green days accumulated",
+        "consistency": "Day 04/22 = 58% of cumulative profit",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "CRYPTO"
+  },
+  {
+    "id": "pay_00014",
+    "userId": "usr_0004",
+    "accountId": "acc_00010",
+    "sequence": 1,
+    "amountCents": 147821,
+    "status": "DISBURSED",
+    "requestedAt": "2026-04-28T15:30:00.000Z",
+    "approvedAt": "2026-04-28T15:30:00.000Z",
+    "processedAt": "2026-04-28T15:30:00.000Z",
+    "disbursedAt": "2026-04-28T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00001",
+    "userId": "usr_0002",
+    "accountId": "acc_00003",
+    "sequence": 1,
+    "amountCents": 96933,
+    "status": "PROCESSED",
+    "requestedAt": "2026-04-27T15:30:00.000Z",
+    "approvedAt": "2026-04-27T15:30:00.000Z",
+    "processedAt": "2026-04-27T15:30:00.000Z",
+    "disbursedAt": null,
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00013",
+    "userId": "usr_0003",
+    "accountId": "acc_00006",
+    "sequence": 2,
+    "amountCents": 72344,
+    "status": "REQUESTED",
+    "requestedAt": "2026-04-27T15:30:00.000Z",
+    "approvedAt": null,
+    "processedAt": null,
+    "disbursedAt": null,
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "FAIL",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Veriff verification pending",
+        "buffer": "Buffer at 64% of target",
+        "greenDays": "3/5 green days accumulated",
+        "consistency": "Day 04/22 = 58% of cumulative profit",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00003",
+    "userId": "usr_0002",
+    "accountId": "acc_00003",
+    "sequence": 3,
+    "amountCents": 85939,
+    "status": "APPROVED",
+    "requestedAt": "2026-04-26T15:30:00.000Z",
+    "approvedAt": "2026-04-26T15:30:00.000Z",
+    "processedAt": null,
+    "disbursedAt": null,
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00012",
+    "userId": "usr_0003",
+    "accountId": "acc_00006",
+    "sequence": 1,
+    "amountCents": 102526,
+    "status": "DISBURSED",
+    "requestedAt": "2026-04-26T15:30:00.000Z",
+    "approvedAt": "2026-04-26T15:30:00.000Z",
+    "processedAt": "2026-04-26T15:30:00.000Z",
+    "disbursedAt": "2026-04-26T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "FAIL",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "FAIL",
+      "details": {
+        "kyc": "Veriff verification pending",
+        "buffer": "Buffer at 64% of target",
+        "greenDays": "3/5 green days accumulated",
+        "consistency": "Day 04/22 = 58% of cumulative profit",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00046",
+    "userId": "usr_0018",
+    "accountId": "acc_00042",
+    "sequence": 2,
+    "amountCents": 75351,
+    "status": "REQUESTED",
+    "requestedAt": "2026-04-26T15:30:00.000Z",
+    "approvedAt": null,
+    "processedAt": null,
+    "disbursedAt": null,
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "FAIL",
+      "consistency": "FAIL",
+      "fraudFlags": "FAIL",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Veriff verification pending",
+        "buffer": "Buffer at 64% of target",
+        "greenDays": "3/5 green days accumulated",
+        "consistency": "Day 04/22 = 58% of cumulative profit",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00034",
+    "userId": "usr_0014",
+    "accountId": "acc_00032",
+    "sequence": 2,
+    "amountCents": 187259,
+    "status": "REQUESTED",
+    "requestedAt": "2026-04-25T15:30:00.000Z",
+    "approvedAt": null,
+    "processedAt": null,
+    "disbursedAt": null,
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00037",
+    "userId": "usr_0016",
+    "accountId": "acc_00036",
+    "sequence": 2,
+    "amountCents": 170486,
+    "status": "DISBURSED",
+    "requestedAt": "2026-04-24T15:30:00.000Z",
+    "approvedAt": "2026-04-24T15:30:00.000Z",
+    "processedAt": "2026-04-24T15:30:00.000Z",
+    "disbursedAt": "2026-04-24T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "FAIL",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Veriff verification pending",
+        "buffer": "Buffer at 64% of target",
+        "greenDays": "3/5 green days accumulated",
+        "consistency": "Day 04/22 = 58% of cumulative profit",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "CRYPTO"
+  },
+  {
+    "id": "pay_00010",
+    "userId": "usr_0003",
+    "accountId": "acc_00005",
+    "sequence": 3,
+    "amountCents": 287004,
+    "status": "APPROVED",
+    "requestedAt": "2026-04-21T15:30:00.000Z",
+    "approvedAt": "2026-04-21T15:30:00.000Z",
+    "processedAt": null,
+    "disbursedAt": null,
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00016",
+    "userId": "usr_0004",
+    "accountId": "acc_00010",
+    "sequence": 3,
+    "amountCents": 270036,
+    "status": "DISBURSED",
+    "requestedAt": "2026-04-21T15:30:00.000Z",
+    "approvedAt": "2026-04-21T15:30:00.000Z",
+    "processedAt": "2026-04-21T15:30:00.000Z",
+    "disbursedAt": "2026-04-21T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00027",
+    "userId": "usr_0010",
+    "accountId": "acc_00023",
+    "sequence": 1,
+    "amountCents": 134116,
+    "status": "DISBURSED",
+    "requestedAt": "2026-04-21T15:30:00.000Z",
+    "approvedAt": "2026-04-21T15:30:00.000Z",
+    "processedAt": "2026-04-21T15:30:00.000Z",
+    "disbursedAt": "2026-04-21T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00042",
+    "userId": "usr_0017",
+    "accountId": "acc_00037",
+    "sequence": 3,
+    "amountCents": 84897,
+    "status": "APPROVED",
+    "requestedAt": "2026-04-21T15:30:00.000Z",
+    "approvedAt": "2026-04-21T15:30:00.000Z",
+    "processedAt": null,
+    "disbursedAt": null,
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00048",
+    "userId": "usr_0019",
+    "accountId": "acc_00043",
+    "sequence": 1,
+    "amountCents": 160992,
+    "status": "DISBURSED",
+    "requestedAt": "2026-04-20T15:30:00.000Z",
+    "approvedAt": "2026-04-20T15:30:00.000Z",
+    "processedAt": "2026-04-20T15:30:00.000Z",
+    "disbursedAt": "2026-04-20T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "FAIL",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Veriff verification pending",
+        "buffer": "Buffer at 64% of target",
+        "greenDays": "3/5 green days accumulated",
+        "consistency": "Day 04/22 = 58% of cumulative profit",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00031",
+    "userId": "usr_0011",
+    "accountId": "acc_00026",
+    "sequence": 3,
+    "amountCents": 143723,
+    "status": "PROCESSED",
+    "requestedAt": "2026-04-17T15:30:00.000Z",
+    "approvedAt": "2026-04-17T15:30:00.000Z",
+    "processedAt": "2026-04-17T15:30:00.000Z",
+    "disbursedAt": null,
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00030",
+    "userId": "usr_0011",
+    "accountId": "acc_00026",
+    "sequence": 2,
+    "amountCents": 138801,
+    "status": "APPROVED",
+    "requestedAt": "2026-04-16T15:30:00.000Z",
+    "approvedAt": "2026-04-16T15:30:00.000Z",
+    "processedAt": null,
+    "disbursedAt": null,
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "CRYPTO"
+  },
+  {
+    "id": "pay_00051",
+    "userId": "usr_0020",
+    "accountId": "acc_00047",
+    "sequence": 3,
+    "amountCents": 71054,
+    "status": "REJECTED",
+    "requestedAt": "2026-04-16T15:30:00.000Z",
+    "approvedAt": null,
+    "processedAt": null,
+    "disbursedAt": null,
+    "rejectionReason": "Consistency rule breach: single day exceeded 50% of cumulative profit",
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00018",
+    "userId": "usr_0007",
+    "accountId": "acc_00015",
+    "sequence": 1,
+    "amountCents": 101609,
+    "status": "DISBURSED",
+    "requestedAt": "2026-04-14T15:30:00.000Z",
+    "approvedAt": "2026-04-14T15:30:00.000Z",
+    "processedAt": "2026-04-14T15:30:00.000Z",
+    "disbursedAt": "2026-04-14T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00023",
+    "userId": "usr_0008",
+    "accountId": "acc_00020",
+    "sequence": 3,
+    "amountCents": 50818,
+    "status": "DISBURSED",
+    "requestedAt": "2026-04-14T15:30:00.000Z",
+    "approvedAt": "2026-04-14T15:30:00.000Z",
+    "processedAt": "2026-04-14T15:30:00.000Z",
+    "disbursedAt": "2026-04-14T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00047",
+    "userId": "usr_0018",
+    "accountId": "acc_00042",
+    "sequence": 3,
+    "amountCents": 97374,
+    "status": "DISBURSED",
+    "requestedAt": "2026-04-14T15:30:00.000Z",
+    "approvedAt": "2026-04-14T15:30:00.000Z",
+    "processedAt": "2026-04-14T15:30:00.000Z",
+    "disbursedAt": "2026-04-14T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00008",
+    "userId": "usr_0003",
+    "accountId": "acc_00005",
+    "sequence": 1,
+    "amountCents": 226964,
+    "status": "DISBURSED",
+    "requestedAt": "2026-04-13T15:30:00.000Z",
+    "approvedAt": "2026-04-13T15:30:00.000Z",
+    "processedAt": "2026-04-13T15:30:00.000Z",
+    "disbursedAt": "2026-04-13T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00038",
+    "userId": "usr_0016",
+    "accountId": "acc_00036",
+    "sequence": 3,
+    "amountCents": 180764,
+    "status": "REQUESTED",
+    "requestedAt": "2026-04-13T15:30:00.000Z",
+    "approvedAt": null,
+    "processedAt": null,
+    "disbursedAt": null,
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00017",
+    "userId": "usr_0004",
+    "accountId": "acc_00010",
+    "sequence": 4,
+    "amountCents": 223188,
+    "status": "PROCESSED",
+    "requestedAt": "2026-04-11T15:30:00.000Z",
+    "approvedAt": "2026-04-11T15:30:00.000Z",
+    "processedAt": "2026-04-11T15:30:00.000Z",
+    "disbursedAt": null,
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00019",
+    "userId": "usr_0007",
+    "accountId": "acc_00015",
+    "sequence": 2,
+    "amountCents": 74707,
+    "status": "PROCESSED",
+    "requestedAt": "2026-04-11T15:30:00.000Z",
+    "approvedAt": "2026-04-11T15:30:00.000Z",
+    "processedAt": "2026-04-11T15:30:00.000Z",
+    "disbursedAt": null,
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00050",
+    "userId": "usr_0020",
+    "accountId": "acc_00047",
+    "sequence": 2,
+    "amountCents": 66238,
+    "status": "REQUESTED",
+    "requestedAt": "2026-04-11T15:30:00.000Z",
+    "approvedAt": null,
+    "processedAt": null,
+    "disbursedAt": null,
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "CRYPTO"
+  },
+  {
+    "id": "pay_00011",
+    "userId": "usr_0003",
+    "accountId": "acc_00005",
+    "sequence": 4,
+    "amountCents": 225338,
+    "status": "DISBURSED",
+    "requestedAt": "2026-04-10T15:30:00.000Z",
+    "approvedAt": "2026-04-10T15:30:00.000Z",
+    "processedAt": "2026-04-10T15:30:00.000Z",
+    "disbursedAt": "2026-04-10T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00028",
+    "userId": "usr_0010",
+    "accountId": "acc_00023",
+    "sequence": 2,
+    "amountCents": 120824,
+    "status": "REQUESTED",
+    "requestedAt": "2026-04-10T15:30:00.000Z",
+    "approvedAt": null,
+    "processedAt": null,
+    "disbursedAt": null,
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00043",
+    "userId": "usr_0017",
+    "accountId": "acc_00037",
+    "sequence": 4,
+    "amountCents": 150544,
+    "status": "DISBURSED",
+    "requestedAt": "2026-04-10T15:30:00.000Z",
+    "approvedAt": "2026-04-10T15:30:00.000Z",
+    "processedAt": "2026-04-10T15:30:00.000Z",
+    "disbursedAt": "2026-04-10T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "CRYPTO"
+  },
+  {
+    "id": "pay_00004",
+    "userId": "usr_0002",
+    "accountId": "acc_00003",
+    "sequence": 4,
+    "amountCents": 120625,
+    "status": "DISBURSED",
+    "requestedAt": "2026-04-09T15:30:00.000Z",
+    "approvedAt": "2026-04-09T15:30:00.000Z",
+    "processedAt": "2026-04-09T15:30:00.000Z",
+    "disbursedAt": "2026-04-09T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00009",
+    "userId": "usr_0003",
+    "accountId": "acc_00005",
+    "sequence": 2,
+    "amountCents": 225236,
+    "status": "DISBURSED",
+    "requestedAt": "2026-04-09T15:30:00.000Z",
+    "approvedAt": "2026-04-09T15:30:00.000Z",
+    "processedAt": "2026-04-09T15:30:00.000Z",
+    "disbursedAt": "2026-04-09T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "FAIL",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "FAIL",
+      "details": {
+        "kyc": "Veriff verification pending",
+        "buffer": "Buffer at 64% of target",
+        "greenDays": "3/5 green days accumulated",
+        "consistency": "Day 04/22 = 58% of cumulative profit",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00020",
+    "userId": "usr_0007",
+    "accountId": "acc_00016",
+    "sequence": 1,
+    "amountCents": 178645,
+    "status": "DISBURSED",
+    "requestedAt": "2026-04-09T15:30:00.000Z",
+    "approvedAt": "2026-04-09T15:30:00.000Z",
+    "processedAt": "2026-04-09T15:30:00.000Z",
+    "disbursedAt": "2026-04-09T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00033",
+    "userId": "usr_0014",
+    "accountId": "acc_00032",
+    "sequence": 1,
+    "amountCents": 128850,
+    "status": "DISBURSED",
+    "requestedAt": "2026-04-09T15:30:00.000Z",
+    "approvedAt": "2026-04-09T15:30:00.000Z",
+    "processedAt": "2026-04-09T15:30:00.000Z",
+    "disbursedAt": "2026-04-09T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  },
+  {
+    "id": "pay_00039",
+    "userId": "usr_0016",
+    "accountId": "acc_00036",
+    "sequence": 4,
+    "amountCents": 136589,
+    "status": "DISBURSED",
+    "requestedAt": "2026-04-08T15:30:00.000Z",
+    "approvedAt": "2026-04-08T15:30:00.000Z",
+    "processedAt": "2026-04-08T15:30:00.000Z",
+    "disbursedAt": "2026-04-08T15:30:00.000Z",
+    "gateStatus": {
+      "kyc": "PASS",
+      "buffer": "PASS",
+      "greenDays": "PASS",
+      "consistency": "PASS",
+      "fraudFlags": "PASS",
+      "dailyCap": "PASS",
+      "details": {
+        "kyc": "Verified",
+        "buffer": "Buffer built",
+        "greenDays": "5/5 green days accumulated",
+        "consistency": "Compliant",
+        "fraudFlags": "No active flags",
+        "dailyCap": "Below daily cap"
+      }
+    },
+    "method": "BANK"
+  }
+]

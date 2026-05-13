@@ -1,0 +1,67 @@
+[
+  {
+    "label": "Signups Today",
+    "value": 47,
+    "formatter": "number",
+    "delta": 12.5
+  },
+  {
+    "label": "Revenue Today",
+    "value": 1287900,
+    "formatter": "currency",
+    "delta": 8.2
+  },
+  {
+    "label": "Active Evals",
+    "value": 1842,
+    "formatter": "number",
+    "delta": 3.4
+  },
+  {
+    "label": "Funded Count",
+    "value": 412,
+    "formatter": "number",
+    "delta": 5.8
+  },
+  {
+    "label": "Payouts Today",
+    "value": 482000,
+    "formatter": "currency",
+    "delta": -2.1
+  },
+  {
+    "label": "Total Accounts",
+    "value": 5683,
+    "formatter": "number"
+  },
+  {
+    "label": "Total Users",
+    "value": 4218,
+    "formatter": "number"
+  },
+  {
+    "label": "Avg Accounts/User",
+    "value": "1.35",
+    "formatter": "raw"
+  },
+  {
+    "label": "Avg Pass Time",
+    "value": "8.2d",
+    "formatter": "raw"
+  },
+  {
+    "label": "Avg Breach Time",
+    "value": "3.1d",
+    "formatter": "raw"
+  },
+  {
+    "label": "Pass Rate",
+    "value": 4.8,
+    "formatter": "percent"
+  },
+  {
+    "label": "Pending Withdrawals",
+    "value": 28,
+    "formatter": "number"
+  }
+]

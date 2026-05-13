@@ -1,0 +1,26 @@
+[
+  {
+    "id": "sub_prod_depth",
+    "name": "Market Depth Pro",
+    "description": "Level-2 order book + DOM heatmap (CME). Streaming via Rithmic.",
+    "priceCents": 5900,
+    "cadence": "MONTHLY",
+    "active": true
+  },
+  {
+    "id": "sub_prod_signals",
+    "name": "Signal Lab",
+    "description": "Daily levels, key events, COT report digest.",
+    "priceCents": 1900,
+    "cadence": "MONTHLY",
+    "active": true
+  },
+  {
+    "id": "sub_prod_journal",
+    "name": "Trade Journal+",
+    "description": "Automated journaling, replay, AI-assisted reviews (beta).",
+    "priceCents": 2900,
+    "cadence": "MONTHLY",
+    "active": false
+  }
+]

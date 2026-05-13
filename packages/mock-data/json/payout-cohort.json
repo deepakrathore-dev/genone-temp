@@ -1,0 +1,242 @@
+[
+  {
+    "signupMonth": "2025-11",
+    "buckets": [
+      {
+        "bucket": "1st",
+        "valuePct": 40,
+        "count": 57
+      },
+      {
+        "bucket": "2nd",
+        "valuePct": 32,
+        "count": 48
+      },
+      {
+        "bucket": "3rd",
+        "valuePct": 19,
+        "count": 45
+      },
+      {
+        "bucket": "4th",
+        "valuePct": 18,
+        "count": 26
+      },
+      {
+        "bucket": "5th",
+        "valuePct": 11,
+        "count": 27
+      },
+      {
+        "bucket": "6th",
+        "valuePct": 5,
+        "count": 21
+      },
+      {
+        "bucket": "7+",
+        "valuePct": 10,
+        "count": 5
+      }
+    ]
+  },
+  {
+    "signupMonth": "2025-12",
+    "buckets": [
+      {
+        "bucket": "1st",
+        "valuePct": 36,
+        "count": 50
+      },
+      {
+        "bucket": "2nd",
+        "valuePct": 35,
+        "count": 57
+      },
+      {
+        "bucket": "3rd",
+        "valuePct": 30,
+        "count": 48
+      },
+      {
+        "bucket": "4th",
+        "valuePct": 22,
+        "count": 35
+      },
+      {
+        "bucket": "5th",
+        "valuePct": 10,
+        "count": 18
+      },
+      {
+        "bucket": "6th",
+        "valuePct": 5,
+        "count": 23
+      },
+      {
+        "bucket": "7+",
+        "valuePct": 4,
+        "count": 4
+      }
+    ]
+  },
+  {
+    "signupMonth": "2026-01",
+    "buckets": [
+      {
+        "bucket": "1st",
+        "valuePct": 31,
+        "count": 61
+      },
+      {
+        "bucket": "2nd",
+        "valuePct": 24,
+        "count": 54
+      },
+      {
+        "bucket": "3rd",
+        "valuePct": 24,
+        "count": 38
+      },
+      {
+        "bucket": "4th",
+        "valuePct": 16,
+        "count": 33
+      },
+      {
+        "bucket": "5th",
+        "valuePct": 18,
+        "count": 25
+      },
+      {
+        "bucket": "6th",
+        "valuePct": 13,
+        "count": 18
+      },
+      {
+        "bucket": "7+",
+        "valuePct": 5,
+        "count": 11
+      }
+    ]
+  },
+  {
+    "signupMonth": "2026-02",
+    "buckets": [
+      {
+        "bucket": "1st",
+        "valuePct": 39,
+        "count": 52
+      },
+      {
+        "bucket": "2nd",
+        "valuePct": 28,
+        "count": 51
+      },
+      {
+        "bucket": "3rd",
+        "valuePct": 20,
+        "count": 39
+      },
+      {
+        "bucket": "4th",
+        "valuePct": 18,
+        "count": 28
+      },
+      {
+        "bucket": "5th",
+        "valuePct": 20,
+        "count": 25
+      },
+      {
+        "bucket": "6th",
+        "valuePct": 12,
+        "count": 25
+      },
+      {
+        "bucket": "7+",
+        "valuePct": 10,
+        "count": 16
+      }
+    ]
+  },
+  {
+    "signupMonth": "2026-03",
+    "buckets": [
+      {
+        "bucket": "1st",
+        "valuePct": 35,
+        "count": 68
+      },
+      {
+        "bucket": "2nd",
+        "valuePct": 26,
+        "count": 42
+      },
+      {
+        "bucket": "3rd",
+        "valuePct": 30,
+        "count": 51
+      },
+      {
+        "bucket": "4th",
+        "valuePct": 18,
+        "count": 39
+      },
+      {
+        "bucket": "5th",
+        "valuePct": 15,
+        "count": 36
+      },
+      {
+        "bucket": "6th",
+        "valuePct": 4,
+        "count": 22
+      },
+      {
+        "bucket": "7+",
+        "valuePct": 9,
+        "count": 8
+      }
+    ]
+  },
+  {
+    "signupMonth": "2026-04",
+    "buckets": [
+      {
+        "bucket": "1st",
+        "valuePct": 35,
+        "count": 56
+      },
+      {
+        "bucket": "2nd",
+        "valuePct": 35,
+        "count": 49
+      },
+      {
+        "bucket": "3rd",
+        "valuePct": 28,
+        "count": 50
+      },
+      {
+        "bucket": "4th",
+        "valuePct": 21,
+        "count": 34
+      },
+      {
+        "bucket": "5th",
+        "valuePct": 17,
+        "count": 35
+      },
+      {
+        "bucket": "6th",
+        "valuePct": 7,
+        "count": 28
+      },
+      {
+        "bucket": "7+",
+        "valuePct": 9,
+        "count": 6
+      }
+    ]
+  }
+]

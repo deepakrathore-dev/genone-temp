@@ -1,0 +1,587 @@
+[
+  {
+    "id": "pur_00001",
+    "userId": "usr_0001",
+    "product": "150K Evaluation",
+    "tier": "150K",
+    "amountCents": 25900,
+    "status": "PAID",
+    "ts": "2026-04-19T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00002",
+    "userId": "usr_0001",
+    "product": "50K Evaluation",
+    "tier": "50K",
+    "amountCents": 12900,
+    "status": "REFUNDED",
+    "ts": "2026-02-27T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00003",
+    "userId": "usr_0001",
+    "product": "50K Evaluation",
+    "tier": "50K",
+    "amountCents": 12900,
+    "status": "PAID",
+    "ts": "2026-04-03T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00004",
+    "userId": "usr_0002",
+    "product": "150K Evaluation",
+    "tier": "150K",
+    "amountCents": 25900,
+    "status": "PAID",
+    "ts": "2026-02-06T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00005",
+    "userId": "usr_0002",
+    "product": "100K Evaluation",
+    "tier": "100K",
+    "amountCents": 22000,
+    "status": "PAID",
+    "ts": "2026-02-27T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00006",
+    "userId": "usr_0003",
+    "product": "50K Evaluation",
+    "tier": "50K",
+    "amountCents": 12900,
+    "status": "PAID",
+    "ts": "2026-04-25T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00007",
+    "userId": "usr_0003",
+    "product": "100K Evaluation",
+    "tier": "100K",
+    "amountCents": 22000,
+    "status": "PAID",
+    "ts": "2026-05-08T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00008",
+    "userId": "usr_0003",
+    "product": "100K Evaluation",
+    "tier": "100K",
+    "amountCents": 22000,
+    "status": "PAID",
+    "ts": "2026-01-17T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00009",
+    "userId": "usr_0004",
+    "product": "50K Evaluation",
+    "tier": "50K",
+    "amountCents": 12900,
+    "status": "PAID",
+    "ts": "2026-04-19T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00010",
+    "userId": "usr_0005",
+    "product": "50K Evaluation",
+    "tier": "50K",
+    "amountCents": 12900,
+    "status": "REFUNDED",
+    "ts": "2026-02-11T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00011",
+    "userId": "usr_0005",
+    "product": "150K Evaluation",
+    "tier": "150K",
+    "amountCents": 25900,
+    "status": "PAID",
+    "ts": "2026-03-13T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00012",
+    "userId": "usr_0005",
+    "product": "100K Evaluation",
+    "tier": "100K",
+    "amountCents": 22000,
+    "status": "PAID",
+    "ts": "2026-02-19T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00013",
+    "userId": "usr_0005",
+    "product": "150K Evaluation",
+    "tier": "150K",
+    "amountCents": 25900,
+    "status": "PAID",
+    "ts": "2026-02-24T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00014",
+    "userId": "usr_0006",
+    "product": "50K Evaluation",
+    "tier": "50K",
+    "amountCents": 12900,
+    "status": "PAID",
+    "ts": "2026-04-21T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00015",
+    "userId": "usr_0006",
+    "product": "50K Evaluation",
+    "tier": "50K",
+    "amountCents": 12900,
+    "status": "PAID",
+    "ts": "2026-04-07T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00016",
+    "userId": "usr_0006",
+    "product": "100K Evaluation",
+    "tier": "100K",
+    "amountCents": 22000,
+    "status": "FAILED",
+    "ts": "2026-03-06T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00017",
+    "userId": "usr_0007",
+    "product": "100K Evaluation",
+    "tier": "100K",
+    "amountCents": 22000,
+    "status": "PAID",
+    "ts": "2026-05-08T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00018",
+    "userId": "usr_0007",
+    "product": "150K Evaluation",
+    "tier": "150K",
+    "amountCents": 25900,
+    "status": "PAID",
+    "ts": "2026-01-14T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00019",
+    "userId": "usr_0007",
+    "product": "100K Evaluation",
+    "tier": "100K",
+    "amountCents": 22000,
+    "status": "PAID",
+    "ts": "2026-02-05T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00020",
+    "userId": "usr_0007",
+    "product": "150K Evaluation",
+    "tier": "150K",
+    "amountCents": 25900,
+    "status": "PAID",
+    "ts": "2026-03-22T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00021",
+    "userId": "usr_0007",
+    "product": "50K Evaluation",
+    "tier": "50K",
+    "amountCents": 12900,
+    "status": "PAID",
+    "ts": "2026-01-31T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00022",
+    "userId": "usr_0007",
+    "product": "100K Evaluation",
+    "tier": "100K",
+    "amountCents": 22000,
+    "status": "PAID",
+    "ts": "2026-04-06T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00023",
+    "userId": "usr_0008",
+    "product": "150K Evaluation",
+    "tier": "150K",
+    "amountCents": 25900,
+    "status": "PAID",
+    "ts": "2026-01-25T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00024",
+    "userId": "usr_0008",
+    "product": "150K Evaluation",
+    "tier": "150K",
+    "amountCents": 25900,
+    "status": "PAID",
+    "ts": "2026-01-30T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00025",
+    "userId": "usr_0008",
+    "product": "150K Evaluation",
+    "tier": "150K",
+    "amountCents": 25900,
+    "status": "PAID",
+    "ts": "2026-04-15T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00026",
+    "userId": "usr_0009",
+    "product": "100K Evaluation",
+    "tier": "100K",
+    "amountCents": 22000,
+    "status": "PAID",
+    "ts": "2026-03-08T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00027",
+    "userId": "usr_0009",
+    "product": "150K Evaluation",
+    "tier": "150K",
+    "amountCents": 25900,
+    "status": "PAID",
+    "ts": "2026-01-17T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00028",
+    "userId": "usr_0009",
+    "product": "100K Evaluation",
+    "tier": "100K",
+    "amountCents": 22000,
+    "status": "FAILED",
+    "ts": "2026-03-06T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00029",
+    "userId": "usr_0009",
+    "product": "50K Evaluation",
+    "tier": "50K",
+    "amountCents": 12900,
+    "status": "PAID",
+    "ts": "2026-01-28T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00030",
+    "userId": "usr_0010",
+    "product": "100K Evaluation",
+    "tier": "100K",
+    "amountCents": 22000,
+    "status": "REFUNDED",
+    "ts": "2026-04-06T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00031",
+    "userId": "usr_0010",
+    "product": "100K Evaluation",
+    "tier": "100K",
+    "amountCents": 22000,
+    "status": "PAID",
+    "ts": "2026-03-14T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00032",
+    "userId": "usr_0011",
+    "product": "50K Evaluation",
+    "tier": "50K",
+    "amountCents": 12900,
+    "status": "PAID",
+    "ts": "2026-01-13T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00033",
+    "userId": "usr_0011",
+    "product": "50K Evaluation",
+    "tier": "50K",
+    "amountCents": 12900,
+    "status": "PAID",
+    "ts": "2026-04-26T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00034",
+    "userId": "usr_0012",
+    "product": "150K Evaluation",
+    "tier": "150K",
+    "amountCents": 25900,
+    "status": "REFUNDED",
+    "ts": "2026-02-18T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00035",
+    "userId": "usr_0012",
+    "product": "100K Evaluation",
+    "tier": "100K",
+    "amountCents": 22000,
+    "status": "REFUNDED",
+    "ts": "2026-05-13T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00036",
+    "userId": "usr_0012",
+    "product": "150K Evaluation",
+    "tier": "150K",
+    "amountCents": 25900,
+    "status": "FAILED",
+    "ts": "2026-03-17T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00037",
+    "userId": "usr_0012",
+    "product": "150K Evaluation",
+    "tier": "150K",
+    "amountCents": 25900,
+    "status": "PAID",
+    "ts": "2026-04-23T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00038",
+    "userId": "usr_0012",
+    "product": "50K Evaluation",
+    "tier": "50K",
+    "amountCents": 12900,
+    "status": "PAID",
+    "ts": "2026-02-07T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00039",
+    "userId": "usr_0013",
+    "product": "100K Evaluation",
+    "tier": "100K",
+    "amountCents": 22000,
+    "status": "PAID",
+    "ts": "2026-02-24T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00040",
+    "userId": "usr_0014",
+    "product": "50K Evaluation",
+    "tier": "50K",
+    "amountCents": 12900,
+    "status": "PAID",
+    "ts": "2026-05-01T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00041",
+    "userId": "usr_0015",
+    "product": "100K Evaluation",
+    "tier": "100K",
+    "amountCents": 22000,
+    "status": "REFUNDED",
+    "ts": "2026-03-13T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00042",
+    "userId": "usr_0015",
+    "product": "100K Evaluation",
+    "tier": "100K",
+    "amountCents": 22000,
+    "status": "PAID",
+    "ts": "2026-02-26T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00043",
+    "userId": "usr_0015",
+    "product": "100K Evaluation",
+    "tier": "100K",
+    "amountCents": 22000,
+    "status": "FAILED",
+    "ts": "2026-03-11T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00044",
+    "userId": "usr_0015",
+    "product": "100K Evaluation",
+    "tier": "100K",
+    "amountCents": 22000,
+    "status": "PAID",
+    "ts": "2026-05-10T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00045",
+    "userId": "usr_0015",
+    "product": "50K Evaluation",
+    "tier": "50K",
+    "amountCents": 12900,
+    "status": "PAID",
+    "ts": "2026-01-19T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00046",
+    "userId": "usr_0016",
+    "product": "50K Evaluation",
+    "tier": "50K",
+    "amountCents": 12900,
+    "status": "PAID",
+    "ts": "2026-03-05T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00047",
+    "userId": "usr_0016",
+    "product": "150K Evaluation",
+    "tier": "150K",
+    "amountCents": 25900,
+    "status": "PAID",
+    "ts": "2026-05-01T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00048",
+    "userId": "usr_0016",
+    "product": "100K Evaluation",
+    "tier": "100K",
+    "amountCents": 22000,
+    "status": "PAID",
+    "ts": "2026-04-06T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00049",
+    "userId": "usr_0016",
+    "product": "50K Evaluation",
+    "tier": "50K",
+    "amountCents": 12900,
+    "status": "PAID",
+    "ts": "2026-01-26T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00050",
+    "userId": "usr_0016",
+    "product": "100K Evaluation",
+    "tier": "100K",
+    "amountCents": 22000,
+    "status": "PAID",
+    "ts": "2026-03-16T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00051",
+    "userId": "usr_0017",
+    "product": "50K Evaluation",
+    "tier": "50K",
+    "amountCents": 12900,
+    "status": "FAILED",
+    "ts": "2026-03-05T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00052",
+    "userId": "usr_0017",
+    "product": "150K Evaluation",
+    "tier": "150K",
+    "amountCents": 25900,
+    "status": "PAID",
+    "ts": "2026-02-23T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00053",
+    "userId": "usr_0017",
+    "product": "150K Evaluation",
+    "tier": "150K",
+    "amountCents": 25900,
+    "status": "PAID",
+    "ts": "2026-03-29T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00054",
+    "userId": "usr_0017",
+    "product": "50K Evaluation",
+    "tier": "50K",
+    "amountCents": 12900,
+    "status": "PAID",
+    "ts": "2026-04-25T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00055",
+    "userId": "usr_0018",
+    "product": "100K Evaluation",
+    "tier": "100K",
+    "amountCents": 22000,
+    "status": "PAID",
+    "ts": "2026-03-30T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00056",
+    "userId": "usr_0018",
+    "product": "150K Evaluation",
+    "tier": "150K",
+    "amountCents": 25900,
+    "status": "FAILED",
+    "ts": "2026-03-27T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00057",
+    "userId": "usr_0018",
+    "product": "50K Evaluation",
+    "tier": "50K",
+    "amountCents": 12900,
+    "status": "PAID",
+    "ts": "2026-01-23T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00058",
+    "userId": "usr_0019",
+    "product": "100K Evaluation",
+    "tier": "100K",
+    "amountCents": 22000,
+    "status": "FAILED",
+    "ts": "2026-02-26T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00059",
+    "userId": "usr_0019",
+    "product": "100K Evaluation",
+    "tier": "100K",
+    "amountCents": 22000,
+    "status": "PAID",
+    "ts": "2026-05-02T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00060",
+    "userId": "usr_0019",
+    "product": "50K Evaluation",
+    "tier": "50K",
+    "amountCents": 12900,
+    "status": "PAID",
+    "ts": "2026-03-08T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00061",
+    "userId": "usr_0019",
+    "product": "150K Evaluation",
+    "tier": "150K",
+    "amountCents": 25900,
+    "status": "PAID",
+    "ts": "2026-02-01T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00062",
+    "userId": "usr_0019",
+    "product": "150K Evaluation",
+    "tier": "150K",
+    "amountCents": 25900,
+    "status": "FAILED",
+    "ts": "2026-04-29T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00063",
+    "userId": "usr_0019",
+    "product": "50K Evaluation",
+    "tier": "50K",
+    "amountCents": 12900,
+    "status": "PAID",
+    "ts": "2026-02-26T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00064",
+    "userId": "usr_0020",
+    "product": "150K Evaluation",
+    "tier": "150K",
+    "amountCents": 25900,
+    "status": "PAID",
+    "ts": "2026-04-20T15:30:00.000Z"
+  },
+  {
+    "id": "pur_00065",
+    "userId": "usr_0020",
+    "product": "50K Evaluation",
+    "tier": "50K",
+    "amountCents": 12900,
+    "status": "PAID",
+    "ts": "2026-01-22T15:30:00.000Z"
+  }
+]

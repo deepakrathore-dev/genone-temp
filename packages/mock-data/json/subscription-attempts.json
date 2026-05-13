@@ -1,0 +1,446 @@
+[
+  {
+    "id": "sba_00001",
+    "subscriptionId": "sub_00001",
+    "ts": "2026-02-28T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00002",
+    "subscriptionId": "sub_00001",
+    "ts": "2026-03-19T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00003",
+    "subscriptionId": "sub_00001",
+    "ts": "2026-04-13T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00004",
+    "subscriptionId": "sub_00001",
+    "ts": "2026-03-20T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00005",
+    "subscriptionId": "sub_00001",
+    "ts": "2026-03-20T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00006",
+    "subscriptionId": "sub_00002",
+    "ts": "2026-05-05T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00007",
+    "subscriptionId": "sub_00003",
+    "ts": "2026-04-19T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00008",
+    "subscriptionId": "sub_00003",
+    "ts": "2026-04-01T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00009",
+    "subscriptionId": "sub_00003",
+    "ts": "2026-04-13T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00010",
+    "subscriptionId": "sub_00003",
+    "ts": "2026-04-22T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00011",
+    "subscriptionId": "sub_00003",
+    "ts": "2026-02-20T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "FAILED",
+    "failureReason": "Card declined"
+  },
+  {
+    "id": "sba_00012",
+    "subscriptionId": "sub_00004",
+    "ts": "2026-04-09T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00013",
+    "subscriptionId": "sub_00004",
+    "ts": "2026-04-29T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00014",
+    "subscriptionId": "sub_00004",
+    "ts": "2026-04-26T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00015",
+    "subscriptionId": "sub_00005",
+    "ts": "2026-02-28T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00016",
+    "subscriptionId": "sub_00005",
+    "ts": "2026-04-03T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00017",
+    "subscriptionId": "sub_00005",
+    "ts": "2026-04-06T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00018",
+    "subscriptionId": "sub_00006",
+    "ts": "2026-03-04T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00019",
+    "subscriptionId": "sub_00006",
+    "ts": "2026-04-04T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00020",
+    "subscriptionId": "sub_00007",
+    "ts": "2026-03-16T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00021",
+    "subscriptionId": "sub_00007",
+    "ts": "2026-02-18T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00022",
+    "subscriptionId": "sub_00007",
+    "ts": "2026-04-23T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00023",
+    "subscriptionId": "sub_00007",
+    "ts": "2026-05-05T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00024",
+    "subscriptionId": "sub_00007",
+    "ts": "2026-04-16T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00025",
+    "subscriptionId": "sub_00007",
+    "ts": "2026-04-11T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00026",
+    "subscriptionId": "sub_00008",
+    "ts": "2026-03-02T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00027",
+    "subscriptionId": "sub_00008",
+    "ts": "2026-03-30T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00028",
+    "subscriptionId": "sub_00009",
+    "ts": "2026-05-10T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00029",
+    "subscriptionId": "sub_00009",
+    "ts": "2026-04-15T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00030",
+    "subscriptionId": "sub_00009",
+    "ts": "2026-03-26T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00031",
+    "subscriptionId": "sub_00009",
+    "ts": "2026-04-16T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00032",
+    "subscriptionId": "sub_00009",
+    "ts": "2026-05-03T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "FAILED",
+    "failureReason": "Card expired"
+  },
+  {
+    "id": "sba_00033",
+    "subscriptionId": "sub_00010",
+    "ts": "2026-04-21T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00034",
+    "subscriptionId": "sub_00010",
+    "ts": "2026-04-15T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00035",
+    "subscriptionId": "sub_00010",
+    "ts": "2026-02-27T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00036",
+    "subscriptionId": "sub_00010",
+    "ts": "2026-03-20T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00037",
+    "subscriptionId": "sub_00010",
+    "ts": "2026-05-10T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00038",
+    "subscriptionId": "sub_00010",
+    "ts": "2026-03-05T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00039",
+    "subscriptionId": "sub_00011",
+    "ts": "2026-05-01T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "FAILED",
+    "failureReason": "Card declined"
+  },
+  {
+    "id": "sba_00040",
+    "subscriptionId": "sub_00012",
+    "ts": "2026-03-11T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00041",
+    "subscriptionId": "sub_00012",
+    "ts": "2026-05-13T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00042",
+    "subscriptionId": "sub_00012",
+    "ts": "2026-04-19T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00043",
+    "subscriptionId": "sub_00013",
+    "ts": "2026-04-11T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00044",
+    "subscriptionId": "sub_00013",
+    "ts": "2026-02-20T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00045",
+    "subscriptionId": "sub_00013",
+    "ts": "2026-02-16T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00046",
+    "subscriptionId": "sub_00013",
+    "ts": "2026-03-29T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00047",
+    "subscriptionId": "sub_00014",
+    "ts": "2026-04-07T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00048",
+    "subscriptionId": "sub_00015",
+    "ts": "2026-04-27T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00049",
+    "subscriptionId": "sub_00015",
+    "ts": "2026-04-02T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00050",
+    "subscriptionId": "sub_00015",
+    "ts": "2026-05-07T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00051",
+    "subscriptionId": "sub_00015",
+    "ts": "2026-05-03T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00052",
+    "subscriptionId": "sub_00015",
+    "ts": "2026-05-13T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00053",
+    "subscriptionId": "sub_00016",
+    "ts": "2026-03-27T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00054",
+    "subscriptionId": "sub_00016",
+    "ts": "2026-04-16T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00055",
+    "subscriptionId": "sub_00016",
+    "ts": "2026-02-25T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00056",
+    "subscriptionId": "sub_00016",
+    "ts": "2026-05-08T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00057",
+    "subscriptionId": "sub_00016",
+    "ts": "2026-02-19T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00058",
+    "subscriptionId": "sub_00017",
+    "ts": "2026-04-26T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00059",
+    "subscriptionId": "sub_00017",
+    "ts": "2026-03-28T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00060",
+    "subscriptionId": "sub_00018",
+    "ts": "2026-05-04T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00061",
+    "subscriptionId": "sub_00018",
+    "ts": "2026-03-25T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00062",
+    "subscriptionId": "sub_00018",
+    "ts": "2026-04-29T15:30:00.000Z",
+    "amountCents": 1900,
+    "result": "SUCCESS"
+  },
+  {
+    "id": "sba_00063",
+    "subscriptionId": "sub_00019",
+    "ts": "2026-03-12T15:30:00.000Z",
+    "amountCents": 5900,
+    "result": "SUCCESS"
+  }
+]

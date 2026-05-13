@@ -1,0 +1,67 @@
+[
+  {
+    "id": "adm_0001",
+    "name": "Avery Stone",
+    "email": "avery@genone.example",
+    "initials": "AS",
+    "role": "SUPER_ADMIN",
+    "status": "ACTIVE",
+    "createdAt": "2025-10-05T15:30:00.000Z",
+    "lastLoginAt": "2026-05-13T15:30:00.000Z",
+    "totpEnabled": true
+  },
+  {
+    "id": "adm_0002",
+    "name": "Jordan Marsh",
+    "email": "jordan@genone.example",
+    "initials": "JM",
+    "role": "OPS",
+    "status": "ACTIVE",
+    "createdAt": "2025-11-14T15:30:00.000Z",
+    "lastLoginAt": "2026-05-12T15:30:00.000Z",
+    "totpEnabled": true
+  },
+  {
+    "id": "adm_0003",
+    "name": "Priya Kapoor",
+    "email": "priya@genone.example",
+    "initials": "PK",
+    "role": "AFFILIATE_MANAGER",
+    "status": "ACTIVE",
+    "createdAt": "2026-02-12T15:30:00.000Z",
+    "lastLoginAt": "2026-05-11T15:30:00.000Z",
+    "totpEnabled": true
+  },
+  {
+    "id": "adm_0004",
+    "name": "Sam Ortega",
+    "email": "sam@genone.example",
+    "initials": "SO",
+    "role": "READ_ONLY",
+    "status": "ACTIVE",
+    "createdAt": "2026-03-14T15:30:00.000Z",
+    "lastLoginAt": "2026-05-10T15:30:00.000Z",
+    "totpEnabled": false
+  },
+  {
+    "id": "adm_0005",
+    "name": "Riley Voss",
+    "email": "riley@genone.example",
+    "initials": "RV",
+    "role": "OPS",
+    "status": "SUSPENDED",
+    "createdAt": "2025-12-04T15:30:00.000Z",
+    "lastLoginAt": "2026-04-13T15:30:00.000Z",
+    "totpEnabled": true
+  },
+  {
+    "id": "adm_0006",
+    "name": "Casey Lin",
+    "email": "casey@genone.example",
+    "initials": "CL",
+    "role": "OPS",
+    "status": "INVITED",
+    "createdAt": "2026-05-11T15:30:00.000Z",
+    "totpEnabled": false
+  }
+]

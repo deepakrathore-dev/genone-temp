@@ -1,0 +1,90 @@
+[
+  {
+    "id": "aff_0001",
+    "name": "FuturesAlpha",
+    "email": "futuresalpha@partner.com",
+    "code": "FUTU1",
+    "tierPct": 15,
+    "monthSignups": 9,
+    "totalCommissionCents": 1703905,
+    "pendingCommissionCents": 157421,
+    "status": "ACTIVE"
+  },
+  {
+    "id": "aff_0002",
+    "name": "TraderTV",
+    "email": "tradertv@partner.com",
+    "code": "TRAD2",
+    "tierPct": 25,
+    "monthSignups": 74,
+    "totalCommissionCents": 220684,
+    "pendingCommissionCents": 9009,
+    "status": "ACTIVE"
+  },
+  {
+    "id": "aff_0003",
+    "name": "Scalp Daily",
+    "email": "scalpdaily@partner.com",
+    "code": "SCAL3",
+    "tierPct": 15,
+    "monthSignups": 6,
+    "totalCommissionCents": 1434670,
+    "pendingCommissionCents": 408681,
+    "status": "PENDING"
+  },
+  {
+    "id": "aff_0004",
+    "name": "PropProphet",
+    "email": "propprophet@partner.com",
+    "code": "PROP4",
+    "tierPct": 20,
+    "monthSignups": 43,
+    "totalCommissionCents": 2661008,
+    "pendingCommissionCents": 329854,
+    "status": "ACTIVE"
+  },
+  {
+    "id": "aff_0005",
+    "name": "MarketMomentum",
+    "email": "marketmomentum@partner.com",
+    "code": "MARK5",
+    "tierPct": 25,
+    "monthSignups": 69,
+    "totalCommissionCents": 176190,
+    "pendingCommissionCents": 36603,
+    "status": "ACTIVE"
+  },
+  {
+    "id": "aff_0006",
+    "name": "GapWizard",
+    "email": "gapwizard@partner.com",
+    "code": "GAPW6",
+    "tierPct": 25,
+    "monthSignups": 56,
+    "totalCommissionCents": 1934666,
+    "pendingCommissionCents": 275207,
+    "status": "ACTIVE"
+  },
+  {
+    "id": "aff_0007",
+    "name": "Charts & Coffee",
+    "email": "charts&coffee@partner.com",
+    "code": "CHAR7",
+    "tierPct": 25,
+    "monthSignups": 54,
+    "totalCommissionCents": 2532581,
+    "pendingCommissionCents": 569610,
+    "status": "ACTIVE"
+  },
+  {
+    "id": "aff_0008",
+    "name": "DeltaEdge",
+    "email": "deltaedge@partner.com",
+    "code": "DELT8",
+    "tierPct": 20,
+    "monthSignups": 46,
+    "totalCommissionCents": 2332196,
+    "pendingCommissionCents": 423810,
+    "status": "ACTIVE"
+  }
+]

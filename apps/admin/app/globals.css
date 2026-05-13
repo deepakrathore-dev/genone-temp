@@ -1,26 +1,75 @@
 @import "tailwindcss";
+@import "@genone/config/theme.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+ * Tailwind v4 only scans files reachable from this app by default and skips
+ * workspace package symlinks. Explicitly include packages/ui so classes used
+ * by shared primitives (Dialog panel width, padding, top/right positioning…)
+ * get compiled into the final CSS bundle.
+ */
+@source "../../../packages/ui/src/**/*.{ts,tsx,js,jsx}";
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-faint: var(--text-faint);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+@custom-variant dark (&:where(.dark, .dark *));
+
+html, body { height: 100%; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
 }
+
+.font-mono, code, kbd, samp, pre {
+  font-family: var(--font-jetbrains-mono), ui-monospace, "SFMono-Regular", monospace;
+}
+
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 8px; }
+*::-webkit-scrollbar-thumb:hover { background: var(--text-faint); }
+
+.text-success { color: var(--success); }
+.text-danger { color: var(--danger); }
+.text-warning { color: var(--warning); }
+.text-muted { color: var(--text-muted); }
+.text-faint { color: var(--text-faint); }
+.bg-success-soft { background-color: var(--success-soft); }
+.bg-danger-soft { background-color: var(--danger-soft); }
+.bg-warning-soft { background-color: var(--warning-soft); }
+.bg-primary-soft { background-color: var(--primary-soft); }
+.bg-info-soft { background-color: var(--info-soft); }
+.bg-accent-soft { background-color: var(--accent-soft); }
+
+.bg-grid {
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Compact card hover lift */
+.card-hover { transition: transform 120ms ease, box-shadow 120ms ease; }
+.card-hover:hover { transform: translateY(-1px); }

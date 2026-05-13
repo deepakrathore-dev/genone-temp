@@ -1,0 +1,44 @@
+[
+  {
+    "date": "2026-05-07",
+    "approvedCents": 1375637,
+    "pendingCents": 301345,
+    "dailyCapCents": 5000000
+  },
+  {
+    "date": "2026-05-08",
+    "approvedCents": 873755,
+    "pendingCents": 361071,
+    "dailyCapCents": 5000000
+  },
+  {
+    "date": "2026-05-09",
+    "approvedCents": 1234470,
+    "pendingCents": 591977,
+    "dailyCapCents": 5000000
+  },
+  {
+    "date": "2026-05-10",
+    "approvedCents": 387351,
+    "pendingCents": 148914,
+    "dailyCapCents": 5000000
+  },
+  {
+    "date": "2026-05-11",
+    "approvedCents": 593303,
+    "pendingCents": 449437,
+    "dailyCapCents": 5000000
+  },
+  {
+    "date": "2026-05-12",
+    "approvedCents": 1003936,
+    "pendingCents": 258268,
+    "dailyCapCents": 5000000
+  },
+  {
+    "date": "2026-05-13",
+    "approvedCents": 733332,
+    "pendingCents": 329594,
+    "dailyCapCents": 5000000
+  }
+]

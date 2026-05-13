@@ -1,0 +1,65 @@
+[
+  {
+    "symbol": "ES 03-2026",
+    "totalTrades": 592,
+    "totalProfitCents": 1663123,
+    "totalLossCents": 4627324,
+    "avgProfitCents": 5117,
+    "avgLossCents": 17395,
+    "lossToProfitRatio": 2.78
+  },
+  {
+    "symbol": "NQ 03-2026",
+    "totalTrades": 3340,
+    "totalProfitCents": 6950651,
+    "totalLossCents": 5398646,
+    "avgProfitCents": 3783,
+    "avgLossCents": 3591,
+    "lossToProfitRatio": 0.78
+  },
+  {
+    "symbol": "CL 03-2026",
+    "totalTrades": 2615,
+    "totalProfitCents": 3067109,
+    "totalLossCents": 6123765,
+    "avgProfitCents": 2132,
+    "avgLossCents": 5207,
+    "lossToProfitRatio": 2
+  },
+  {
+    "symbol": "GC 03-2026",
+    "totalTrades": 1821,
+    "totalProfitCents": 4316575,
+    "totalLossCents": 2821890,
+    "avgProfitCents": 4312,
+    "avgLossCents": 3445,
+    "lossToProfitRatio": 0.65
+  },
+  {
+    "symbol": "6E 03-2026",
+    "totalTrades": 1777,
+    "totalProfitCents": 7817185,
+    "totalLossCents": 5735399,
+    "avgProfitCents": 8001,
+    "avgLossCents": 7178,
+    "lossToProfitRatio": 0.73
+  },
+  {
+    "symbol": "NGX25",
+    "totalTrades": 3088,
+    "totalProfitCents": 3062242,
+    "totalLossCents": 551313,
+    "avgProfitCents": 1803,
+    "avgLossCents": 396,
+    "lossToProfitRatio": 0.18
+  },
+  {
+    "symbol": "ZB 03-2026",
+    "totalTrades": 1749,
+    "totalProfitCents": 4348943,
+    "totalLossCents": 2187727,
+    "avgProfitCents": 4525,
+    "avgLossCents": 2779,
+    "lossToProfitRatio": 0.5
+  }
+]

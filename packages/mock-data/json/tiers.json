@@ -1,0 +1,35 @@
+[
+  {
+    "tier": "50K",
+    "evaluationFeeCents": 12900,
+    "profitTargetCents": 300000,
+    "drawdownCents": 200000,
+    "dailyLossCents": 137500,
+    "maxContracts": 3,
+    "bufferCents": 210000,
+    "firstPayoutCapCents": 200000,
+    "inactivityDays": 30
+  },
+  {
+    "tier": "100K",
+    "evaluationFeeCents": 22000,
+    "profitTargetCents": 600000,
+    "drawdownCents": 300000,
+    "dailyLossCents": 275000,
+    "maxContracts": 5,
+    "bufferCents": 310000,
+    "firstPayoutCapCents": 200000,
+    "inactivityDays": 30
+  },
+  {
+    "tier": "150K",
+    "evaluationFeeCents": 25900,
+    "profitTargetCents": 900000,
+    "drawdownCents": 450000,
+    "dailyLossCents": 412500,
+    "maxContracts": 10,
+    "bufferCents": 460000,
+    "firstPayoutCapCents": 300000,
+    "inactivityDays": 30
+  }
+]
