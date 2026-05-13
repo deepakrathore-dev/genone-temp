@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { LogOut, User as UserIcon, Wallet, Shield } from "lucide-react";
+import { LogOut, User as UserIcon, Wallet, Shield, UserCircle } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,13 +31,16 @@ export function UserMenu() {
           <span className="text-xs text-[var(--text-muted)] font-normal">{me?.email}</span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
+        <DropdownMenuItem onSelect={() => router.push("/profile")}>
+          <UserCircle className="h-4 w-4" /> My profile
+        </DropdownMenuItem>
         <DropdownMenuItem onSelect={() => router.push("/profile/accounts")}>
           <UserIcon className="h-4 w-4" /> Accounts
         </DropdownMenuItem>
         <DropdownMenuItem onSelect={() => router.push("/profile/wallet")}>
           <Wallet className="h-4 w-4" /> Wallet & loyalty
         </DropdownMenuItem>
-        <DropdownMenuItem onSelect={() => router.push("/profile/accounts")}>
+        <DropdownMenuItem onSelect={() => router.push("/profile")}>
           <Shield className="h-4 w-4" /> KYC status: {me?.kycStatus ?? "-"}
         </DropdownMenuItem>
         <DropdownMenuSeparator />

@@ -111,6 +111,32 @@ const todayISO = (offsetDays = 0) => {
 // ---- Builders ----
 seed(0xC0FFEE);
 
+const CITIES_BY_COUNTRY: Record<string, Array<[string, string, string]>> = {
+  // [city, region, postal]
+  US: [["Austin", "TX", "78701"], ["New York", "NY", "10001"], ["Chicago", "IL", "60601"]],
+  GB: [["London", "England", "EC1A 1BB"], ["Manchester", "England", "M1 1AE"]],
+  IN: [["Mumbai", "MH", "400001"], ["Bengaluru", "KA", "560001"]],
+  CA: [["Toronto", "ON", "M5H 2N2"], ["Vancouver", "BC", "V6B 2W9"]],
+  DE: [["Berlin", "BE", "10115"], ["Munich", "BY", "80331"]],
+  AU: [["Sydney", "NSW", "2000"], ["Melbourne", "VIC", "3000"]],
+  BR: [["São Paulo", "SP", "01001-000"]],
+  FR: [["Paris", "IDF", "75001"]],
+  MX: [["Mexico City", "CDMX", "06000"]],
+  NG: [["Lagos", "LA", "100001"]],
+  PH: [["Manila", "NCR", "1000"]],
+  SG: [["Singapore", "SG", "238801"]],
+  ZA: [["Cape Town", "WC", "8001"]],
+  AE: [["Dubai", "DU", "00000"]],
+  TR: [["Istanbul", "34", "34000"]],
+};
+
+const TIMEZONES_BY_COUNTRY: Record<string, string> = {
+  US: "America/New_York", GB: "Europe/London", IN: "Asia/Kolkata", CA: "America/Toronto",
+  DE: "Europe/Berlin", AU: "Australia/Sydney", BR: "America/Sao_Paulo", FR: "Europe/Paris",
+  MX: "America/Mexico_City", NG: "Africa/Lagos", PH: "Asia/Manila", SG: "Asia/Singapore",
+  ZA: "Africa/Johannesburg", AE: "Asia/Dubai", TR: "Europe/Istanbul",
+};
+
 function buildUsers(): User[] {
   const users: User[] = [];
   for (let i = 0; i < 20; i++) {
@@ -119,20 +145,58 @@ function buildUsers(): User[] {
     const [country, flag] = pick(COUNTRIES);
     const attempts = randInt(0, 14);
     const tierPct = attempts >= 10 ? 10 : attempts >= 5 ? 5 : attempts >= 3 ? 2 : 0;
+    const cities = CITIES_BY_COUNTRY[country] ?? [["—", "—", "—"]];
+    const [city, region, postal] = pick(cities);
+    const dob = new Date("1990-01-01");
+    dob.setUTCFullYear(1990 - randInt(0, 30));
+    dob.setUTCMonth(randInt(0, 11));
+    dob.setUTCDate(randInt(1, 28));
+    const kyc = i === 0 ? "VERIFIED" : pick(["VERIFIED", "VERIFIED", "PENDING", "NONE"] as const);
     users.push({
       id: `usr_${String(i + 1).padStart(4, "0")}`,
       email: `${first.toLowerCase()}.${last.toLowerCase()}${i}@example.com`,
+      emailVerified: i === 0 ? true : chance(0.85),
       fullName: `${first} ${last}`,
       initials: `${first[0]}. ${last[0]}.`,
+      dateOfBirth: dob.toISOString(),
+      phone: `+${country === "US" ? "1" : country === "GB" ? "44" : country === "IN" ? "91" : "49"} ${randInt(200, 999)} ${randInt(100, 999)} ${randInt(1000, 9999)}`,
+      phoneVerified: chance(0.55),
       country,
       countryFlag: flag,
-      kycStatus: i === 0 ? "VERIFIED" : pick(["VERIFIED", "VERIFIED", "PENDING", "NONE"] as const),
+      addressLine1: `${randInt(1, 9999)} ${pick(["Main", "Market", "Bridge", "King", "Queen", "Park"])} ${pick(["St", "Ave", "Rd", "Blvd"])}`,
+      addressLine2: chance(0.3) ? `Apt ${randInt(1, 50)}` : undefined,
+      city,
+      region,
+      postalCode: postal,
+      kycStatus: kyc,
+      kycVerifiedAt: kyc === "VERIFIED" ? todayISO(-randInt(1, 200)) : undefined,
+      pepFlag: chance(0.02),
+      sanctionsCleared: !chance(0.01),
+      riskDisclosure: {
+        acceptedAt: todayISO(-randInt(10, 220)),
+        version: "2026-02",
+        ip: `${randInt(1, 250)}.${randInt(0, 255)}.${randInt(0, 255)}.${randInt(0, 255)}`,
+        userAgent: pick(["Mozilla/5.0 (Macintosh)", "Mozilla/5.0 (Windows NT 10.0)", "Mozilla/5.0 (iPhone)"]),
+      },
+      totpEnabled: i === 0 ? true : chance(0.4),
+      lastLoginAt: todayISO(-randInt(0, 3)),
+      lastLoginIp: `${randInt(1, 250)}.${randInt(0, 255)}.${randInt(0, 255)}.${randInt(0, 255)}`,
+      timezone: TIMEZONES_BY_COUNTRY[country] ?? "UTC",
+      locale: country === "US" ? "en-US" : country === "GB" ? "en-GB" : "en",
+      notificationPrefs: {
+        passFailEmails: true,
+        payoutEmails: true,
+        retentionEmails: chance(0.85),
+        productAnnouncements: chance(0.6),
+        loyaltyUpdates: chance(0.9),
+      },
       createdAt: todayISO(-randInt(10, 220)),
       walletCreditCents: randInt(0, 30_000),
       loyaltyAttempts: attempts,
       loyaltyTierPct: tierPct,
       suspended: chance(0.05),
       affiliateCode: chance(0.3) ? `REF${(i + 1) * 7}` : undefined,
+      referredBy: chance(0.25) ? `REF${randInt(1, 9) * 7}` : undefined,
     });
   }
   return users;

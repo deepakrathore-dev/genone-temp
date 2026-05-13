@@ -57,14 +57,59 @@ export interface SubscriptionBillingAttempt {
   failureReason?: string;
 }
 
+export interface NotificationPreferences {
+  passFailEmails: boolean;
+  payoutEmails: boolean;
+  retentionEmails: boolean;
+  productAnnouncements: boolean;
+  loyaltyUpdates: boolean;
+}
+
+export interface RiskDisclosureAcceptance {
+  acceptedAt: ISODate;
+  version: string;
+  ip: string;
+  userAgent: string;
+}
+
 export interface User {
+  // Identity (REQ-001)
   id: string;
   email: string;
+  emailVerified: boolean;
   fullName: string;
   initials: string;
+  dateOfBirth?: ISODate;
+  phone?: string;
+  phoneVerified: boolean;
+
+  // Address (captured during Veriff KYC, REQ-005)
   country: string; // ISO-2
   countryFlag: string; // emoji
+  addressLine1?: string;
+  addressLine2?: string;
+  city?: string;
+  region?: string;
+  postalCode?: string;
+
+  // Compliance
   kycStatus: KycStatus;
+  kycVerifiedAt?: ISODate;
+  pepFlag: boolean;
+  sanctionsCleared: boolean;
+  riskDisclosure?: RiskDisclosureAcceptance;
+
+  // Security
+  totpEnabled: boolean;
+  lastLoginAt?: ISODate;
+  lastLoginIp?: string;
+
+  // Preferences
+  timezone?: string;
+  locale?: string;
+  notificationPrefs?: NotificationPreferences;
+
+  // Lifecycle / business
   createdAt: ISODate;
   walletCreditCents: number;
   loyaltyAttempts: number;

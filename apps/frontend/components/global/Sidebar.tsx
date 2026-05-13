@@ -19,6 +19,7 @@ import {
   Plus,
   Repeat,
   Globe,
+  UserCircle,
 } from "lucide-react";
 import { cn, Button } from "@genone/ui";
 import { useUi } from "@/lib/stores/ui.store";
@@ -44,6 +45,7 @@ export function Sidebar() {
     { label: "Leaderboard", href: "/leaderboard", icon: Trophy },
     { label: "Subscriptions", href: "/subscriptions", icon: Repeat },
     { label: "Community", href: "/community", icon: Globe },
+    { label: "Profile", href: "/profile", icon: UserCircle },
     { label: "Accounts", href: "/profile/accounts", icon: Boxes },
     { label: "Wallet", href: "/profile/wallet", icon: Wallet },
     { label: "Notifications", href: "/notifications", icon: Bell },
@@ -106,7 +108,9 @@ export function Sidebar() {
 
         <nav className="flex-1 overflow-y-auto p-2">
           {items.map((it) => {
-            const active = pathname === it.href || (it.href !== "/dashboard" && pathname.startsWith(it.href));
+            // Routes that should only highlight on exact match (not for their children)
+            const EXACT = new Set(["/dashboard", "/profile"]);
+            const active = pathname === it.href || (!EXACT.has(it.href) && pathname.startsWith(it.href));
             const Icon = it.icon;
             return (
               <Link
