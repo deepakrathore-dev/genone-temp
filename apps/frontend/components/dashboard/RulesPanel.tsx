@@ -7,6 +7,9 @@ import {
   formatCurrency,
   cn,
   Badge,
+  InfoTip,
+  RULE_HELP,
+  type RuleHelpKey,
 } from "@genone/ui";
 import type { Account } from "@genone/types";
 import { Zap, ShieldCheck, AlertTriangle } from "lucide-react";
@@ -31,17 +34,17 @@ export function RulesPanel({ account }: { account: Account }) {
           <Badge variant="primary">{account.tier}</Badge>
         </CardHeader>
         <CardContent className="space-y-2 text-xs font-mono">
-          <Row label="Profit target" value={formatCurrency(r.profitTargetCents)} />
-          <Row label="EOD drawdown" value={formatCurrency(r.drawdownCents)} />
-          <Row label="Daily loss" value={formatCurrency(r.dailyLossCents)} />
-          <Row label="Max contracts" value={`${r.maxContracts} minis`} />
-          <Row label="Buffer" value={formatCurrency(r.bufferCents)} />
-          <Row label="First payout cap" value={formatCurrency(r.firstPayoutCapCents)} />
-          <Row label="Green day threshold" value={`${formatCurrency(r.greenDayThresholdCents)}+`} />
-          <Row label="Green days required" value={`${r.greenDaysRequired}`} />
-          <Row label="Consistency" value={`${r.consistencyPct}%`} />
-          <Row label="Profit split" value={`${r.profitSplitPct}/${100 - r.profitSplitPct}`} />
-          <Row label="Inactivity" value={`${r.inactivityDays} days`} />
+          <Row helpKey="profitTarget" label="Profit target" value={formatCurrency(r.profitTargetCents)} />
+          <Row helpKey="drawdown" label="EOD drawdown" value={formatCurrency(r.drawdownCents)} />
+          <Row helpKey="dailyLoss" label="Daily loss" value={formatCurrency(r.dailyLossCents)} />
+          <Row helpKey="maxContracts" label="Max contracts" value={`${r.maxContracts} minis`} />
+          <Row helpKey="buffer" label="Buffer" value={formatCurrency(r.bufferCents)} />
+          <Row helpKey="firstPayoutCap" label="First payout cap" value={formatCurrency(r.firstPayoutCapCents)} />
+          <Row helpKey="greenDayThreshold" label="Green day threshold" value={`${formatCurrency(r.greenDayThresholdCents)}+`} />
+          <Row helpKey="greenDaysRequired" label="Green days required" value={`${r.greenDaysRequired}`} />
+          <Row helpKey="consistency" label="Consistency" value={`${r.consistencyPct}%`} />
+          <Row helpKey="profitSplit" label="Profit split" value={`${r.profitSplitPct}/${100 - r.profitSplitPct}`} />
+          <Row helpKey="inactivity" label="Inactivity" value={`${r.inactivityDays} days`} />
         </CardContent>
       </Card>
 
@@ -50,6 +53,9 @@ export function RulesPanel({ account }: { account: Account }) {
           <CardTitle className="text-sm flex items-center gap-2">
             <Zap className="h-4 w-4 text-[var(--warning)]" />
             Auto-liquidation
+            <InfoTip title={RULE_HELP.forceLiquidation.title}>
+              {RULE_HELP.forceLiquidation.body}
+            </InfoTip>
           </CardTitle>
         </CardHeader>
         <CardContent className="text-xs text-[var(--text-muted)] leading-relaxed">
@@ -72,10 +78,16 @@ export function RulesPanel({ account }: { account: Account }) {
   );
 }
 
-function Row({ label, value }: { label: string; value: string }) {
+function Row({ label, value, helpKey }: { label: string; value: string; helpKey: RuleHelpKey }) {
+  const help = RULE_HELP[helpKey];
   return (
     <div className="flex items-baseline justify-between gap-2">
-      <span className="text-[var(--text-muted)] uppercase tracking-wider text-[10px]">{label}</span>
+      <span className="text-[var(--text-muted)] uppercase tracking-wider text-[10px] inline-flex items-center gap-1">
+        {label}
+        <InfoTip title={help.title} size="sm" side="right">
+          {help.body}
+        </InfoTip>
+      </span>
       <span className="text-[var(--text)] font-semibold tabular-nums">{value}</span>
     </div>
   );

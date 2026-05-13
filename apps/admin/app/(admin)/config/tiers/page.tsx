@@ -7,19 +7,20 @@ import {
   Card, CardContent, CardHeader, CardTitle,
   Button, Input, Label, Skeleton, Badge, formatCurrency,
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
+  InfoTip, RULE_HELP, type RuleHelpKey,
 } from "@genone/ui";
 import type { TierConfig } from "@genone/types";
 import { Save } from "lucide-react";
 
-const FIELDS: Array<{ key: keyof TierConfig; label: string; isCurrency?: boolean }> = [
-  { key: "evaluationFeeCents", label: "Evaluation fee", isCurrency: true },
-  { key: "profitTargetCents", label: "Profit target", isCurrency: true },
-  { key: "drawdownCents", label: "EOD drawdown", isCurrency: true },
-  { key: "dailyLossCents", label: "Daily loss", isCurrency: true },
-  { key: "bufferCents", label: "Buffer", isCurrency: true },
-  { key: "firstPayoutCapCents", label: "First payout cap", isCurrency: true },
-  { key: "maxContracts", label: "Max contracts" },
-  { key: "inactivityDays", label: "Inactivity (days)" },
+const FIELDS: Array<{ key: keyof TierConfig; label: string; isCurrency?: boolean; help: RuleHelpKey }> = [
+  { key: "evaluationFeeCents", label: "Evaluation fee", isCurrency: true, help: "evaluationFee" },
+  { key: "profitTargetCents", label: "Profit target", isCurrency: true, help: "profitTarget" },
+  { key: "drawdownCents", label: "EOD drawdown", isCurrency: true, help: "drawdown" },
+  { key: "dailyLossCents", label: "Daily loss", isCurrency: true, help: "dailyLoss" },
+  { key: "bufferCents", label: "Buffer", isCurrency: true, help: "buffer" },
+  { key: "firstPayoutCapCents", label: "First payout cap", isCurrency: true, help: "firstPayoutCap" },
+  { key: "maxContracts", label: "Max contracts", help: "maxContracts" },
+  { key: "inactivityDays", label: "Inactivity (days)", help: "inactivity" },
 ];
 
 export default function TiersConfigPage() {
@@ -75,20 +76,34 @@ function TierForm({ tier, onSave }: { tier: TierConfig; onSave: (payload: Record
   return (
     <CardContent>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {FIELDS.map((f) => (
-          <div key={f.key} className="space-y-1">
-            <Label>{f.label} {f.isCurrency && <span className="text-[10px] text-[var(--text-faint)]">(USD)</span>}</Label>
-            <Input
-              type="number"
-              value={f.isCurrency ? (values[f.key] ?? 0) / 100 : values[f.key]}
-              onChange={(e) => setValues((v) => ({ ...v, [f.key]: f.isCurrency ? Math.round(Number(e.target.value) * 100) : Number(e.target.value) }))}
-              className="font-mono"
-            />
-            <div className="text-[10px] text-[var(--text-faint)] font-mono">
-              Current: {f.isCurrency ? formatCurrency(tier[f.key] as number) : tier[f.key]}
+        {FIELDS.map((f) => {
+          const help = RULE_HELP[f.help];
+          return (
+            <div key={f.key} className="space-y-1">
+              <Label className="flex items-center gap-1.5">
+                {f.label}
+                {f.isCurrency && <span className="text-[10px] text-[var(--text-faint)]">(USD)</span>}
+                <InfoTip title={help.title}>
+                  {help.body}
+                  {help.reqId && (
+                    <div className="mt-1.5 text-[10px] uppercase tracking-wider text-[var(--text-faint)] font-mono">
+                      Spec: {help.reqId}
+                    </div>
+                  )}
+                </InfoTip>
+              </Label>
+              <Input
+                type="number"
+                value={f.isCurrency ? (values[f.key] ?? 0) / 100 : values[f.key]}
+                onChange={(e) => setValues((v) => ({ ...v, [f.key]: f.isCurrency ? Math.round(Number(e.target.value) * 100) : Number(e.target.value) }))}
+                className="font-mono"
+              />
+              <div className="text-[10px] text-[var(--text-faint)] font-mono">
+                Current: {f.isCurrency ? formatCurrency(tier[f.key] as number) : tier[f.key]}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
       <div className="mt-4 flex justify-end">
         <Button onClick={() => onSave(values)}><Save className="h-3.5 w-3.5" /> Save changes</Button>
