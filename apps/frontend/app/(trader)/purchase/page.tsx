@@ -2,17 +2,18 @@
 import * as React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
-  Card, CardHeader, CardTitle, CardContent, CardDescription,
+  Card, CardContent,
   Checkbox, Skeleton, formatCurrency,
 } from "@genone/ui";
-import { TierPicker } from "@/components/purchase/TierPicker";
+import { TierPicker, sizeLabel } from "@/components/purchase/TierPicker";
+import { ChallengeTypePicker } from "@/components/purchase/ChallengeTypePicker";
 import { OrderSummary, type PriceBreakdown } from "@/components/purchase/OrderSummary";
 import { PromoField } from "@/components/purchase/PromoField";
 import { NmiHostedPanel } from "@/components/purchase/NmiHostedPanel";
-import { useMe } from "@/lib/queries";
+import { useMe, useChallengeTypes, useChallenges } from "@/lib/queries";
 import { useCreatePurchase } from "@/lib/mutations";
-import { TIERS } from "@genone/mock-data";
 import type { PromoResult } from "@/lib/api/api-client";
+import type { Challenge } from "@genone/types";
 
 export default function PurchasePage() {
   return (
@@ -27,14 +28,42 @@ function PurchaseInner() {
   const search = useSearchParams();
   const initialTier = (search.get("tier") ?? "100K") as "50K" | "100K" | "150K";
 
-  const { data: me, isLoading } = useMe();
-  const [tier, setTier] = React.useState<string>(initialTier);
+  const { data: me, isLoading: meLoading } = useMe();
+  const { data: types, isLoading: typesLoading } = useChallengeTypes();
+  const { data: challenges, isLoading: chLoading } = useChallenges();
+
+  const [typeId, setTypeId] = React.useState<string | null>(null);
+  const [challengeId, setChallengeId] = React.useState<string | null>(null);
   const [promo, setPromo] = React.useState<Extract<PromoResult, { ok: true }> | null>(null);
   const [useCredit, setUseCredit] = React.useState(true);
   const create = useCreatePurchase();
 
-  const tierCfg = TIERS.find((t) => t.tier === tier)!;
-  const subtotal = tierCfg.evaluationFeeCents;
+  React.useEffect(() => {
+    if (!typeId && types && types.length > 0) setTypeId(types[0]!.id);
+  }, [typeId, types]);
+
+  const typeChallenges = React.useMemo<Challenge[]>(() => {
+    if (!challenges || !typeId) return [];
+    return challenges.filter((c) => c.typeId === typeId).sort((a, b) => a.startingBalanceCents - b.startingBalanceCents);
+  }, [challenges, typeId]);
+
+  React.useEffect(() => {
+    if (typeChallenges.length === 0) return;
+    const stillValid = challengeId && typeChallenges.some((c) => c.id === challengeId);
+    if (stillValid) return;
+    const preferred = typeChallenges.find((c) => sizeLabel(c) === initialTier) ?? typeChallenges[1] ?? typeChallenges[0];
+    if (preferred) setChallengeId(preferred.id);
+  }, [typeChallenges, challengeId, initialTier]);
+
+  const popularChallengeId = React.useMemo(
+    () => typeChallenges.find((c) => sizeLabel(c) === "100K")?.id,
+    [typeChallenges]
+  );
+
+  const selectedChallenge = typeChallenges.find((c) => c.id === challengeId) ?? null;
+  const tier = selectedChallenge ? sizeLabel(selectedChallenge) : initialTier;
+
+  const subtotal = selectedChallenge?.evaluationFeeCents ?? 0;
   const loyaltyPct = me?.loyaltyTierPct ?? 0;
   const loyaltyDiscount = Math.round(subtotal * (loyaltyPct / 100));
   const afterLoyalty = subtotal - loyaltyDiscount;
@@ -48,8 +77,13 @@ function PurchaseInner() {
   const creditApplied = useCredit ? Math.min(wallet, afterPromo) : 0;
   const total = Math.max(0, afterPromo - creditApplied);
 
+  const selectedType = types?.find((t) => t.id === typeId) ?? null;
+  const productLine = selectedChallenge
+    ? `${selectedType?.name ?? ""} ${sizeLabel(selectedChallenge)} Evaluation`.trim()
+    : `${tier} Evaluation`;
+
   const breakdown: PriceBreakdown = {
-    tier,
+    tier: productLine,
     subtotalCents: subtotal,
     loyaltyDiscountCents: loyaltyDiscount,
     loyaltyPct,
@@ -61,57 +95,55 @@ function PurchaseInner() {
   };
 
   const submit = async () => {
+    if (!selectedChallenge) return;
     const receipt = await create.mutateAsync({
       tier,
       promoCode: promo?.code,
       useCredit,
+      challengeId: selectedChallenge.id,
     });
     router.push(`/purchase/success?id=${receipt.id}&accountId=${receipt.accountId}&tier=${receipt.tier}&total=${receipt.totalCents}`);
   };
 
-  if (isLoading) return <Skeleton className="h-96 w-full" />;
+  if (meLoading || typesLoading || chLoading) return <Skeleton className="h-96 w-full" />;
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-6 pb-12">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Buy a challenge</h1>
-        <p className="text-sm text-[var(--text-muted)]">
-          Pick a tier, apply discounts, and pay. Your funded account auto-provisions on pass.
+        <h1 className="text-2xl font-semibold tracking-tight text-white">Buy a challenge</h1>
+        <p className="text-sm text-white/55 mt-1">
+          Pick a challenge type, choose your account size, apply discounts and pay. Your evaluation auto-provisions on completion.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-5">
-        <div className="lg:col-span-3 space-y-4">
-          {/* Step 1 - tier */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-base flex items-center gap-2">
-                <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[var(--primary-soft)] text-[var(--primary)] text-xs font-semibold">1</span>
-                Choose your tier
-              </CardTitle>
-              <CardDescription>Each tier has its own rules and pricing. Pick one to continue.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <TierPicker value={tier} onChange={setTier} />
-            </CardContent>
-          </Card>
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+        <div className="lg:col-span-3 space-y-6">
+          <Step number={1} title="Challenge type" caption="Different rule profiles for different trading styles.">
+            <ChallengeTypePicker
+              types={types ?? []}
+              value={typeId}
+              onChange={(id) => {
+                setTypeId(id);
+                setChallengeId(null);
+              }}
+            />
+          </Step>
 
-          {/* Step 2 - discounts & credit */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-base flex items-center gap-2">
-                <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[var(--primary-soft)] text-[var(--primary)] text-xs font-semibold">2</span>
-                Discounts & wallet credit
-              </CardTitle>
-              <CardDescription>
-                Loyalty discount auto-applies based on your attempt count. Promo code and wallet credit are optional.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-3">
+          <Step number={2} title="Account size" caption="Each size has its own profit target, drawdown and contract limits.">
+            <TierPicker
+              challenges={typeChallenges}
+              value={challengeId}
+              onChange={(c) => setChallengeId(c.id)}
+              popularChallengeId={popularChallengeId}
+            />
+          </Step>
+
+          <Step number={3} title="Discounts & wallet credit" caption="Loyalty auto-applies. Promo and wallet credit are optional.">
+            <div className="space-y-3">
               {loyaltyPct > 0 && (
-                <div className="flex items-center gap-2 rounded-lg border border-[var(--primary)]/30 bg-[var(--primary-soft)] px-3 py-2 text-sm">
-                  <span className="font-semibold text-[var(--primary)]">{loyaltyPct}% loyalty discount</span>
-                  <span className="text-[var(--text-muted)] text-xs ml-auto font-mono">auto-applied</span>
+                <div className="flex items-center gap-2 rounded-xl border border-[#5BA8E5]/30 bg-[#5BA8E5]/[0.10] px-3 py-2.5 text-sm">
+                  <span className="font-semibold text-[#5BA8E5]">{loyaltyPct}% loyalty discount</span>
+                  <span className="text-white/55 text-xs ml-auto font-mono uppercase tracking-wider">auto-applied</span>
                 </div>
               )}
               <PromoField
@@ -121,50 +153,36 @@ function PurchaseInner() {
                 onClear={() => setPromo(null)}
               />
               {wallet > 0 && (
-                <label className="flex items-start gap-2 cursor-pointer">
+                <label className="flex items-start gap-3 cursor-pointer rounded-xl border border-white/[0.10] bg-white/[0.03] p-3">
                   <Checkbox checked={useCredit} onCheckedChange={(v) => setUseCredit(!!v)} className="mt-0.5" />
                   <div className="text-sm">
-                    Apply {formatCurrency(Math.min(wallet, afterPromo))} from wallet credit
-                    <div className="text-xs text-[var(--text-muted)]">
-                      Wallet balance {formatCurrency(wallet)} - credit is non-withdrawable and auto-applies before card charge.
+                    <div className="text-white">Apply {formatCurrency(Math.min(wallet, afterPromo))} from wallet credit</div>
+                    <div className="text-xs text-white/55 mt-0.5">
+                      Wallet balance {formatCurrency(wallet)}. Credit is non-withdrawable and auto-applies before the card charge.
                     </div>
                   </div>
                 </label>
               )}
-            </CardContent>
-          </Card>
+            </div>
+          </Step>
 
-          {/* Step 3 - pay */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-base flex items-center gap-2">
-                <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[var(--primary-soft)] text-[var(--primary)] text-xs font-semibold">3</span>
-                Pay {total === 0 ? "(no card needed)" : formatCurrency(total)}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              {total === 0 ? (
-                <div className="space-y-3">
-                  <p className="text-sm text-[var(--text-muted)]">
-                    Your discount + credit covers the full amount. No card charge.
-                  </p>
-                  <button
-                    onClick={submit}
-                    disabled={create.isPending}
-                    className="h-11 w-full rounded-lg bg-[var(--primary)] text-white font-medium hover:opacity-90 disabled:opacity-50"
-                  >
-                    {create.isPending ? "Provisioning account…" : "Confirm and provision account"}
-                  </button>
-                </div>
-              ) : (
-                <NmiHostedPanel
-                  totalCents={total}
-                  isProcessing={create.isPending}
-                  onSubmit={submit}
-                />
-              )}
-            </CardContent>
-          </Card>
+          <Step number={4} title={total === 0 ? "Confirm — no card needed" : `Pay ${formatCurrency(total)}`} caption={total === 0 ? "Your discount and credit cover the full amount." : "Card data is captured on NMI's hosted page and never touches our servers."}>
+            {total === 0 ? (
+              <button
+                onClick={submit}
+                disabled={!selectedChallenge || create.isPending}
+                className="h-12 w-full rounded-full bg-gradient-to-r from-[#5BA8E5] via-[#4F92D6] to-[#3B7BAA] text-white font-semibold hover:opacity-95 disabled:opacity-50 shadow-[var(--shadow-cta)] transition-opacity"
+              >
+                {create.isPending ? "Provisioning account…" : "Confirm and provision account"}
+              </button>
+            ) : (
+              <NmiHostedPanel
+                totalCents={total}
+                isProcessing={create.isPending}
+                onSubmit={submit}
+              />
+            )}
+          </Step>
         </div>
 
         <div className="lg:col-span-2">
@@ -172,5 +190,34 @@ function PurchaseInner() {
         </div>
       </div>
     </div>
+  );
+}
+
+function Step({
+  number,
+  title,
+  caption,
+  children,
+}: {
+  number: number;
+  title: string;
+  caption?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <Card className="overflow-hidden">
+      <CardContent className="p-5 space-y-4">
+        <div className="flex items-start gap-3">
+          <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#5BA8E5]/[0.12] text-[#5BA8E5] text-xs font-semibold ring-1 ring-[#5BA8E5]/30">
+            {number}
+          </span>
+          <div className="min-w-0">
+            <div className="text-base font-semibold text-white leading-tight">{title}</div>
+            {caption && <div className="text-xs text-white/55 mt-0.5">{caption}</div>}
+          </div>
+        </div>
+        <div>{children}</div>
+      </CardContent>
+    </Card>
   );
 }

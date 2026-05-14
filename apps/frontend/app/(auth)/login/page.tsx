@@ -1,66 +1,97 @@
 "use client";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
+import * as React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { Eye, EyeOff } from "lucide-react";
 import {
-  Card, CardHeader, CardTitle, CardContent, CardDescription,
-  Button, Input, Label,
+  AuthShell, AuthCard, AuthInput, AuthLabel, AuthButton, AuthCheckbox,
 } from "@genone/ui";
 
 const schema = z.object({
   email: z.string().email("Enter a valid email"),
-  password: z.string().min(12, "12 character minimum"),
+  password: z.string().min(8, "Enter your password"),
+  remember: z.boolean().optional(),
 });
 
 export default function LoginPage() {
   const router = useRouter();
+  const [showPassword, setShowPassword] = React.useState(false);
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
     resolver: zodResolver(schema),
-    defaultValues: { email: "dev@ment.tech", password: "demopassword!!" },
+    defaultValues: { email: "", password: "", remember: true },
   });
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-aurora p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center items-center">
-          <div className="flex items-center justify-center mb-2">
-            <Image src="/logo.png" alt="Gen One" width={56} height={56} priority className="h-14 w-14 rounded-xl" />
+    <AuthShell>
+      <div className="text-center mb-8">
+        <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-white">
+          Welcome Back!
+        </h1>
+        <p className="mt-3 text-sm text-white/70">
+          Sign in to your Gen One Futures account.
+        </p>
+      </div>
+
+      <AuthCard heading="Login">
+        <form
+          className="space-y-5"
+          onSubmit={handleSubmit(() => router.push("/dashboard"))}
+        >
+          <div>
+            <AuthLabel>Email Address</AuthLabel>
+            <AuthInput
+              type="email"
+              autoComplete="email"
+              placeholder="name@domain.com"
+              {...register("email")}
+            />
+            {errors.email && <p className="mt-1.5 text-xs text-red-300">{errors.email.message}</p>}
           </div>
-          <CardTitle className="text-xl">Welcome back</CardTitle>
-          <CardDescription>Sign in to your Gen One Futures account.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form
-            className="space-y-3"
-            onSubmit={handleSubmit(() => {
-              router.push("/dashboard");
-            })}
-          >
-            <div className="space-y-1">
-              <Label>Email</Label>
-              <Input type="email" autoComplete="email" {...register("email")} />
-              {errors.email && <p className="text-xs text-danger">{errors.email.message}</p>}
+
+          <div>
+            <AuthLabel>Password</AuthLabel>
+            <div className="relative">
+              <AuthInput
+                type={showPassword ? "text" : "password"}
+                autoComplete="current-password"
+                placeholder="Password"
+                className="pr-12"
+                {...register("password")}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((v) => !v)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-white/55 hover:text-white/90 focus:outline-none"
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+              </button>
             </div>
-            <div className="space-y-1">
-              <div className="flex items-center justify-between">
-                <Label>Password</Label>
-                <Link href="#" className="text-xs text-[var(--primary)] hover:underline">Forgot?</Link>
-              </div>
-              <Input type="password" autoComplete="current-password" {...register("password")} />
-              {errors.password && <p className="text-xs text-danger">{errors.password.message}</p>}
-            </div>
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
-              Sign in
-            </Button>
-            <p className="text-xs text-center text-[var(--text-muted)]">
-              No account? <Link href="/register" className="text-[var(--primary)] hover:underline">Create one</Link>
-            </p>
-          </form>
-        </CardContent>
-      </Card>
-    </div>
+            {errors.password && <p className="mt-1.5 text-xs text-red-300">{errors.password.message}</p>}
+          </div>
+
+          <div className="flex items-center justify-between">
+            <AuthCheckbox label="Keep me logged in" defaultChecked {...register("remember")} />
+            <Link href="#" className="text-sm text-white/85 underline-offset-4 hover:underline font-medium">
+              Forgot password?
+            </Link>
+          </div>
+
+          <AuthButton type="submit" disabled={isSubmitting}>
+            Sign In
+          </AuthButton>
+
+          <p className="text-center text-sm text-white/65 pt-2">
+            New to Gen One?{" "}
+            <Link href="/register" className="text-white font-medium underline-offset-4 hover:underline">
+              Create an account
+            </Link>
+          </p>
+        </form>
+      </AuthCard>
+    </AuthShell>
   );
 }

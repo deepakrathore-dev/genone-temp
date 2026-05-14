@@ -20,4 +20,5 @@ export * from "./CountryChip";
 export * from "./Separator";
 export * from "./StatTile";
 export * from "./EmptyState";
+export * from "./AuthShell";
 export * from "./rule-help";

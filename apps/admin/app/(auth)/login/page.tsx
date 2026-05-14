@@ -1,134 +1,158 @@
 "use client";
 import * as React from "react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { Eye, EyeOff, ShieldCheck } from "lucide-react";
 import {
-  Card, CardHeader, CardTitle, CardContent, CardDescription,
-  Button, Input, Label, Badge,
+  AuthShell, AuthCard, AuthInput, AuthLabel, AuthButton, AuthCheckbox,
 } from "@genone/ui";
-import { ShieldCheck } from "lucide-react";
 import type { UserRole } from "@genone/types";
 import { useAuth } from "@/lib/stores/auth.store";
 
-const schema = z.object({
-  email: z.string().email(),
-  password: z.string().min(12),
-  totp: z.string().length(6, "6-digit code"),
-});
-
-interface Identity {
-  id: string;
-  email: string;
-  name: string;
-  initials: string;
-  role: UserRole;
-  blurb: string;
-}
-
-const TEAM: Identity[] = [
-  { id: "adm_0001", email: "avery@genone.example", name: "Avery Stone", initials: "AS", role: "SUPER_ADMIN", blurb: "Full access. Configuration, audit log, admin management." },
-  { id: "adm_0002", email: "jordan@genone.example", name: "Jordan Marsh", initials: "JM", role: "OPS", blurb: "User and payout operations. KYC and risk review." },
-  { id: "adm_0003", email: "priya@genone.example", name: "Priya Kapoor", initials: "PK", role: "AFFILIATE_MANAGER", blurb: "Affiliate programme operations." },
-  { id: "adm_0004", email: "sam@genone.example", name: "Sam Ortega", initials: "SO", role: "READ_ONLY", blurb: "View-only access to all dashboards and reports." },
+const ROLE_OPTIONS: Array<{ value: Exclude<UserRole, "TRADER">; label: string; hint: string }> = [
+  { value: "SUPER_ADMIN",       label: "Super Admin",       hint: "Full access including configuration and admin management." },
+  { value: "OPS",               label: "Ops",               hint: "User and payout operations, KYC and risk review." },
+  { value: "AFFILIATE_MANAGER", label: "Affiliate Manager", hint: "Affiliate programme operations only." },
+  { value: "READ_ONLY",         label: "Read-only",         hint: "View-only access to all dashboards and reports." },
 ];
+
+const ROLE_NAME: Record<Exclude<UserRole, "TRADER">, { id: string; name: string; initials: string }> = {
+  SUPER_ADMIN:       { id: "adm_super",     name: "Avery Stone",  initials: "AS" },
+  OPS:               { id: "adm_ops",       name: "Jordan Marsh", initials: "JM" },
+  AFFILIATE_MANAGER: { id: "adm_affiliate", name: "Priya Kapoor", initials: "PK" },
+  READ_ONLY:         { id: "adm_readonly",  name: "Sam Ortega",   initials: "SO" },
+};
+
+const schema = z.object({
+  email: z.string().email("Enter a valid email"),
+  password: z.string().min(8, "Enter your password"),
+  totp: z.string().length(6, "6-digit code"),
+  role: z.enum(["SUPER_ADMIN", "OPS", "AFFILIATE_MANAGER", "READ_ONLY"]),
+  remember: z.boolean().optional(),
+});
 
 export default function AdminLoginPage() {
   const router = useRouter();
   const signIn = useAuth((s) => s.signIn);
-  const [identity, setIdentity] = React.useState<Identity>(TEAM[0]!);
-  const { register, handleSubmit, formState: { errors, isSubmitting }, setValue } = useForm({
+  const [showPassword, setShowPassword] = React.useState(false);
+  const {
+    register, handleSubmit, watch, formState: { errors, isSubmitting },
+  } = useForm({
     resolver: zodResolver(schema),
-    defaultValues: { email: identity.email, password: "demopassword!!", totp: "123456" },
+    defaultValues: { email: "", password: "", totp: "", role: "SUPER_ADMIN" as const, remember: true },
   });
 
-  React.useEffect(() => {
-    setValue("email", identity.email);
-  }, [identity, setValue]);
+  const selectedRole = watch("role");
+  const hint = ROLE_OPTIONS.find((r) => r.value === selectedRole)?.hint ?? "";
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-aurora p-4">
-      <div className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-5 gap-4">
-        <Card className="lg:col-span-3">
-          <CardHeader className="text-center items-center">
-            <div className="flex items-center justify-center mb-2">
-              <Image src="/logo.png" alt="Gen One" width={56} height={56} priority className="h-14 w-14 rounded-xl" />
-            </div>
-            <CardTitle className="text-xl">Admin console</CardTitle>
-            <CardDescription className="flex items-center justify-center gap-2">
-              <ShieldCheck className="h-3.5 w-3.5 text-[var(--success)]" /> Two-factor authentication required
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form
-              className="space-y-3"
-              onSubmit={handleSubmit(() => {
-                signIn({
-                  id: identity.id,
-                  email: identity.email,
-                  name: identity.name,
-                  role: identity.role,
-                  initials: identity.initials,
-                });
-                router.push("/");
-              })}
-            >
-              <div className="space-y-1">
-                <Label>Email</Label>
-                <Input type="email" {...register("email")} />
-                {errors.email && <p className="text-xs text-danger">{errors.email.message}</p>}
-              </div>
-              <div className="space-y-1">
-                <Label>Password</Label>
-                <Input type="password" {...register("password")} />
-                {errors.password && <p className="text-xs text-danger">{errors.password.message}</p>}
-              </div>
-              <div className="space-y-1">
-                <Label>Authentication code</Label>
-                <Input inputMode="numeric" maxLength={6} {...register("totp")} className="font-mono tracking-[0.5em]" />
-                {errors.totp && <p className="text-xs text-danger">{errors.totp.message}</p>}
-              </div>
-              <Button type="submit" className="w-full" disabled={isSubmitting}>
-                Sign in as {identity.name}
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
-
-        <Card className="lg:col-span-2">
-          <CardHeader>
-            <CardTitle className="text-base">Team</CardTitle>
-            <CardDescription>Sign in as a team member to preview the console with their permissions.</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            {TEAM.map((d) => {
-              const active = d.id === identity.id;
-              return (
-                <button
-                  key={d.id}
-                  type="button"
-                  onClick={() => setIdentity(d)}
-                  className={`w-full text-left rounded-lg border px-3 py-2 transition-colors ${
-                    active
-                      ? "border-[var(--primary)] bg-[var(--primary-soft)]"
-                      : "border-[var(--border)] hover:bg-[var(--surface-2)]"
-                  }`}
-                >
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-sm font-medium">{d.name}</span>
-                    <Badge variant={d.role === "SUPER_ADMIN" ? "accent" : d.role === "READ_ONLY" ? "neutral" : "primary"}>
-                      {d.role.replace("_", " ")}
-                    </Badge>
-                  </div>
-                  <div className="text-xs text-[var(--text-muted)] mt-0.5">{d.blurb}</div>
-                </button>
-              );
-            })}
-          </CardContent>
-        </Card>
+    <AuthShell>
+      <div className="text-center mb-8">
+        <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-white">
+          Admin Portal
+        </h1>
+       
       </div>
-    </div>
+
+      <AuthCard heading="Login">
+        <form
+          className="space-y-5"
+          onSubmit={handleSubmit((values) => {
+            const ident = ROLE_NAME[values.role];
+            signIn({
+              id: ident.id,
+              email: values.email,
+              name: ident.name,
+              initials: ident.initials,
+              role: values.role,
+            });
+            router.push("/");
+          })}
+        >
+          <div>
+            <AuthLabel>Email Address</AuthLabel>
+            <AuthInput
+              type="email"
+              autoComplete="email"
+              placeholder="name@domain.com"
+              {...register("email")}
+            />
+            {errors.email && <p className="mt-1.5 text-xs text-red-300">{errors.email.message}</p>}
+          </div>
+
+          <div>
+            <AuthLabel>Password</AuthLabel>
+            <div className="relative">
+              <AuthInput
+                type={showPassword ? "text" : "password"}
+                autoComplete="current-password"
+                placeholder="Password"
+                className="pr-12"
+                {...register("password")}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((v) => !v)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-white/55 hover:text-white/90 focus:outline-none"
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+              </button>
+            </div>
+            {errors.password && <p className="mt-1.5 text-xs text-red-300">{errors.password.message}</p>}
+          </div>
+
+          <div>
+            <AuthLabel>Authentication code</AuthLabel>
+            <AuthInput
+              inputMode="numeric"
+              maxLength={6}
+              placeholder="123456"
+              className="tracking-[0.5em] text-center font-[family-name:var(--font-jetbrains-mono)]"
+              {...register("totp")}
+            />
+            {errors.totp && <p className="mt-1.5 text-xs text-red-300">{errors.totp.message}</p>}
+          </div>
+
+          <div>
+            <AuthLabel>Role</AuthLabel>
+            <div className="relative">
+              <select
+                {...register("role")}
+                className="w-full h-12 rounded-full pl-5 pr-10 appearance-none bg-white/[0.04] text-white border border-white/20 hover:border-white/30 focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/15 transition-colors text-sm"
+              >
+                {ROLE_OPTIONS.map((r) => (
+                  <option key={r.value} value={r.value} className="bg-[#0C0B10] text-white">
+                    {r.label}
+                  </option>
+                ))}
+              </select>
+              <svg
+                viewBox="0 0 20 20"
+                className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-white/55"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M5 8l5 5 5-5" />
+              </svg>
+            </div>
+            <p className="mt-1.5 text-xs text-white/55 leading-snug">{hint}</p>
+          </div>
+
+          <div>
+            <AuthCheckbox label="Keep me signed in" defaultChecked {...register("remember")} />
+          </div>
+
+          <AuthButton type="submit" disabled={isSubmitting}>
+            Sign In
+          </AuthButton>
+        </form>
+      </AuthCard>
+    </AuthShell>
   );
 }

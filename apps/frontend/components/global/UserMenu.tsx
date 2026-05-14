@@ -19,16 +19,19 @@ export function UserMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
-          className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-[var(--primary)] to-[var(--accent)] text-white text-xs font-semibold hover:opacity-90"
+          className="inline-flex h-10 items-center gap-2 rounded-full border border-white/[0.10] bg-white/[0.04] pl-1 pr-3 text-sm text-white hover:bg-white/[0.08]"
           aria-label="Open user menu"
         >
-          {initials.replace(/\s/g, "").slice(0, 2)}
+          <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#5BA8E5] via-[#4F92D6] to-[#3B7BAA] text-[11px] font-semibold text-white">
+            {initials.replace(/\s/g, "").slice(0, 2)}
+          </span>
+          <span className="hidden md:inline text-sm font-medium">{me?.fullName?.split(" ")[0] ?? "Trader"}</span>
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
+      <DropdownMenuContent align="end" className="w-64">
         <DropdownMenuLabel className="flex flex-col">
-          <span className="text-sm text-[var(--text)] font-medium">{me?.fullName ?? "Trader"}</span>
-          <span className="text-xs text-[var(--text-muted)] font-normal">{me?.email}</span>
+          <span className="text-sm text-white font-medium">{me?.fullName ?? "Trader"}</span>
+          <span className="text-xs text-white/55 font-normal">{me?.email}</span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem onSelect={() => router.push("/profile")}>

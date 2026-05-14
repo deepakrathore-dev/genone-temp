@@ -15,6 +15,8 @@ export const queryKeys = {
   leaderboard: (window: TimeWindow) => ["leaderboard", window] as const,
   subscriptions: ["subscriptions"] as const,
   subscriptionProducts: ["subscription-products"] as const,
+  challengeTypes: ["challenge-types"] as const,
+  challenges: ["challenges"] as const,
 };
 
 export function useMe() {
@@ -72,4 +74,12 @@ export function useSubscriptionProducts() {
 
 export function useMySubscriptions() {
   return useQuery({ queryKey: queryKeys.subscriptions, queryFn: api.getSubscriptions });
+}
+
+export function useChallengeTypes() {
+  return useQuery({ queryKey: queryKeys.challengeTypes, queryFn: api.getChallengeTypes });
+}
+
+export function useChallenges() {
+  return useQuery({ queryKey: queryKeys.challenges, queryFn: api.getChallenges });
 }

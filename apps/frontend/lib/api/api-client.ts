@@ -2,6 +2,8 @@ import * as mock from "@genone/mock-data";
 import type {
   Account,
   CalendarDay,
+  Challenge,
+  ChallengeType,
   LeaderboardRow,
   NotificationItem,
   Payout,
@@ -151,11 +153,17 @@ export const api = {
   cancelMySubscription: (id: string) =>
     post<{ ok: true }>(`/subscriptions/${id}/cancel`, {}, () => ({ ok: true })),
 
+  // ---------- Proptech catalog (challenge types + challenges) ----------
+  getChallengeTypes: () =>
+    get<ChallengeType[]>("/challenge-types", () => mock.challengeTypes.filter((t) => t.active)),
+  getChallenges: () =>
+    get<Challenge[]>("/challenges", () => mock.challenges.filter((c) => c.active && !c.archivedAt)),
+
   // ---------- Purchase / checkout (§2 - REQ-007 to REQ-013) ----------
   validatePromoCode: (code: string, tier: string) =>
     post<PromoResult>("/promo/validate", { code, tier }, () => mockValidatePromo(code, tier)),
 
-  createPurchase: (input: { tier: string; promoCode?: string; useCredit: boolean }) =>
+  createPurchase: (input: { tier: string; promoCode?: string; useCredit: boolean; challengeId?: string }) =>
     post<PurchaseReceipt>("/purchase", input, () => mockCreatePurchase(input)),
 };
 
@@ -200,7 +208,7 @@ export interface PurchaseReceipt {
   status: "PAID";
 }
 
-function mockCreatePurchase(input: { tier: string; promoCode?: string; useCredit: boolean }): PurchaseReceipt {
+function mockCreatePurchase(input: { tier: string; promoCode?: string; useCredit: boolean; challengeId?: string }): PurchaseReceipt {
   // Recompute server-side rather than trusting the client.
   const me = mock.users.find((u) => u.id === CURRENT_USER_ID)!;
   const tierCfg = mock.tierConfigs.find((t) => t.tier === input.tier)!;

@@ -1,77 +1,119 @@
 "use client";
-import Image from "next/image";
+import * as React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { Eye, EyeOff } from "lucide-react";
 import {
-  Card, CardHeader, CardTitle, CardContent, CardDescription,
-  Button, Input, Label, Checkbox,
+  AuthShell, AuthCard, AuthInput, AuthLabel, AuthButton, AuthCheckbox,
 } from "@genone/ui";
 
 const schema = z.object({
   fullName: z.string().min(2, "Enter your full legal name"),
-  email: z.string().email(),
-  password: z.string().min(12, "12 character minimum"),
-  accept: z.boolean().refine((v) => v, "Accept the risk disclosure"),
+  email: z.string().email("Enter a valid email"),
+  password: z.string().min(12, "Use at least 12 characters"),
+  accept: z.boolean().refine((v) => v, "Accept the risk disclosure to continue"),
 });
 
 export default function RegisterPage() {
   const router = useRouter();
-  const { register, handleSubmit, watch, setValue, formState: { errors, isSubmitting } } = useForm<z.input<typeof schema>>({
+  const [showPassword, setShowPassword] = React.useState(false);
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<z.input<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: { fullName: "", email: "", password: "", accept: false },
   });
-  const accept = watch("accept");
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-aurora p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center items-center">
-          <div className="flex items-center justify-center mb-2">
-            <Image src="/logo.png" alt="Gen One" width={56} height={56} priority className="h-14 w-14 rounded-xl" />
+    <AuthShell>
+      <div className="text-center mb-8">
+        <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-white">
+          Get started
+        </h1>
+        <p className="mt-3 text-sm text-white/70">
+          Create your Gen One Futures account in under a minute.
+        </p>
+      </div>
+
+      <AuthCard heading="Create account">
+        <form
+          className="space-y-5"
+          onSubmit={handleSubmit(() => router.push("/onboarding"))}
+        >
+          <div>
+            <AuthLabel>Full legal name</AuthLabel>
+            <AuthInput
+              autoComplete="name"
+              placeholder="Jane Doe"
+              {...register("fullName")}
+            />
+            {errors.fullName && <p className="mt-1.5 text-xs text-red-300">{errors.fullName.message}</p>}
           </div>
-          <CardTitle className="text-xl">Create your account</CardTitle>
-          <CardDescription>It takes about 60 seconds. KYC can be completed later.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form
-            className="space-y-3"
-            onSubmit={handleSubmit(() => router.push("/onboarding"))}
-          >
-            <div className="space-y-1">
-              <Label>Full legal name</Label>
-              <Input {...register("fullName")} />
-              {errors.fullName && <p className="text-xs text-danger">{errors.fullName.message}</p>}
+
+          <div>
+            <AuthLabel>Email Address</AuthLabel>
+            <AuthInput
+              type="email"
+              autoComplete="email"
+              placeholder="name@domain.com"
+              {...register("email")}
+            />
+            {errors.email && <p className="mt-1.5 text-xs text-red-300">{errors.email.message}</p>}
+          </div>
+
+          <div>
+            <AuthLabel>Password</AuthLabel>
+            <div className="relative">
+              <AuthInput
+                type={showPassword ? "text" : "password"}
+                autoComplete="new-password"
+                placeholder="At least 12 characters"
+                className="pr-12"
+                {...register("password")}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((v) => !v)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-white/55 hover:text-white/90 focus:outline-none"
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+              </button>
             </div>
-            <div className="space-y-1">
-              <Label>Email</Label>
-              <Input type="email" {...register("email")} />
-              {errors.email && <p className="text-xs text-danger">{errors.email.message}</p>}
-            </div>
-            <div className="space-y-1">
-              <Label>Password</Label>
-              <Input type="password" {...register("password")} />
-              <p className="text-[10px] text-[var(--text-faint)]">
-                12+ chars. Hashed with Argon2id and checked against HaveIBeenPwned.
-              </p>
-              {errors.password && <p className="text-xs text-danger">{errors.password.message}</p>}
-            </div>
-            <label className="flex items-start gap-2 text-xs text-[var(--text-muted)]">
-              <Checkbox checked={accept} onCheckedChange={(v) => setValue("accept", !!v, { shouldValidate: true })} />
-              <span>
-                I have read and accept the risk disclosure and terms of use. I understand that futures trading carries substantial risk.
+            {errors.password && <p className="mt-1.5 text-xs text-red-300">{errors.password.message}</p>}
+          </div>
+
+          <AuthCheckbox
+            label={
+              <span className="leading-snug">
+                I have read and accept the{" "}
+                <Link href="#" className="text-white underline-offset-4 hover:underline font-medium">
+                  risk disclosure
+                </Link>{" "}
+                and{" "}
+                <Link href="#" className="text-white underline-offset-4 hover:underline font-medium">
+                  terms of use
+                </Link>
+                .
               </span>
-            </label>
-            {errors.accept && <p className="text-xs text-danger">{errors.accept.message}</p>}
-            <Button type="submit" className="w-full" disabled={isSubmitting}>Continue</Button>
-            <p className="text-xs text-center text-[var(--text-muted)]">
-              Already have an account? <Link href="/login" className="text-[var(--primary)] hover:underline">Sign in</Link>
-            </p>
-          </form>
-        </CardContent>
-      </Card>
-    </div>
+            }
+            {...register("accept")}
+          />
+          {errors.accept && <p className="text-xs text-red-300">{errors.accept.message}</p>}
+
+          <AuthButton type="submit" disabled={isSubmitting}>
+            Create account
+          </AuthButton>
+
+          <p className="text-center text-sm text-white/65 pt-2">
+            Already have an account?{" "}
+            <Link href="/login" className="text-white font-medium underline-offset-4 hover:underline">
+              Sign in
+            </Link>
+          </p>
+        </form>
+      </AuthCard>
+    </AuthShell>
   );
 }

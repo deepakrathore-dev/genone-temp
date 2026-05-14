@@ -1,14 +1,7 @@
 @import "tailwindcss";
 @import "@genone/config/theme.css";
 
-/*
- * Tailwind v4 only scans files reachable from this app by default and skips
- * workspace package symlinks. Explicitly include packages/ui so classes used
- * by shared primitives (Dialog panel width, padding, top/right positioning…)
- * get compiled into the final CSS bundle.
- */
 @source "../../../packages/ui/src/**/*.{ts,tsx,js,jsx}";
-
 
 @theme inline {
   --color-bg: var(--bg);
@@ -27,7 +20,8 @@
   --color-danger: var(--danger);
   --color-warning: var(--warning);
   --color-info: var(--info);
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-dm-sans);
+  --font-display: var(--font-dm-sans);
   --font-mono: var(--font-jetbrains-mono);
 }
 
@@ -35,22 +29,41 @@
 
 html, body { height: 100%; }
 
+html.dark { color-scheme: dark; }
+
 body {
   background-color: var(--bg);
   color: var(--text);
-  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
-  font-feature-settings: "cv11", "ss01";
+  font-family: var(--font-dm-sans), "DM Sans Placeholder", system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Brand backdrop on the body: deep ink + faint teal corner washes. */
+body {
+  background:
+    radial-gradient(60% 50% at 0% 0%, rgba(29, 65, 83, 0.45), transparent 70%),
+    radial-gradient(50% 45% at 100% 100%, rgba(29, 65, 83, 0.35), transparent 70%),
+    #0C0B10;
+  background-attachment: fixed;
 }
 
 .font-mono, code, kbd, samp, pre {
   font-family: var(--font-jetbrains-mono), ui-monospace, "SFMono-Regular", monospace;
 }
 
-*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar { width: 10px; height: 10px; }
 *::-webkit-scrollbar-track { background: transparent; }
-*::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 8px; }
-*::-webkit-scrollbar-thumb:hover { background: var(--text-faint); }
+*::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.10);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.20);
+  background-clip: content-box;
+}
 
 .text-success { color: var(--success); }
 .text-danger { color: var(--danger); }
@@ -64,10 +77,7 @@ body {
 .bg-info-soft { background-color: var(--info-soft); }
 .bg-accent-soft { background-color: var(--accent-soft); }
 
-/*
- * Soft grid backdrop used behind auth, onboarding, and hero panels.
- * Lighter than utility borders so it reads as ambient texture, not structure.
- */
+/* Brand grid backdrop (used on auth) */
 .bg-grid {
   background-image:
     linear-gradient(to right, color-mix(in srgb, var(--border) 70%, transparent) 1px, transparent 1px),
@@ -76,15 +86,43 @@ body {
   background-position: center;
 }
 
-/* Subtle radial wash used on auth screens; works in light and dark. */
+/* Brand aurora wash for hero panels */
 .bg-aurora {
   background:
-    radial-gradient(60% 50% at 20% 0%, color-mix(in srgb, var(--grad-1) 22%, transparent), transparent 70%),
-    radial-gradient(50% 45% at 100% 100%, color-mix(in srgb, var(--grad-2) 18%, transparent), transparent 70%),
-    var(--bg);
+    radial-gradient(60% 50% at 0% 0%, rgba(29, 65, 83, 0.55), transparent 70%),
+    radial-gradient(50% 45% at 100% 100%, rgba(29, 65, 83, 0.45), transparent 70%),
+    #0C0B10;
 }
 
-/* Card hover: subtle lift + shadow upgrade */
+/* Live indicator dot */
+.live-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--success);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--success) 60%, transparent);
+  animation: live-pulse 2.4s ease-out infinite;
+}
+@keyframes live-pulse {
+  0%   { box-shadow: 0 0 0 0   color-mix(in srgb, var(--success) 60%, transparent); }
+  70%  { box-shadow: 0 0 0 10px color-mix(in srgb, var(--success) 0%,  transparent); }
+  100% { box-shadow: 0 0 0 0   color-mix(in srgb, var(--success) 0%,  transparent); }
+}
+
+/* Brand surface — translucent panel matching the login card */
+.brand-surface {
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.brand-surface-2 {
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+/* Card hover */
 .card-hover {
   transition: transform 160ms cubic-bezier(0.4, 0, 0.2, 1),
               box-shadow 160ms cubic-bezier(0.4, 0, 0.2, 1),
@@ -93,16 +131,35 @@ body {
 .card-hover:hover {
   transform: translateY(-1px);
   box-shadow: var(--shadow-lift);
+  border-color: rgba(255, 255, 255, 0.20);
 }
 
-/* Numerical typography polish */
+/* Numerics */
 .tabular-nums { font-variant-numeric: tabular-nums; }
+.num-display {
+  font-family: var(--font-jetbrains-mono), ui-monospace, "SFMono-Regular", monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
 
-/* Reduce motion preference: respect users who don't want animation */
+:where(button, a, [role="button"], input, select, textarea):focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  .live-dot { animation: none; }
 }

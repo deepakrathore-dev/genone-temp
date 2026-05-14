@@ -20,7 +20,7 @@ export function OrderSummary({ breakdown }: { breakdown: PriceBreakdown }) {
         <CardTitle className="text-sm">Order summary</CardTitle>
       </CardHeader>
       <CardContent className="space-y-2">
-        <Row label={`${breakdown.tier} Evaluation`} value={formatCurrency(breakdown.subtotalCents)} />
+        <Row label={breakdown.tier} value={formatCurrency(breakdown.subtotalCents)} />
         {breakdown.loyaltyDiscountCents > 0 && (
           <Row
             label={`Loyalty discount (${breakdown.loyaltyPct}%)`}

@@ -1,92 +1,140 @@
 /*
  * Gen One design tokens.
- * Polished light-first palette tuned for a professional trading platform.
- * Switch to .dark on <html> for the dark mode variant.
+ *
+ * Brand: deep ink #0C0B10 + teal-navy #1D4153 corners + cobalt blue gradient CTA.
+ * Both apps run a brand-dark experience by default. A light fallback is kept for
+ * surfaces that might need it (print, future marketing pages), but the in-product
+ * experience is dark.
  */
 
 :root {
-  /* Surfaces */
-  --bg: #f7f8fc;
-  --surface: #ffffff;
-  --surface-2: #f1f3f9;
-  --surface-3: #e7eaf2;
-  --border: #e4e8f0;
-  --border-strong: #cfd5e2;
+  /* In-product dark surfaces (the brand) */
+  --bg:           #0C0B10;
+  --surface:      rgba(255, 255, 255, 0.04);
+  --surface-2:    rgba(255, 255, 255, 0.06);
+  --surface-3:    rgba(255, 255, 255, 0.10);
+  --border:       rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.22);
 
-  /* Text */
-  --text: #0d1426;
-  --text-muted: #4b556b;
-  --text-faint: #8b95ac;
+  --text:        #f5f7fb;
+  --text-muted:  rgba(255, 255, 255, 0.65);
+  --text-faint:  rgba(255, 255, 255, 0.40);
 
-  /* Brand */
-  --primary: #4f46e5;
-  --primary-foreground: #ffffff;
-  --primary-soft: rgba(79, 70, 229, 0.10);
-  --primary-hover: #4338ca;
+  /* Brand primary — cobalt blue used in CTA gradient */
+  --primary:           #5BA8E5;
+  --primary-foreground: #0C0B10;
+  --primary-soft:      rgba(91, 168, 229, 0.16);
+  --primary-hover:     #79b8ec;
 
-  --accent: #7c3aed;
-  --accent-soft: rgba(124, 58, 237, 0.10);
+  /* Accent — teal-navy used in corner washes and accent badges */
+  --accent:      #1D4153;
+  --accent-soft: rgba(29, 65, 83, 0.30);
 
-  /* Semantic */
-  --success: #047857;
-  --success-soft: rgba(4, 120, 87, 0.10);
+  /* Brand gradient stops — used on hero washes, primary buttons */
+  --grad-1: #5BA8E5;
+  --grad-2: #4F92D6;
+  --grad-3: #3B7BAA;
 
-  --danger: #dc2626;
-  --danger-soft: rgba(220, 38, 38, 0.10);
+  /* Semantic colours tuned for dark backgrounds */
+  --success:     #34d399;
+  --success-soft: rgba(52, 211, 153, 0.16);
 
-  --warning: #b45309;
-  --warning-soft: rgba(180, 83, 9, 0.10);
+  --danger:      #f87171;
+  --danger-soft: rgba(248, 113, 113, 0.16);
 
-  --info: #0369a1;
-  --info-soft: rgba(3, 105, 161, 0.10);
+  --warning:     #fbbf24;
+  --warning-soft: rgba(251, 191, 36, 0.16);
 
-  --ring: rgba(79, 70, 229, 0.35);
-  --shadow-card: 0 1px 2px rgba(15, 21, 37, 0.04), 0 1px 3px rgba(15, 21, 37, 0.05);
-  --shadow-lift: 0 4px 6px -1px rgba(15, 21, 37, 0.05), 0 10px 20px -8px rgba(15, 21, 37, 0.10);
-  --shadow-pop:  0 10px 30px -8px rgba(15, 21, 37, 0.18), 0 4px 8px -2px rgba(15, 21, 37, 0.06);
+  --info:        #60a5fa;
+  --info-soft:   rgba(96, 165, 250, 0.16);
 
-  /* Subtle gradient stops used in heroes and brand panels */
-  --grad-1: #6366f1;
-  --grad-2: #a855f7;
-}
-
-.dark {
-  --bg: #07090f;
-  --surface: #0e1320;
-  --surface-2: #141a2c;
-  --surface-3: #1c2440;
-  --border: rgba(255, 255, 255, 0.06);
-  --border-strong: rgba(255, 255, 255, 0.14);
-
-  --text: #f4f6fb;
-  --text-muted: #a4afc8;
-  --text-faint: #6c7693;
-
-  --primary: #818cf8;
-  --primary-foreground: #060914;
-  --primary-soft: rgba(129, 140, 248, 0.16);
-  --primary-hover: #a5b0ff;
-
-  --accent: #c084fc;
-  --accent-soft: rgba(192, 132, 252, 0.16);
-
-  --success: #34d399;
-  --success-soft: rgba(52, 211, 153, 0.14);
-
-  --danger: #f87171;
-  --danger-soft: rgba(248, 113, 113, 0.14);
-
-  --warning: #fbbf24;
-  --warning-soft: rgba(251, 191, 36, 0.14);
-
-  --info: #38bdf8;
-  --info-soft: rgba(56, 189, 248, 0.14);
-
-  --ring: rgba(129, 140, 248, 0.5);
+  /* Focus + shadows */
+  --ring: rgba(91, 168, 229, 0.5);
   --shadow-card: 0 1px 0 rgba(0, 0, 0, 0.4), 0 12px 32px -16px rgba(0, 0, 0, 0.55);
   --shadow-lift: 0 6px 18px -6px rgba(0, 0, 0, 0.5);
   --shadow-pop:  0 18px 48px -12px rgba(0, 0, 0, 0.7);
+  --shadow-cta:  0 8px 24px -8px rgba(75, 130, 200, 0.55);
+}
 
-  --grad-1: #818cf8;
-  --grad-2: #c084fc;
+/*
+ * Explicit .dark variant. The :root above is already the dark brand experience,
+ * but next-themes still writes .dark on <html> when the user picks "dark".
+ * Keep these in sync.
+ */
+.dark {
+  --bg:           #0C0B10;
+  --surface:      rgba(255, 255, 255, 0.04);
+  --surface-2:    rgba(255, 255, 255, 0.06);
+  --surface-3:    rgba(255, 255, 255, 0.10);
+  --border:       rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.22);
+
+  --text:        #f5f7fb;
+  --text-muted:  rgba(255, 255, 255, 0.65);
+  --text-faint:  rgba(255, 255, 255, 0.40);
+
+  --primary:           #5BA8E5;
+  --primary-foreground: #0C0B10;
+  --primary-soft:      rgba(91, 168, 229, 0.16);
+  --primary-hover:     #79b8ec;
+
+  --accent:      #1D4153;
+  --accent-soft: rgba(29, 65, 83, 0.30);
+
+  --grad-1: #5BA8E5;
+  --grad-2: #4F92D6;
+  --grad-3: #3B7BAA;
+
+  --success:     #34d399;
+  --success-soft: rgba(52, 211, 153, 0.16);
+  --danger:      #f87171;
+  --danger-soft: rgba(248, 113, 113, 0.16);
+  --warning:     #fbbf24;
+  --warning-soft: rgba(251, 191, 36, 0.16);
+  --info:        #60a5fa;
+  --info-soft:   rgba(96, 165, 250, 0.16);
+
+  --ring: rgba(91, 168, 229, 0.5);
+  --shadow-card: 0 1px 0 rgba(0, 0, 0, 0.4), 0 12px 32px -16px rgba(0, 0, 0, 0.55);
+  --shadow-lift: 0 6px 18px -6px rgba(0, 0, 0, 0.5);
+  --shadow-pop:  0 18px 48px -12px rgba(0, 0, 0, 0.7);
+  --shadow-cta:  0 8px 24px -8px rgba(75, 130, 200, 0.55);
+}
+
+/*
+ * Optional light fallback. Not used in the product today, kept so any future
+ * marketing surface can opt in by adding .light to a subtree.
+ */
+.light {
+  --bg:           #f6f7fb;
+  --surface:      #ffffff;
+  --surface-2:    #eef0f7;
+  --surface-3:    #e2e6f0;
+  --border:       #e4e7f0;
+  --border-strong: #c8cfdd;
+
+  --text:        #0b1124;
+  --text-muted:  #4a5470;
+  --text-faint:  #8590a8;
+
+  --primary:           #3B7BAA;
+  --primary-foreground: #ffffff;
+  --primary-soft:      rgba(59, 123, 170, 0.10);
+  --primary-hover:     #316591;
+
+  --accent:      #1D4153;
+  --accent-soft: rgba(29, 65, 83, 0.10);
+
+  --grad-1: #5BA8E5;
+  --grad-2: #4F92D6;
+  --grad-3: #3B7BAA;
+
+  --success:     #047857;
+  --success-soft: rgba(4, 120, 87, 0.10);
+  --danger:      #b91c1c;
+  --danger-soft: rgba(185, 28, 28, 0.10);
+  --warning:     #a25608;
+  --warning-soft: rgba(162, 86, 8, 0.10);
+  --info:        #0369a1;
+  --info-soft:   rgba(3, 105, 161, 0.10);
 }

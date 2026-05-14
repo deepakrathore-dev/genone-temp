@@ -1,7 +1,6 @@
 "use client";
 import * as React from "react";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
-import { Check, ChevronRight } from "lucide-react";
 import { cn } from "./cn";
 
 export const DropdownMenu = DropdownMenuPrimitive.Root;
@@ -14,13 +13,13 @@ export const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup;
 export const DropdownMenuContent = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content>
->(({ className, sideOffset = 6, ...props }, ref) => (
+>(({ className, sideOffset = 8, ...props }, ref) => (
   <DropdownMenuPrimitive.Portal>
     <DropdownMenuPrimitive.Content
       ref={ref}
       sideOffset={sideOffset}
       className={cn(
-        "z-50 min-w-[10rem] overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface)] p-1 shadow-xl",
+        "z-50 min-w-[12rem] overflow-hidden rounded-2xl border border-white/[0.12] bg-[#13121a]/95 backdrop-blur-xl p-1.5 shadow-[var(--shadow-pop)]",
         className
       )}
       {...props}
@@ -36,8 +35,9 @@ export const DropdownMenuItem = React.forwardRef<
   <DropdownMenuPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex cursor-pointer select-none items-center gap-2 rounded-md px-2 py-1.5 text-sm outline-none transition-colors focus:bg-[var(--surface-2)] focus:text-[var(--text)] data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-      inset && "pl-8",
+      "relative flex cursor-pointer select-none items-center gap-2 rounded-lg px-3 py-2 text-sm text-white/85 outline-none transition-colors",
+      "focus:bg-white/[0.08] focus:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      inset && "pl-9",
       className
     )}
     {...props}
@@ -51,7 +51,7 @@ export const DropdownMenuLabel = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DropdownMenuPrimitive.Label
     ref={ref}
-    className={cn("px-2 py-1.5 text-xs font-semibold text-[var(--text-muted)]", className)}
+    className={cn("px-3 py-1.5 text-xs font-semibold text-white/55", className)}
     {...props}
   />
 ));
@@ -63,7 +63,7 @@ export const DropdownMenuSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DropdownMenuPrimitive.Separator
     ref={ref}
-    className={cn("my-1 h-px bg-[var(--border)]", className)}
+    className={cn("my-1 h-px bg-white/[0.08]", className)}
     {...props}
   />
 ));
