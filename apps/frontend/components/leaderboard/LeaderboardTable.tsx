@@ -1,7 +1,7 @@
 "use client";
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
-  formatCurrency, formatNumber, cn,
+  formatCurrency, formatNumber, cn, CountryChip,
 } from "@genone/ui";
 import type { LeaderboardRow } from "@genone/types";
 
@@ -27,8 +27,10 @@ export function LeaderboardTable({ rows }: { rows: LeaderboardRow[] }) {
               <TableRow key={r.userId}>
                 <TableCell className="font-mono">#{r.rank}</TableCell>
                 <TableCell>
-                  <span className="font-mono">{r.initials}</span>{" "}
-                  <span aria-label={r.country}>{r.countryFlag}</span>
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono">{r.initials}</span>
+                    <CountryChip code={r.country} />
+                  </div>
                 </TableCell>
                 <TableCell className={cn("font-mono font-semibold", r.totalPnlCents >= 0 ? "text-success" : "text-danger")}>
                   {formatCurrency(r.totalPnlCents, { compact: true, sign: true })}
@@ -50,7 +52,7 @@ export function LeaderboardTable({ rows }: { rows: LeaderboardRow[] }) {
           <li key={r.userId} className="p-3 flex items-center gap-3">
             <span className="text-xs font-mono text-[var(--text-muted)] w-8">#{r.rank}</span>
             <div className="flex-1 min-w-0">
-              <div className="font-mono text-sm">{r.initials} {r.countryFlag}</div>
+              <div className="text-sm flex items-center gap-2"><span className="font-mono">{r.initials}</span><CountryChip code={r.country} size="xs" /></div>
               <div className="text-[11px] font-mono text-[var(--text-muted)]">
                 {r.winRatePct}% WR · {r.trades} trades · PF {r.profitFactor}
               </div>

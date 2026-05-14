@@ -5,15 +5,15 @@ import { SimpleConfigForm } from "@/components/config/SimpleConfigForm";
 export default function RiskRulesConfigPage() {
   return (
     <ConfigPageShell
-      title="Risk rules"
-      description="REQ-129. System-level guardrails reviewed quarterly."
+      title="Risk controls"
+      description="System-wide guardrails reviewed quarterly. Designed to halt automatic disbursement when business metrics drift outside expected ranges."
       auditFilter={(a) => a.includes("RISK") || a.includes("PAYOUT_RATIO")}
     >
       <SimpleConfigForm
         title="Payout ratio ceiling"
-        description="Auto-suspends all payout approvals if cumulative payouts exceed % of revenue."
+        description="Automatically pauses all payout approvals if cumulative payouts exceed this share of revenue."
         fields={[
-          { key: "ceiling", label: "Ceiling (%)", type: "percent", value: 15, help: "Industry typical 10–20%" },
+          { key: "ceiling", label: "Ceiling (%)", type: "percent", value: 15, help: "Industry typical range is 10 to 20 percent." },
           { key: "freezeOnBreach", label: "Auto-freeze on breach", type: "switch", value: true },
         ]}
       />

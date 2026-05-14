@@ -26,7 +26,7 @@ export default function RegisterPage() {
   const accept = watch("accept");
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-grid p-4">
+    <div className="min-h-screen flex items-center justify-center bg-aurora p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center items-center">
           <div className="flex items-center justify-center mb-2">

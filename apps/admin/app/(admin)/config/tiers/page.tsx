@@ -83,14 +83,7 @@ function TierForm({ tier, onSave }: { tier: TierConfig; onSave: (payload: Record
               <Label className="flex items-center gap-1.5">
                 {f.label}
                 {f.isCurrency && <span className="text-[10px] text-[var(--text-faint)]">(USD)</span>}
-                <InfoTip title={help.title}>
-                  {help.body}
-                  {help.reqId && (
-                    <div className="mt-1.5 text-[10px] uppercase tracking-wider text-[var(--text-faint)] font-mono">
-                      Spec: {help.reqId}
-                    </div>
-                  )}
-                </InfoTip>
+                <InfoTip title={help.title}>{help.body}</InfoTip>
               </Label>
               <Input
                 type="number"

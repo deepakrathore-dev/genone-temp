@@ -13,9 +13,14 @@ export interface StatTileProps {
 
 export function StatTile({ label, value, delta, hint, className }: StatTileProps) {
   return (
-    <div className={cn("rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-[var(--shadow-card)]", className)}>
-      <div className="text-xs uppercase tracking-wider text-[var(--text-muted)] font-medium">{label}</div>
-      <div className="mt-2 flex items-baseline gap-2">
+    <div
+      className={cn(
+        "card-hover rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-[var(--shadow-card)]",
+        className
+      )}
+    >
+      <div className="text-[11px] uppercase tracking-[0.08em] text-[var(--text-muted)] font-semibold">{label}</div>
+      <div className="mt-2 flex items-baseline gap-2 flex-wrap">
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.div
             key={value}
@@ -29,12 +34,19 @@ export function StatTile({ label, value, delta, hint, className }: StatTileProps
           </motion.div>
         </AnimatePresence>
         {typeof delta === "number" && (
-          <span className={cn("text-xs font-medium", delta >= 0 ? "text-success" : "text-danger")}>
-            {delta >= 0 ? "+" : ""}{delta.toFixed(1)}%
+          <span
+            className={cn(
+              "inline-flex items-center gap-0.5 rounded-md px-1.5 py-0.5 text-[11px] font-semibold tabular-nums",
+              delta >= 0
+                ? "bg-[var(--success-soft)] text-[var(--success)]"
+                : "bg-[var(--danger-soft)] text-[var(--danger)]"
+            )}
+          >
+            {delta >= 0 ? "↑" : "↓"} {Math.abs(delta).toFixed(1)}%
           </span>
         )}
       </div>
-      {hint && <div className="mt-1 text-xs text-[var(--text-faint)]">{hint}</div>}
+      {hint && <div className="mt-1.5 text-xs text-[var(--text-faint)] leading-snug">{hint}</div>}
     </div>
   );
 }

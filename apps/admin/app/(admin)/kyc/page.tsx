@@ -4,7 +4,7 @@ import Link from "next/link";
 import {
   Card, CardContent,
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
-  Badge, Button, Skeleton, formatDate,
+  Badge, Button, Skeleton, CountryChip, formatDate,
 } from "@genone/ui";
 import { toast } from "sonner";
 
@@ -34,7 +34,7 @@ export default function KycPage() {
                         <div className="text-xs text-[var(--text-muted)] font-mono">{u.email}</div>
                       </Link>
                     </TableCell>
-                    <TableCell>{u.countryFlag} {u.country}</TableCell>
+                    <TableCell><CountryChip code={u.country} showName /></TableCell>
                     <TableCell><Badge variant="warning">{u.kycStatus}</Badge></TableCell>
                     <TableCell className="font-mono text-xs">{formatDate(u.createdAt)}</TableCell>
                     <TableCell className="flex gap-1 justify-end">

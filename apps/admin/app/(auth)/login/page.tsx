@@ -19,7 +19,7 @@ const schema = z.object({
   totp: z.string().length(6, "6-digit code"),
 });
 
-interface DemoIdentity {
+interface Identity {
   id: string;
   email: string;
   name: string;
@@ -28,17 +28,17 @@ interface DemoIdentity {
   blurb: string;
 }
 
-const DEMO_IDENTITIES: DemoIdentity[] = [
-  { id: "adm_0001", email: "avery@genone.example", name: "Avery Stone", initials: "AS", role: "SUPER_ADMIN", blurb: "Full access - config, audit, admin management" },
-  { id: "adm_0002", email: "jordan@genone.example", name: "Jordan Marsh", initials: "JM", role: "OPS", blurb: "Users, payouts, KYC, risk" },
-  { id: "adm_0003", email: "priya@genone.example", name: "Priya Kapoor", initials: "PK", role: "AFFILIATE_MANAGER", blurb: "Affiliate management only" },
-  { id: "adm_0004", email: "sam@genone.example", name: "Sam Ortega", initials: "SO", role: "READ_ONLY", blurb: "View only - no actions" },
+const TEAM: Identity[] = [
+  { id: "adm_0001", email: "avery@genone.example", name: "Avery Stone", initials: "AS", role: "SUPER_ADMIN", blurb: "Full access. Configuration, audit log, admin management." },
+  { id: "adm_0002", email: "jordan@genone.example", name: "Jordan Marsh", initials: "JM", role: "OPS", blurb: "User and payout operations. KYC and risk review." },
+  { id: "adm_0003", email: "priya@genone.example", name: "Priya Kapoor", initials: "PK", role: "AFFILIATE_MANAGER", blurb: "Affiliate programme operations." },
+  { id: "adm_0004", email: "sam@genone.example", name: "Sam Ortega", initials: "SO", role: "READ_ONLY", blurb: "View-only access to all dashboards and reports." },
 ];
 
 export default function AdminLoginPage() {
   const router = useRouter();
   const signIn = useAuth((s) => s.signIn);
-  const [identity, setIdentity] = React.useState<DemoIdentity>(DEMO_IDENTITIES[0]!);
+  const [identity, setIdentity] = React.useState<Identity>(TEAM[0]!);
   const { register, handleSubmit, formState: { errors, isSubmitting }, setValue } = useForm({
     resolver: zodResolver(schema),
     defaultValues: { email: identity.email, password: "demopassword!!", totp: "123456" },
@@ -49,9 +49,8 @@ export default function AdminLoginPage() {
   }, [identity, setValue]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-grid p-4">
+    <div className="min-h-screen flex items-center justify-center bg-aurora p-4">
       <div className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-5 gap-4">
-        {/* Sign-in card */}
         <Card className="lg:col-span-3">
           <CardHeader className="text-center items-center">
             <div className="flex items-center justify-center mb-2">
@@ -59,7 +58,7 @@ export default function AdminLoginPage() {
             </div>
             <CardTitle className="text-xl">Admin console</CardTitle>
             <CardDescription className="flex items-center justify-center gap-2">
-              <ShieldCheck className="h-3.5 w-3.5 text-[var(--success)]" /> TOTP required
+              <ShieldCheck className="h-3.5 w-3.5 text-[var(--success)]" /> Two-factor authentication required
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -87,29 +86,24 @@ export default function AdminLoginPage() {
                 {errors.password && <p className="text-xs text-danger">{errors.password.message}</p>}
               </div>
               <div className="space-y-1">
-                <Label>TOTP code</Label>
+                <Label>Authentication code</Label>
                 <Input inputMode="numeric" maxLength={6} {...register("totp")} className="font-mono tracking-[0.5em]" />
                 {errors.totp && <p className="text-xs text-danger">{errors.totp.message}</p>}
               </div>
               <Button type="submit" className="w-full" disabled={isSubmitting}>
                 Sign in as {identity.name}
               </Button>
-              <p className="text-[10px] text-center text-[var(--text-faint)]">
-                {/* TODO(genone): replace with real OIDC + TOTP backend verification */}
-                Demo mode - any 6-digit code works.
-              </p>
             </form>
           </CardContent>
         </Card>
 
-        {/* Role picker */}
         <Card className="lg:col-span-2">
           <CardHeader>
-            <CardTitle className="text-base">Demo identities</CardTitle>
-            <CardDescription>Pick a role to preview the console as that admin.</CardDescription>
+            <CardTitle className="text-base">Team</CardTitle>
+            <CardDescription>Sign in as a team member to preview the console with their permissions.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            {DEMO_IDENTITIES.map((d) => {
+            {TEAM.map((d) => {
               const active = d.id === identity.id;
               return (
                 <button

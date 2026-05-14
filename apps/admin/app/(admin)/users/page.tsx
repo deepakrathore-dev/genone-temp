@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useUsers } from "@/lib/queries";
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
-  Input, Badge, Button, Skeleton, formatCurrency, formatDate,
+  Input, Badge, Button, Skeleton, CountryChip, formatCurrency, formatDate,
 } from "@genone/ui";
 import { Search, Download } from "lucide-react";
 import { toast } from "sonner";
@@ -72,7 +72,7 @@ export default function UsersPage() {
                       <div className="text-xs text-[var(--text-muted)] font-mono">{u.email}</div>
                     </Link>
                   </TableCell>
-                  <TableCell><span aria-label={u.country}>{u.countryFlag} {u.country}</span></TableCell>
+                  <TableCell><CountryChip code={u.country} /></TableCell>
                   <TableCell><Badge variant={u.kycStatus === "VERIFIED" ? "success" : u.kycStatus === "PENDING" ? "warning" : "neutral"}>{u.kycStatus}</Badge></TableCell>
                   <TableCell className="font-mono">{u.accountsCount}</TableCell>
                   <TableCell className="font-mono">{formatCurrency(u.totalSpentCents)}</TableCell>

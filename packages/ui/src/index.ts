@@ -16,6 +16,7 @@ export * from "./Checkbox";
 export * from "./Tooltip";
 export * from "./Popover";
 export * from "./InfoTip";
+export * from "./CountryChip";
 export * from "./Separator";
 export * from "./StatTile";
 export * from "./EmptyState";

@@ -48,9 +48,9 @@ function Inner() {
   return (
     <div className="space-y-4">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Subscriptions (§24)</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">Subscriptions</h1>
         <p className="text-sm text-[var(--text-muted)]">
-          Recurring add-on products billed monthly via NMI Customer Vault. Dunning runs 3 retries at 3-day intervals.
+          Recurring add-on products billed monthly. Failed charges enter a three-attempt dunning cycle before the subscription is suspended.
         </p>
       </div>
 

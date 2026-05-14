@@ -6,14 +6,14 @@ export default function PayoutCapPage() {
   return (
     <ConfigPageShell
       title="Daily payout cap"
-      description="REQ-131. Hard cap on total disbursements per day."
+      description="A hard ceiling on total disbursements per calendar day. Further payouts auto-pause until the next day rolls over."
       auditFilter={(a) => a.includes("PAYOUT_CAP") || a.includes("DAILY")}
     >
       <SimpleConfigForm
         title="Limits"
         fields={[
-          { key: "dailyCap", label: "Daily cap ($)", type: "currency", value: 5_000_000, help: "All amounts auto-paused beyond this" },
-          { key: "rolloverSurplus", label: "Roll surplus to next day", type: "switch", value: false },
+          { key: "dailyCap", label: "Daily cap ($)", type: "currency", value: 5_000_000, help: "All payouts beyond this amount are auto-paused for the day." },
+          { key: "rolloverSurplus", label: "Roll unused capacity to next day", type: "switch", value: false },
         ]}
       />
     </ConfigPageShell>

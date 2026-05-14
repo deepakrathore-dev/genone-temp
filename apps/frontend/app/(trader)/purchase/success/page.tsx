@@ -73,7 +73,7 @@ function SuccessInner() {
           <Step n={1} title="Connect your front-end" body="Use the Rithmic credentials we just emailed in R|Trader Pro, NinjaTrader, Quantower, TradeSea, Onyx Trader, or any other Rithmic-compatible platform." />
           <Step n={2} title="Hit your profit target" body={`Reach the ${tier === "50K" ? "$3,000" : tier === "100K" ? "$6,000" : "$9,000"} target without breaching the EOD drawdown or the daily loss limit.`} />
           <Step n={3} title="Get funded" body="On pass, your funded account is auto-created and we'll email you. Funded rules + buffer kick in immediately." />
-          <Step n={4} title="Request payouts" body="Once you've built buffer + 5 green days, request payouts straight from the dashboard. Bank transfer in 2–3 business days." />
+          <Step n={4} title="Request payouts" body="Once you've built the buffer and 5 green days, request payouts straight from the dashboard. Bank transfer in 2 to 3 business days." />
         </CardContent>
       </Card>
 

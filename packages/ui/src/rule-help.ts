@@ -1,103 +1,82 @@
 /**
  * Plain-English explanations for every tier-rule field. One source of truth used
- * by:
- *   • Admin /config/tiers form fields
- *   • Trader purchase page tier picker
- *   • Trader dashboard Rules Panel
- *
- * Keep these short — 2-3 sentences max. They appear inside an InfoTip popover.
+ * across the admin tier configuration form and the trader-facing rules surfaces.
+ * Each entry has a short title and a 2-3 sentence body shown inside an InfoTip
+ * popover.
  */
 export interface RuleHelpEntry {
   title: string;
   body: string;
-  reqId?: string;
 }
 
 export const RULE_HELP = {
   evaluationFee: {
     title: "Evaluation fee",
-    body: "One-time fee the trader pays to take this evaluation. Direct revenue per signup. Paid via NMI hosted page — card data never touches our infrastructure.",
-    reqId: "REQ-109",
+    body: "One-time fee the trader pays to take this evaluation. Charged through NMI's hosted page so card data never touches Gen One infrastructure.",
   },
   profitTarget: {
     title: "Profit target",
-    body: "How much P&L the trader must accumulate to pass the evaluation. Hit this without breaching any rule and the funded account auto-provisions.",
-    reqId: "REQ-110",
+    body: "How much profit the trader must accumulate to pass the evaluation. Hit this without breaching any rule and the funded account is provisioned automatically.",
   },
   drawdown: {
     title: "EOD drawdown (fixed)",
-    body: "A fixed floor set at account creation as (starting balance − drawdown). Never moves — even after the trader makes profit. Crossing it at end-of-day fails the account permanently. This is what powers our 'your wins are protected' position.",
-    reqId: "REQ-111",
+    body: "A fixed floor set when the account is created as starting balance minus the drawdown amount. The floor never moves, even after the trader makes profit. Crossing it at end of day fails the account.",
   },
   dailyLoss: {
-    title: "Daily loss (SOFT)",
-    body: "Max loss allowed in a single trading day. Breaching it locks the account out of trading for the rest of the day — the account is NOT failed. Trading resumes at the next session open (6 PM ET Sun-Thu).",
-    reqId: "REQ-112",
+    title: "Daily loss (soft)",
+    body: "Maximum allowed loss in a single trading day. Breaching it locks the account out of trading for the rest of the day. The account is not failed; trading resumes at the next session open (6 PM ET, Sunday through Thursday).",
   },
   maxContracts: {
     title: "Max contracts",
-    body: "Largest position size allowed on a single order. Orders for more than this many minis are rejected at order entry by the broker. Keeps risk-per-trade scaled to account size.",
-    reqId: "REQ-113",
+    body: "Largest position size allowed on a single order. Orders for more than this many minis are rejected at order entry. Keeps risk per trade scaled to the account size.",
   },
   buffer: {
     title: "Buffer",
-    body: "Funded accounts only. The trader must build this much cumulative profit before their first payout request will be approved. Default formula is drawdown + $100. Guarantees the firm recoups its drawdown exposure before paying out.",
-    reqId: "REQ-114, REQ-026",
+    body: "Funded accounts only. The trader must accumulate this much profit before their first payout request is approved. The default formula is drawdown plus $100. Ensures the firm recoups its drawdown exposure before paying out.",
   },
   firstPayoutCap: {
     title: "First payout cap",
-    body: "Hard limit on the very first payout request from a funded account. Subsequent payouts have no cap. Stops one big winning day from triggering an oversized first wire.",
-    reqId: "REQ-115, REQ-030",
+    body: "Hard limit on the trader's very first payout request from a funded account. Subsequent payouts have no cap. Prevents one strong day from triggering an oversized first wire.",
   },
   inactivity: {
     title: "Inactivity window",
-    body: "If the trader places zero trades for this many calendar days, the evaluation auto-closes and a re-engagement email goes out. Resets every time the trader places a trade.",
-    reqId: "REQ-116, REQ-022",
+    body: "If the trader places no trades for this many calendar days, the evaluation auto-closes and a re-engagement email is sent. The window resets every time the trader places a trade.",
   },
   greenDayThreshold: {
     title: "Green day threshold",
-    body: "A day counts as a 'green day' only if its P&L meets or exceeds this amount. Green days accumulate toward the payout gate. Default $200.",
-    reqId: "REQ-117, REQ-028",
+    body: "A day counts as a green day only if its profit meets or exceeds this amount. Green days accumulate toward the payout gate.",
   },
   greenDaysRequired: {
     title: "Green days required",
-    body: "How many green days a funded trader must accumulate since their last payout before they can request another one. Stops one lucky day from triggering a payout.",
-    reqId: "REQ-119, REQ-029",
+    body: "How many green days a funded trader must accumulate since their last payout before they can request another. Stops a single lucky day from triggering a payout.",
   },
   consistency: {
     title: "Consistency rule",
-    body: "No single trading day may account for more than this percentage of cumulative profit since the last payout. Prevents 'lottery-ticket' trading. Default 50%.",
-    reqId: "REQ-118, REQ-027",
+    body: "No single trading day may account for more than this percentage of cumulative profit since the last payout. Prevents lottery-style trading.",
   },
   profitSplit: {
     title: "Profit split",
-    body: "Trader keeps this percentage of profit at payout. The firm keeps the rest. Default 80/20. Spec also has a 90/10 candidate Gen One can confirm before kick-off.",
-    reqId: "REQ-120",
+    body: "Trader's share of profit at payout. The firm keeps the rest. The default split is 80/20.",
   },
   maxAccounts: {
-    title: "Max accounts per user",
-    body: "A single identity (detected via email, payment source, IP cluster, device fingerprint) can hold at most this many funded accounts. Default 10.",
-    reqId: "REQ-121, REQ-031",
+    title: "Max accounts per trader",
+    body: "A single identity (matched via email, payment source, IP cluster, and device fingerprint) can hold at most this many funded accounts.",
   },
   scaleThreshold: {
-    title: "Scale rule threshold",
-    body: "Once cumulative withdrawn (not just profit) reaches this amount, the trader is auto-upgraded to the next tier for free. Withdrawn — not profit — because it's a stronger signal of genuine trading success.",
-    reqId: "REQ-122, REQ-033",
+    title: "Scale rule",
+    body: "Once cumulative withdrawals reach this amount, the trader is automatically upgraded to the next tier at no cost. Uses withdrawals (not profit) because they're a stronger signal of consistent trading.",
   },
   forceLiquidation: {
     title: "Daily force liquidation",
-    body: "All open positions are force-closed every trading day at 4:00 PM ET via Rithmic order API. Eliminates overnight gap risk against the EOD drawdown rule. Liquidation trades appear in trade history with a distinct source flag.",
-    reqId: "REQ-138",
+    body: "All open positions are force-closed every trading day at 4:00 PM ET. Eliminates overnight gap risk against the EOD drawdown rule. Liquidation trades appear in history with a distinct source flag.",
   },
   payoutRatio: {
     title: "Payout ratio ceiling",
-    body: "If cumulative payouts exceed this percentage of revenue, all auto-approvals freeze until an admin intervenes. A hard stop that protects the business from systemic risk. Default 15%.",
-    reqId: "REQ-129",
+    body: "If cumulative payouts exceed this percentage of revenue, all automatic approvals freeze until an administrator intervenes. A hard stop that protects the business from systemic risk.",
   },
   dailyPayoutCap: {
     title: "Daily payout cap",
-    body: "Maximum total disbursement allowed per calendar day across all funded accounts. Auto-locks further payouts beyond this until the next day rolls over.",
-    reqId: "REQ-131",
+    body: "Maximum total disbursement allowed per calendar day across all funded accounts. Further payouts auto-lock until the next day rolls over.",
   },
 } as const satisfies Record<string, RuleHelpEntry>;
 

@@ -6,16 +6,17 @@ export default function LoyaltyConfigPage() {
   return (
     <ConfigPageShell
       title="Loyalty programme"
-      description="REQ-123, REQ-124. Pass credit and per-attempt loyalty discounts."
+      description="Pass credits and per-attempt discounts that reward repeat traders."
       auditFilter={(a) => a.includes("LOYALTY") || a.includes("CREDIT")}
     >
       <SimpleConfigForm
         title="Pass credit"
-        fields={[{ key: "passCreditPct", label: "Pass credit (% of fee)", type: "percent", value: 20, help: "Auto-issued to wallet on evaluation pass" }]}
+        description="Issued to the trader's wallet automatically when an evaluation is passed."
+        fields={[{ key: "passCreditPct", label: "Pass credit (% of fee)", type: "percent", value: 20, help: "Auto-issued to the wallet on a successful evaluation pass." }]}
       />
       <SimpleConfigForm
         title="Loyalty discount tiers"
-        description="Tier unlocks at the listed attempt count and grants the listed percentage off all future evaluations."
+        description="A tier unlocks at the listed attempt count and grants the listed percentage off all future evaluations."
         fields={[
           { key: "tier1Attempts", label: "Tier 1 attempts", type: "number", value: 3 },
           { key: "tier1Pct", label: "Tier 1 discount (%)", type: "percent", value: 2 },

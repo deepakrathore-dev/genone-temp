@@ -6,7 +6,7 @@ import {
   Card, CardContent, CardHeader, CardTitle,
   Tabs, TabsList, TabsTrigger, TabsContent,
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
-  Badge, Button, Input, Label, Skeleton,
+  Badge, Button, Input, Label, Skeleton, CountryChip,
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
   formatCurrency, formatDate,
 } from "@genone/ui";
@@ -29,7 +29,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-2xl font-semibold tracking-tight">{user.fullName}</h1>
-            <span className="text-sm text-[var(--text-muted)]">{user.countryFlag}</span>
+            <CountryChip code={user.country} />
             {user.suspended ? <Badge variant="danger">Suspended</Badge> : <Badge variant="success">Active</Badge>}
             <Badge variant={user.kycStatus === "VERIFIED" ? "success" : "warning"}>KYC: {user.kycStatus}</Badge>
           </div>

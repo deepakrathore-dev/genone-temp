@@ -3,7 +3,7 @@ import * as React from "react";
 import Link from "next/link";
 import { useMe } from "@/lib/queries";
 import {
-  Badge, Button, Card, CardContent, Skeleton, Switch, Separator,
+  Badge, Button, Card, CardContent, Skeleton, Switch, Separator, CountryChip,
   formatCurrency, formatDate,
 } from "@genone/ui";
 import {
@@ -36,7 +36,7 @@ export default function ProfilePage() {
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
               <h1 className="text-2xl font-semibold tracking-tight">{me.fullName}</h1>
-              <span aria-label={me.country} title={me.country}>{me.countryFlag}</span>
+              <CountryChip code={me.country} />
               {me.suspended ? <Badge variant="danger">Suspended</Badge> : <Badge variant="success">Active</Badge>}
             </div>
             <p className="text-sm text-[var(--text-muted)] font-mono">{me.email} · {me.id}</p>
@@ -64,7 +64,7 @@ export default function ProfilePage() {
       {/* Identity */}
       <ProfileSection
         title="Personal information"
-        description="Legal identity captured at registration and during KYC. Locked after verification — contact support to change."
+        description="Legal identity captured at registration and during verification. Locked after verification; contact support to change."
         action={<Button size="sm" variant="outline" onClick={() => toast.info("Contact support to update locked identity fields")}><Pencil className="h-3.5 w-3.5" /> Request change</Button>}
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -88,12 +88,7 @@ export default function ProfilePage() {
                 : <Badge variant="warning">Unverified</Badge>}
             </span>
           } mono />
-          <Field label="Country" value={
-            <span className="inline-flex items-center gap-1.5">
-              <span>{me.countryFlag}</span>
-              <span>{me.country}</span>
-            </span>
-          } />
+          <Field label="Country" value={<CountryChip code={me.country} showName />} />
           <Field label="Trader ID" value={me.id} mono />
         </div>
       </ProfileSection>
@@ -113,7 +108,7 @@ export default function ProfilePage() {
       {/* Verification */}
       <ProfileSection
         title="Verification status"
-        description="KYC + AML — required before your first payout (REQ-005, REQ-045)."
+        description="Identity, address, and source-of-funds checks. Required before your first payout."
       >
         <div className="space-y-3">
           <VerificationRow
@@ -138,7 +133,7 @@ export default function ProfilePage() {
               me.kycStatus === "VERIFIED" && me.kycVerifiedAt
                 ? `Verified ${formatDate(me.kycVerifiedAt)} · AML + PEP + sanctions`
                 : me.kycStatus === "PENDING"
-                  ? "Submitted — under review (1-2 business days)"
+                  ? "Submitted. Under review, typically 1 to 2 business days."
                   : "Required before your first payout"
             }
             verified={me.kycStatus === "VERIFIED"}
@@ -204,7 +199,7 @@ export default function ProfilePage() {
           </div>
           <Separator />
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-            <Field label="Last sign-in" value={me.lastLoginAt ? formatDate(me.lastLoginAt, "datetime") : "—"} />
+            <Field label="Last sign-in" value={me.lastLoginAt ? formatDate(me.lastLoginAt, "datetime") : "Not available"} />
             <Field label="Last sign-in IP" value={me.lastLoginIp} mono />
           </div>
         </div>
@@ -214,8 +209,8 @@ export default function ProfilePage() {
       <ProfileSection title="Notifications" description="Pick which emails Gen One sends you. In-platform notifications are always on.">
         <div className="space-y-2">
           {[
-            { key: "passFailEmails", label: "Pass / fail events", hint: "Required for evaluation outcomes — cannot be disabled" },
-            { key: "payoutEmails", label: "Payout state changes", hint: "Required by REQ-048 — cannot be disabled" },
+            { key: "passFailEmails", label: "Pass / fail events", hint: "Required for evaluation outcomes. Cannot be disabled." },
+            { key: "payoutEmails", label: "Payout state changes", hint: "Required for regulatory record-keeping. Cannot be disabled." },
             { key: "retentionEmails", label: "Educational retention emails", hint: "Day-3 content tailored to your last failure mode" },
             { key: "productAnnouncements", label: "Product announcements", hint: "New tiers, features, scheduled maintenance" },
             { key: "loyaltyUpdates", label: "Loyalty tier updates", hint: "When you unlock a new discount tier" },
@@ -250,7 +245,7 @@ export default function ProfilePage() {
       {/* Legal */}
       <ProfileSection
         title="Legal & compliance"
-        description="Audit trail for regulatory record-keeping (REQ-003)."
+        description="Audit trail of your acceptance, kept for regulatory record-keeping."
       >
         {me.riskDisclosure ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

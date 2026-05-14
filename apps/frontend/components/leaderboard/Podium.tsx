@@ -1,6 +1,6 @@
 "use client";
 import { Crown, Trophy, Shield } from "lucide-react";
-import { cn, formatCurrency } from "@genone/ui";
+import { cn, formatCurrency, CountryChip } from "@genone/ui";
 import type { LeaderboardRow } from "@genone/types";
 
 export function Podium({ top3 }: { top3: LeaderboardRow[] }) {
@@ -30,7 +30,10 @@ function PodiumCard({
           place === 1 ? "text-yellow-400" : place === 2 ? "text-slate-300" : "text-amber-500"
         )} />
         <div className="text-xs uppercase tracking-wider text-[var(--text-muted)] font-mono">#{place}</div>
-        <div className="text-base font-mono font-semibold">{row.initials} {row.countryFlag}</div>
+        <div className="text-base font-semibold flex items-center gap-2 flex-wrap justify-center">
+          <span className="font-mono">{row.initials}</span>
+          <CountryChip code={row.country} />
+        </div>
         <div className="text-sm text-success font-mono">{formatCurrency(row.totalPnlCents, { compact: true })}</div>
       </div>
     </div>

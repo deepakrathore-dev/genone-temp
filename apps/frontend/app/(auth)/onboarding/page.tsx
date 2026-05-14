@@ -20,7 +20,7 @@ export default function OnboardingPage() {
   const [tier, setTier] = React.useState<string | null>(null);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-grid p-4">
+    <div className="min-h-screen flex items-center justify-center bg-aurora p-4">
       <Card className="w-full max-w-3xl">
         <CardHeader>
           <CardTitle>Let&apos;s set you up</CardTitle>

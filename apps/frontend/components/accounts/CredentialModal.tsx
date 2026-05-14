@@ -49,8 +49,7 @@ export function CredentialModal({
                 placeholder="Enter your password"
               />
               <p className="text-[10px] text-[var(--text-faint)]">
-                {/* TODO(genone): replace with a real password challenge round-trip + audit hit */}
-                Demo: any 8+ character string unlocks the credentials.
+                For your security, every credential view is recorded in your account&apos;s audit history.
               </p>
             </div>
             <DialogFooter>

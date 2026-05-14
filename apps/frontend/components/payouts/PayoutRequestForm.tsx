@@ -49,7 +49,7 @@ export function PayoutRequestForm({ account }: { account: Account }) {
       <CardHeader>
         <CardTitle>Request a payout</CardTitle>
         <CardDescription>
-          Bank transfer via Gen One Finance. ETA 2–3 business days from approval.
+          Bank transfer via Gen One Finance. Funds typically arrive 2 to 3 business days after approval.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
