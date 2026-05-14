@@ -101,3 +101,68 @@ export function useManualCredit() {
     onSuccess: () => { qc.invalidateQueries({ queryKey: queryKeys.users }); toast.success("Credit issued"); },
   });
 }
+
+// ---- Challenge taxonomy ----
+export function useCreateChallengeType() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: api.createChallengeType,
+    onSuccess: () => { qc.invalidateQueries({ queryKey: queryKeys.challengeTypes }); toast.success("Challenge type created"); },
+  });
+}
+
+export function useUpdateChallengeType() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, payload }: { id: string; payload: Partial<import("@genone/types").ChallengeType> }) => api.updateChallengeType(id, payload),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: queryKeys.challengeTypes }); toast.success("Challenge type updated"); },
+  });
+}
+
+export function useDeleteChallengeType() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => api.deleteChallengeType(id),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: queryKeys.challengeTypes }); toast.success("Challenge type removed"); },
+  });
+}
+
+export function useCreateChallenge() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: api.createChallenge,
+    onSuccess: () => { qc.invalidateQueries({ queryKey: queryKeys.challenges }); toast.success("Challenge created. Available to new purchasers immediately."); },
+  });
+}
+
+export function useUpdateChallenge() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, payload }: { id: string; payload: Partial<import("@genone/types").Challenge> }) => api.updateChallenge(id, payload),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: queryKeys.challenges }); toast.success("Challenge updated"); },
+  });
+}
+
+export function useArchiveChallenge() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => api.archiveChallenge(id),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: queryKeys.challenges }); toast.success("Challenge archived"); },
+  });
+}
+
+// ---- Email templates ----
+export function useUpdateEmailTemplate() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, payload }: { id: string; payload: Partial<import("@genone/types").EmailTemplate> }) => api.updateEmailTemplate(id, payload),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: queryKeys.emailTemplates }); toast.success("Template saved"); },
+  });
+}
+
+export function useSendEmailTemplateTest() {
+  return useMutation({
+    mutationFn: ({ id, to }: { id: string; to: string }) => api.sendEmailTemplateTest(id, to),
+    onSuccess: (_, { to }) => toast.success(`Test email sent to ${to}`),
+  });
+}

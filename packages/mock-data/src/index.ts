@@ -5,7 +5,10 @@ import type {
   AffiliateRow,
   AuditEntry,
   CalendarDay,
+  Challenge,
+  ChallengeType,
   CohortRow,
+  EmailTemplate,
   ForecastBucket,
   Kpi,
   LeaderboardRow,
@@ -690,6 +693,83 @@ const adminUsersData = buildAdminUsers();
 const subscriptionProductsData = buildSubscriptionProducts();
 const subscriptionsData = buildSubscriptions(usersData, subscriptionProductsData);
 const subscriptionAttemptsData = buildSubscriptionAttempts(subscriptionsData);
+const challengeTypesData = buildChallengeTypes();
+const challengesData = buildChallenges(challengeTypesData);
+const emailTemplatesData = buildEmailTemplates();
+
+function buildChallengeTypes(): ChallengeType[] {
+  return [
+    { id: "ct_standard", name: "Standard", description: "Two-step evaluation with end-of-day drawdown and a profit target. The flagship product.", active: true, challengeCount: 3, createdAt: todayISO(-200) },
+    { id: "ct_static",   name: "Static",   description: "Static drawdown that never trails the high-water mark. Designed for risk-disciplined traders who want predictable risk on every account.", active: true, challengeCount: 3, createdAt: todayISO(-120) },
+  ];
+}
+
+function buildChallenges(types: ChallengeType[]): Challenge[] {
+  const sizes: Array<{ size: number; fee: number; target: number; dd: number; daily: number; max: number; buffer: number; cap: number }> = [
+    { size: 5_000_000,  fee: 12_900, target: 300_000, dd: 200_000, daily: 137_500, max: 3,  buffer: 210_000, cap: 200_000 },
+    { size: 10_000_000, fee: 22_000, target: 600_000, dd: 300_000, daily: 275_000, max: 5,  buffer: 310_000, cap: 200_000 },
+    { size: 15_000_000, fee: 25_900, target: 900_000, dd: 450_000, daily: 412_500, max: 10, buffer: 460_000, cap: 300_000 },
+  ];
+  const out: Challenge[] = [];
+  let i = 1;
+  for (const t of types) {
+    if (!t.active) continue;
+    for (const s of sizes) {
+      const sizeLabel = `${(s.size / 100_000).toFixed(0)}K`;
+      out.push({
+        id: `ch_${String(i++).padStart(4, "0")}`,
+        typeId: t.id,
+        typeName: t.name,
+        name: `${t.name} ${sizeLabel}`,
+        phase: "EVALUATION",
+        startingBalanceCents: s.size,
+        evaluationFeeCents: s.fee,
+        profitTargetCents: s.target,
+        drawdownCents: s.dd,
+        dailyLossCents: s.daily,
+        maxContracts: s.max,
+        bufferCents: s.buffer,
+        firstPayoutCapCents: s.cap,
+        inactivityDays: 30,
+        active: true,
+        archivedAt: null,
+        createdAt: todayISO(-randInt(20, 180)),
+      });
+    }
+  }
+  return out;
+}
+
+function buildEmailTemplates(): EmailTemplate[] {
+  const now = todayISO(-randInt(1, 30));
+  const make = (key: string, name: string, category: EmailTemplate["category"], subject: string, body: string, vars: string[]): EmailTemplate => ({
+    id: `et_${key.toLowerCase()}`,
+    key,
+    name,
+    category,
+    subject,
+    bodyHtml: body,
+    variables: vars,
+    active: true,
+    updatedAt: now,
+    updatedBy: "Avery Stone",
+  });
+  return [
+    make("EVAL_PURCHASE",       "Evaluation purchase confirmation",  "EVALUATION", "Your {{tier}} evaluation is ready",                "<p>Hi {{firstName}},</p><p>Your {{tier}} evaluation is provisioned. Credentials: {{username}} / {{password}}.</p>",                                                              ["firstName", "tier", "username", "password"]),
+    make("EVAL_PASS",           "Evaluation passed",                 "EVALUATION", "Congratulations — your funded account is ready",  "<p>Hi {{firstName}},</p><p>You passed the {{tier}} evaluation. Your funded account is being provisioned and credentials will arrive shortly.</p>",                              ["firstName", "tier"]),
+    make("EVAL_FAIL_DRAWDOWN",  "Evaluation failed (drawdown)",      "EVALUATION", "Your {{tier}} evaluation has closed",             "<p>Hi {{firstName}},</p><p>Your {{tier}} evaluation hit the EOD drawdown. Use your {{loyaltyPct}}% loyalty discount on the next attempt.</p>",                                    ["firstName", "tier", "loyaltyPct"]),
+    make("EVAL_FAIL_TIMEOUT",   "Evaluation timed out",              "EVALUATION", "Your evaluation has expired",                     "<p>Hi {{firstName}},</p><p>Your evaluation expired after 30 days of inactivity. You can purchase a fresh attempt with your loyalty credit applied automatically.</p>",            ["firstName"]),
+    make("DAILY_LOCK",          "Daily loss lockout",                "EVALUATION", "Daily loss limit reached",                        "<p>Hi {{firstName}},</p><p>You've hit today's daily loss limit. Trading will resume at the next session open (6 PM ET).</p>",                                                       ["firstName"]),
+    make("FUNDED_WELCOME",      "Funded account welcome",            "FUNDED",     "Welcome to a funded Gen One account",             "<p>Hi {{firstName}},</p><p>Your funded account is live. Here's how to think about the buffer, green days, and your first payout.</p>",                                            ["firstName"]),
+    make("PAYOUT_REQUESTED",    "Payout requested",                  "PAYOUT",     "Payout request received",                         "<p>Hi {{firstName}},</p><p>We've received your payout request for {{amount}}. Our operations team will review within one business day.</p>",                                       ["firstName", "amount"]),
+    make("PAYOUT_APPROVED",     "Payout approved",                   "PAYOUT",     "Your payout is approved",                         "<p>Hi {{firstName}},</p><p>Your payout of {{amount}} is approved and queued for disbursement.</p>",                                                                                 ["firstName", "amount"]),
+    make("PAYOUT_DISBURSED",    "Payout disbursed",                  "PAYOUT",     "Your payout is on the way",                       "<p>Hi {{firstName}},</p><p>{{amount}} is on its way via {{method}}. Funds typically arrive in 2 to 3 business days.</p>",                                                          ["firstName", "amount", "method"]),
+    make("PAYOUT_REJECTED",     "Payout rejected",                   "PAYOUT",     "Payout request couldn't be approved",             "<p>Hi {{firstName}},</p><p>Your payout could not be approved. Reason: {{reason}}.</p>",                                                                                            ["firstName", "reason"]),
+    make("LOYALTY_TIER_UP",     "Loyalty tier unlocked",             "LOYALTY",    "You've unlocked {{tierPct}}% off future evaluations", "<p>Hi {{firstName}},</p><p>You've reached {{attempts}} attempts and unlocked a {{tierPct}}% discount on every future evaluation.</p>",                                          ["firstName", "attempts", "tierPct"]),
+    make("RETENTION_DAY3",      "Day 3 retention nudge",             "MARKETING",  "Ready for another go?",                           "<p>Hi {{firstName}},</p><p>Here's what we've learned from traders who came back stronger. Your {{loyaltyPct}}% discount is waiting.</p>",                                          ["firstName", "loyaltyPct"]),
+    make("ADMIN_INVITE",        "Admin invite",                      "ADMIN",     "You've been invited to the Gen One admin console", "<p>Hi {{firstName}},</p><p>You've been invited as a {{role}} on the admin console. Set up your password and 2FA in the next 24 hours.</p>",                                       ["firstName", "role"]),
+  ];
+}
 
 export const users: User[] = usersData;
 export const accounts: Account[] = accountsData;
@@ -712,6 +792,9 @@ export const adminUsers: AdminUser[] = adminUsersData;
 export const subscriptionProducts: SubscriptionProduct[] = subscriptionProductsData;
 export const subscriptions: Subscription[] = subscriptionsData;
 export const subscriptionAttempts: SubscriptionBillingAttempt[] = subscriptionAttemptsData;
+export const challengeTypes: ChallengeType[] = challengeTypesData;
+export const challenges: Challenge[] = challengesData;
+export const emailTemplates: EmailTemplate[] = emailTemplatesData;
 
 export const adminUserSummaries: AdminUserSummary[] = users.map((u) => {
   const userAccounts = accounts.filter((a) => a.userId === u.id);

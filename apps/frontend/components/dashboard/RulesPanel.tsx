@@ -28,7 +28,6 @@ export function RulesPanel({ account }: { account: Account }) {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0">
           <CardTitle className="text-sm flex items-center gap-2">
-            <ShieldCheck className="h-4 w-4 text-[var(--primary)]" />
             Tier Rules
           </CardTitle>
           <Badge variant="primary">{account.tier}</Badge>
@@ -51,7 +50,6 @@ export function RulesPanel({ account }: { account: Account }) {
       <Card>
         <CardHeader>
           <CardTitle className="text-sm flex items-center gap-2">
-            <Zap className="h-4 w-4 text-[var(--warning)]" />
             Auto-liquidation
             <InfoTip title={RULE_HELP.forceLiquidation.title}>
               {RULE_HELP.forceLiquidation.body}
@@ -66,7 +64,6 @@ export function RulesPanel({ account }: { account: Account }) {
       <Card>
         <CardHeader>
           <CardTitle className="text-sm flex items-center gap-2">
-            <AlertTriangle className="h-4 w-4 text-[var(--info)]" />
             Heads up
           </CardTitle>
         </CardHeader>

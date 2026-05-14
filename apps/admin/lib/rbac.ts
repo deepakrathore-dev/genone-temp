@@ -46,9 +46,16 @@ export const PERMISSIONS = {
   "admins.view": ["SUPER_ADMIN"],
   "admins.write": ["SUPER_ADMIN"],
 
-  // Subscriptions (§24)
+  // Subscriptions
   "subscriptions.view": ["SUPER_ADMIN", "OPS", "READ_ONLY"],
   "subscriptions.write": ["SUPER_ADMIN", "OPS"],
+
+  // Proptech configuration
+  "proptech.view": ["SUPER_ADMIN", "OPS", "READ_ONLY"],
+  "proptech.write": ["SUPER_ADMIN"],
+
+  // Risk reports
+  "reports.view": ["SUPER_ADMIN", "OPS", "READ_ONLY"],
 } as const satisfies Record<string, readonly UserRole[]>;
 
 export type Permission = keyof typeof PERMISSIONS;

@@ -7,6 +7,7 @@ import {
   LayoutDashboard, Users, Banknote, ShieldAlert, IdCard, Megaphone,
   LineChart, GitMerge, Activity, Settings, ScrollText, ChevronLeft, Menu,
   Sigma, Coins, Bell, AlertOctagon, Network, UserCog, Repeat,
+  ListOrdered, Boxes, Layers, MailOpen, FileBarChart,
 } from "lucide-react";
 import { cn } from "@genone/ui";
 import { useUi } from "@/lib/stores/ui.store";
@@ -24,8 +25,18 @@ const GROUPS: NavGroup[] = [
       { label: "Payouts", href: "/payouts", icon: Banknote, permission: "payouts.view" },
       { label: "Subscriptions", href: "/subscriptions", icon: Repeat, permission: "subscriptions.view" },
       { label: "Risk", href: "/risk", icon: ShieldAlert, permission: "risk.view" },
+      { label: "Risk reports", href: "/risk-reports", icon: FileBarChart, permission: "reports.view" },
       { label: "KYC", href: "/kyc", icon: IdCard, permission: "kyc.view" },
       { label: "Affiliates", href: "/affiliates", icon: Megaphone, permission: "affiliates.view" },
+    ],
+  },
+  {
+    label: "Proptech Configuration",
+    items: [
+      { label: "Challenge Types", href: "/proptech/challenge-types", icon: ListOrdered, permission: "proptech.view" },
+      { label: "Challenges", href: "/proptech/challenges", icon: Boxes, permission: "proptech.view" },
+      { label: "Phase", href: "/proptech/phase", icon: Layers, permission: "proptech.view" },
+      { label: "Email Templates", href: "/proptech/email-templates", icon: MailOpen, permission: "proptech.view" },
     ],
   },
   {
@@ -39,14 +50,13 @@ const GROUPS: NavGroup[] = [
   {
     label: "Configuration",
     items: [
-      { label: "Tiers", href: "/config/tiers", icon: Coins, permission: "config.view" },
       { label: "Universal rules", href: "/config/rules", icon: GitMerge, permission: "config.view" },
       { label: "Loyalty", href: "/config/loyalty", icon: Activity, permission: "config.view" },
       { label: "Affiliates", href: "/config/affiliates", icon: Megaphone, permission: "config.view" },
       { label: "Risk rules", href: "/config/risk", icon: ShieldAlert, permission: "config.view" },
       { label: "KPI alerts", href: "/config/alerts", icon: Bell, permission: "config.view" },
       { label: "Payout cap", href: "/config/payout-cap", icon: AlertOctagon, permission: "config.view" },
-      { label: "Intercom", href: "/config/intercom", icon: Settings, permission: "config.view" },
+      { label: "Customer support", href: "/config/intercom", icon: Settings, permission: "config.view" },
     ],
   },
   {
@@ -115,7 +125,12 @@ export function Sidebar() {
                 </div>
               )}
               {g.items.map((it) => {
-                const active = it.href === "/" ? pathname === "/" : pathname.startsWith(it.href);
+                const active =
+                  it.href === "/"
+                    ? pathname === "/"
+                    : it.href === "/risk"
+                      ? pathname === "/risk" || (pathname.startsWith("/risk/") && !pathname.startsWith("/risk-reports"))
+                      : pathname === it.href || pathname.startsWith(`${it.href}/`);
                 const Icon = it.icon;
                 return (
                   <Link

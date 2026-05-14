@@ -24,6 +24,9 @@ export const queryKeys = {
   subscriptions: ["admin", "subscriptions"] as const,
   subscriptionProducts: ["admin", "subscription-products"] as const,
   subscriptionAttempts: ["admin", "subscription-attempts"] as const,
+  challengeTypes: ["admin", "challenge-types"] as const,
+  challenges: ["admin", "challenges"] as const,
+  emailTemplates: ["admin", "email-templates"] as const,
 };
 
 export const useKpis = () => useQuery({ queryKey: queryKeys.kpis, queryFn: api.getKpis, refetchInterval: 30_000 });
@@ -47,3 +50,6 @@ export const useAdmins = () => useQuery({ queryKey: queryKeys.admins, queryFn: a
 export const useSubscriptions = () => useQuery({ queryKey: queryKeys.subscriptions, queryFn: api.getSubscriptions });
 export const useSubscriptionProducts = () => useQuery({ queryKey: queryKeys.subscriptionProducts, queryFn: api.getSubscriptionProducts });
 export const useSubscriptionAttempts = () => useQuery({ queryKey: queryKeys.subscriptionAttempts, queryFn: api.getSubscriptionAttempts });
+export const useChallengeTypes = () => useQuery({ queryKey: queryKeys.challengeTypes, queryFn: api.getChallengeTypes });
+export const useChallenges = () => useQuery({ queryKey: queryKeys.challenges, queryFn: api.getChallenges });
+export const useEmailTemplates = () => useQuery({ queryKey: queryKeys.emailTemplates, queryFn: api.getEmailTemplates });

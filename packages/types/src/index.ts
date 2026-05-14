@@ -23,7 +23,56 @@ export interface AdminUser {
   totpEnabled: boolean;
 }
 
-// Subscriptions (§24 - REQ-209 to REQ-216)
+// Phases
+export type Phase = "EVALUATION" | "FUNDED";
+
+// Challenge taxonomy: a Type groups Challenges of the same flavour
+// (e.g. "Standard", "Instant", "EOD") and each Challenge is a specific
+// account size + ruleset that traders can purchase.
+export interface ChallengeType {
+  id: string;
+  name: string;
+  description: string;
+  active: boolean;
+  challengeCount: number;
+  createdAt: ISODate;
+}
+
+export interface Challenge {
+  id: string;
+  typeId: string;
+  typeName: string;
+  name: string;                // "Standard 50K"
+  phase: Phase;                // EVALUATION account or FUNDED account
+  startingBalanceCents: number;
+  evaluationFeeCents: number;
+  profitTargetCents: number;
+  drawdownCents: number;
+  dailyLossCents: number;
+  maxContracts: number;
+  bufferCents: number;
+  firstPayoutCapCents: number;
+  inactivityDays: number;
+  active: boolean;
+  archivedAt?: ISODate | null;
+  createdAt: ISODate;
+}
+
+// Email templates configurable by ops
+export interface EmailTemplate {
+  id: string;
+  key: string;                 // machine key e.g. "EVAL_PASS"
+  name: string;
+  category: "EVALUATION" | "FUNDED" | "PAYOUT" | "LOYALTY" | "MARKETING" | "ADMIN";
+  subject: string;
+  bodyHtml: string;
+  variables: string[];
+  active: boolean;
+  updatedAt: ISODate;
+  updatedBy?: string;
+}
+
+// Subscriptions
 export type SubscriptionStatus = "ACTIVE" | "PAST_DUE" | "CANCELLED" | "SUSPENDED";
 
 export interface SubscriptionProduct {
