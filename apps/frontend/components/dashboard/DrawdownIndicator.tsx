@@ -74,17 +74,9 @@ export function DrawdownIndicator({ account }: { account: Account }) {
             <div className="text-[11px] uppercase tracking-[0.1em] font-semibold text-[var(--text-faint)]">
               EOD drawdown headroom
             </div>
-            <div className="mt-1 text-xs text-[var(--text-muted)]">
-              Fixed floor - never moves. Wins are protected.
-            </div>
+            
           </div>
-          <span
-            className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider"
-            style={{ background: `color-mix(in srgb, ${zoneColor[zone]} 18%, transparent)`, color: zoneColor[zone] }}
-          >
-            <span aria-hidden className="h-1.5 w-1.5 rounded-full" style={{ background: zoneColor[zone] }} />
-            {zoneLabel[zone]}
-          </span>
+         
         </div>
 
         <div className="flex items-baseline justify-between gap-3 flex-wrap">
