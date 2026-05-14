@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { Input, Button, Badge } from "@genone/ui";
+import { Input, Button } from "@genone/ui";
 import { useValidatePromo } from "@/lib/mutations";
 import { Check, X } from "lucide-react";
 import type { PromoResult } from "@/lib/api/api-client";
@@ -70,11 +70,12 @@ export function PromoField({
           {validate.isPending ? "Checking…" : "Apply"}
         </Button>
       </div>
-      {error && <p className="text-xs text-danger mt-1">{error}</p>}
-      <div className="mt-1 flex flex-wrap gap-1 text-[10px] text-[var(--text-faint)]">
-        Try <Badge variant="outline" className="cursor-pointer" onClick={() => setCode("WELCOME10")}>WELCOME10</Badge>
-        or <Badge variant="outline" className="cursor-pointer" onClick={() => setCode("PRO20")}>PRO20</Badge>
-        or <Badge variant="outline" className="cursor-pointer" onClick={() => setCode("SAVE25")}>SAVE25</Badge>
+      {error && <p className="text-xs text-[var(--danger)] mt-2">{error}</p>}
+      <div className="mt-4 flex flex-wrap items-center gap-2 text-[11px] text-[var(--text-muted)]">
+        <span className="uppercase tracking-wider text-[var(--text-faint)]">Try</span>
+        <button type="button" onClick={() => setCode("WELCOME10")} className="inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--surface-2)] px-2.5 py-1 font-mono font-medium text-[var(--text)] hover:border-[var(--border-strong)]">WELCOME10</button>
+        <button type="button" onClick={() => setCode("PRO20")} className="inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--surface-2)] px-2.5 py-1 font-mono font-medium text-[var(--text)] hover:border-[var(--border-strong)]">PRO20</button>
+        <button type="button" onClick={() => setCode("SAVE25")} className="inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--surface-2)] px-2.5 py-1 font-mono font-medium text-[var(--text)] hover:border-[var(--border-strong)]">SAVE25</button>
       </div>
     </div>
   );

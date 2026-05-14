@@ -287,6 +287,7 @@ export interface LeaderboardRow {
   initials: string;
   country: string;
   countryFlag: string;
+  avatarUrl?: string;
   totalPnlCents: number;
   winRatePct: number;
   trades: number;

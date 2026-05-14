@@ -15,7 +15,7 @@ export interface PriceBreakdown {
 
 export function OrderSummary({ breakdown }: { breakdown: PriceBreakdown }) {
   return (
-    <Card className="sticky top-20">
+    <Card>
       <CardHeader>
         <CardTitle className="text-sm">Order summary</CardTitle>
       </CardHeader>

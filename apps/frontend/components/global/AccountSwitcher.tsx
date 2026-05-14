@@ -52,7 +52,7 @@ export function AccountSwitcher() {
       <DropdownMenuTrigger asChild>
         <button
           className={cn(
-            "inline-flex h-10 items-center gap-2 rounded-full border border-white/[0.10] bg-white/[0.04] px-3 text-sm font-medium text-white hover:bg-white/[0.08] transition-colors min-w-[180px] max-w-[280px]"
+            "inline-flex h-10 items-center gap-2 rounded-full border border-[var(--chrome-border)] bg-[var(--chrome-surface)] px-3 text-sm font-medium text-[var(--chrome-text)] hover:bg-[var(--chrome-surface)]/80 transition-colors min-w-[180px] max-w-[280px]"
           )}
         >
           {current ? (
@@ -61,9 +61,9 @@ export function AccountSwitcher() {
               <span className="truncate">{accountLabel(current)}</span>
             </>
           ) : (
-            <span className="text-white/55">Select account</span>
+            <span className="text-[var(--chrome-muted)]">Select account</span>
           )}
-          <ChevronsUpDown className="ml-auto h-4 w-4 text-white/55 shrink-0" />
+          <ChevronsUpDown className="ml-auto h-4 w-4 text-[var(--chrome-muted)] shrink-0" />
         </button>
       </DropdownMenuTrigger>
 
@@ -77,11 +77,11 @@ export function AccountSwitcher() {
                 <Badge variant={STATUS_VARIANT[acc.status]} className="shrink-0">{STATUS_LABEL[acc.status]}</Badge>
                 <span className="truncate text-sm">{accountLabel(acc)}</span>
               </div>
-              <span className="text-[10px] text-white/55 font-mono">
+              <span className="text-[10px] text-[var(--text-muted)] font-mono">
                 {acc.type} · {acc.tier} · {formatCurrency(acc.currentEquityCents)}
               </span>
             </div>
-            {acc.id === accountId && <Check className="h-4 w-4 text-[#5BA8E5]" />}
+            {acc.id === accountId && <Check className="h-4 w-4 text-[var(--primary)]" />}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

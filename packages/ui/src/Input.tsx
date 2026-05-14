@@ -3,9 +3,9 @@ import * as React from "react";
 import { cn } from "./cn";
 
 const baseInput =
-  "flex w-full text-sm text-white placeholder:text-white/30 " +
-  "bg-white/[0.04] border border-white/[0.15] hover:border-white/[0.25] " +
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/15 focus-visible:border-white/[0.40] " +
+  "flex w-full text-sm text-[var(--text)] placeholder:text-[var(--text-faint)] " +
+  "bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--border-strong)] " +
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:border-[var(--primary)] " +
   "disabled:cursor-not-allowed disabled:opacity-50 transition-colors";
 
 export const Input = React.forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>(
@@ -35,7 +35,7 @@ export const Label = React.forwardRef<HTMLLabelElement, React.LabelHTMLAttribute
   ({ className, ...props }, ref) => (
     <label
       ref={ref}
-      className={cn("text-sm font-medium text-white/85 block mb-2", className)}
+      className={cn("text-sm font-medium text-[var(--text)] block mb-2", className)}
       {...props}
     />
   )

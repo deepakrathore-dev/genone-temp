@@ -107,7 +107,7 @@ function AccountsSection() {
         <MetricTile label="Live Account" value="1" href="/users?live=1" delta={0.0} hint="from last week" accent="success" />
       </div>
 
-      {/* Broker (Rithmic only — others come later) */}
+      {/* Broker (Rithmic only - others come later) */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <MetricTile label="Rithmic active accounts" value="76" href="/users" accent="primary" hint="All live broker connections" />
         <Card className="flex items-center justify-between p-4 text-sm text-[var(--text-muted)]">

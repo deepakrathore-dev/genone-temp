@@ -2,7 +2,7 @@
 import { useAccountState } from "@/lib/queries";
 import { useSelectedAccount } from "@/lib/stores/selected-account.store";
 import { useDashboardWs } from "@/lib/ws/use-dashboard-ws";
-import { StatusBanner } from "@/components/dashboard/StatusBanner";
+import { EquityCandleChart } from "@/components/dashboard/EquityCandleChart";
 import { HeadlineMetrics } from "@/components/dashboard/HeadlineMetrics";
 import { DrawdownIndicator } from "@/components/dashboard/DrawdownIndicator";
 import { DailyLossIndicator } from "@/components/dashboard/DailyLossIndicator";
@@ -41,8 +41,8 @@ export default function DashboardPage() {
 
   if (isLoading || !account) {
     return (
-      <div className="space-y-3">
-        <Skeleton className="h-16 w-full" />
+      <div className="space-y-4">
+        <Skeleton className="h-72 w-full" />
         <div className="grid grid-cols-3 gap-3">
           <Skeleton className="h-24" />
           <Skeleton className="h-24" />
@@ -55,27 +55,24 @@ export default function DashboardPage() {
 
   return (
     <div className="flex gap-6">
-      <div className="flex-1 min-w-0 space-y-4">
-        <StatusBanner account={account} />
+      <div className="flex-1 min-w-0 space-y-5">
         <HeadlineMetrics account={account} />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <EquityCandleChart account={account} />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <DrawdownIndicator account={account} />
           <DailyLossIndicator account={account} />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <ProfitTargetRing account={account} />
           <GreenDaysTracker account={account} />
         </div>
         {account.type === "FUNDED" && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <BufferIndicator account={account} />
             <ConsistencyStatus account={account} />
           </div>
         )}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <InactivityTimer account={account} />
-          <div className="hidden md:block" />
-        </div>
+        <InactivityTimer account={account} />
         <RecentTradesList accountId={account.id} />
       </div>
       <RulesPanel account={account} />

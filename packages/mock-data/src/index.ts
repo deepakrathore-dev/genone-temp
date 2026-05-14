@@ -148,7 +148,7 @@ function buildUsers(): User[] {
     const [country, flag] = pick(COUNTRIES);
     const attempts = randInt(0, 14);
     const tierPct = attempts >= 10 ? 10 : attempts >= 5 ? 5 : attempts >= 3 ? 2 : 0;
-    const cities = CITIES_BY_COUNTRY[country] ?? [["—", "—", "—"]];
+    const cities = CITIES_BY_COUNTRY[country] ?? [["-", "-", "-"]];
     const [city, region, postal] = pick(cities);
     const dob = new Date("1990-01-01");
     dob.setUTCFullYear(1990 - randInt(0, 30));
@@ -397,6 +397,12 @@ function bodyFor(kind: NotificationItem["kind"]) {
   }
 }
 
+const LEADERBOARD_AVATARS = [
+  "/user-images/user1.webp",
+  "/user-images/user2.png",
+  "/user-images/user3.jpg",
+];
+
 function buildLeaderboard(users: User[]): LeaderboardRow[] {
   const ranked = users.map((u, i) => {
     const totalPnl = randInt(80_000, 4_500_000);
@@ -407,12 +413,16 @@ function buildLeaderboard(users: User[]): LeaderboardRow[] {
     const avgWin = randInt(8_000, 35_000);
     const avgLoss = randInt(5_000, 25_000);
     const profitFactor = +(((wins * avgWin) / Math.max(1, losses * avgLoss))).toFixed(2);
+    let hash = 0;
+    for (let j = 0; j < u.id.length; j++) hash = (hash * 31 + u.id.charCodeAt(j)) | 0;
+    const avatarUrl = LEADERBOARD_AVATARS[Math.abs(hash) % LEADERBOARD_AVATARS.length];
     return {
       rank: 0,
       userId: u.id,
       initials: u.initials,
       country: u.country,
       countryFlag: u.countryFlag,
+      avatarUrl,
       totalPnlCents: totalPnl,
       winRatePct: winRate,
       trades,
@@ -422,7 +432,10 @@ function buildLeaderboard(users: User[]): LeaderboardRow[] {
     } satisfies LeaderboardRow;
   });
   ranked.sort((a, b) => b.totalPnlCents - a.totalPnlCents);
-  ranked.forEach((r, i) => (r.rank = i + 1));
+  ranked.forEach((r, i) => {
+    r.rank = i + 1;
+    if (i < LEADERBOARD_AVATARS.length) r.avatarUrl = LEADERBOARD_AVATARS[i];
+  });
   return ranked;
 }
 
@@ -756,7 +769,7 @@ function buildEmailTemplates(): EmailTemplate[] {
   });
   return [
     make("EVAL_PURCHASE",       "Evaluation purchase confirmation",  "EVALUATION", "Your {{tier}} evaluation is ready",                "<p>Hi {{firstName}},</p><p>Your {{tier}} evaluation is provisioned. Credentials: {{username}} / {{password}}.</p>",                                                              ["firstName", "tier", "username", "password"]),
-    make("EVAL_PASS",           "Evaluation passed",                 "EVALUATION", "Congratulations — your funded account is ready",  "<p>Hi {{firstName}},</p><p>You passed the {{tier}} evaluation. Your funded account is being provisioned and credentials will arrive shortly.</p>",                              ["firstName", "tier"]),
+    make("EVAL_PASS",           "Evaluation passed",                 "EVALUATION", "Congratulations - your funded account is ready",  "<p>Hi {{firstName}},</p><p>You passed the {{tier}} evaluation. Your funded account is being provisioned and credentials will arrive shortly.</p>",                              ["firstName", "tier"]),
     make("EVAL_FAIL_DRAWDOWN",  "Evaluation failed (drawdown)",      "EVALUATION", "Your {{tier}} evaluation has closed",             "<p>Hi {{firstName}},</p><p>Your {{tier}} evaluation hit the EOD drawdown. Use your {{loyaltyPct}}% loyalty discount on the next attempt.</p>",                                    ["firstName", "tier", "loyaltyPct"]),
     make("EVAL_FAIL_TIMEOUT",   "Evaluation timed out",              "EVALUATION", "Your evaluation has expired",                     "<p>Hi {{firstName}},</p><p>Your evaluation expired after 30 days of inactivity. You can purchase a fresh attempt with your loyalty credit applied automatically.</p>",            ["firstName"]),
     make("DAILY_LOCK",          "Daily loss lockout",                "EVALUATION", "Daily loss limit reached",                        "<p>Hi {{firstName}},</p><p>You've hit today's daily loss limit. Trading will resume at the next session open (6 PM ET).</p>",                                                       ["firstName"]),

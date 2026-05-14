@@ -21,12 +21,12 @@ export function Providers({ children }: { children: React.ReactNode }) {
       })
   );
   return (
-    <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark" storageKey="genone-admin-theme">
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} storageKey="genone-admin-theme">
       <QueryClientProvider client={queryClient}>
         <TooltipProvider delayDuration={150}>
           <AuthGuard>{children}</AuthGuard>
         </TooltipProvider>
-        <Toaster theme="dark" position="bottom-right" richColors closeButton />
+        <Toaster position="bottom-right" richColors closeButton />
       </QueryClientProvider>
     </ThemeProvider>
   );

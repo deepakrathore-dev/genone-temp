@@ -64,7 +64,7 @@ export function Sidebar() {
     <>
       <button
         onClick={() => setMobileOpen(true)}
-        className="lg:hidden fixed top-3 left-3 z-40 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.12] bg-white/[0.05] backdrop-blur text-white"
+        className="lg:hidden fixed top-3 left-3 z-40 inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--chrome-border)] bg-[var(--chrome-surface)] backdrop-blur text-[var(--chrome-text)]"
         aria-label="Open menu"
       >
         <Menu className="h-5 w-5" />
@@ -79,14 +79,14 @@ export function Sidebar() {
 
       <aside
         className={cn(
-          "fixed lg:sticky top-0 z-50 h-screen flex flex-col border-r border-white/[0.08] bg-[#0C0B10]/85 backdrop-blur-xl transition-all duration-200 left-0",
+          "fixed lg:sticky top-0 z-50 h-screen flex flex-col border-r border-[var(--chrome-border)] bg-[var(--chrome-bg)]/95 backdrop-blur-xl transition-all duration-200 left-0",
           sidebarCollapsed ? "w-[72px]" : "w-64",
           "lg:translate-x-0",
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        {/* Brand */}
-        <div className="flex h-20 items-center justify-between gap-2 border-b border-white/[0.08] px-4 shrink-0">
+        {/* Brand — height matches the topbar (h-16) so the borders line up. */}
+        <div className="flex h-16 items-center justify-between gap-2 border-b border-[var(--chrome-border)] px-4 shrink-0">
           <Link
             href="/dashboard"
             className="flex items-center gap-2 overflow-hidden"
@@ -94,15 +94,15 @@ export function Sidebar() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/genone-logo-white.png"
+              src={sidebarCollapsed ? "/genone-logo-white.png" : "/large-logo.png"}
               alt="Gen One Futures"
-              className={cn("shrink-0", sidebarCollapsed ? "h-8 w-auto" : "h-12 w-auto")}
-              style={{ height: sidebarCollapsed ? 32 : 48 }}
+              className={cn("shrink-0", sidebarCollapsed ? "h-8 w-auto" : "h-9 w-auto")}
+              style={{ height: sidebarCollapsed ? 32 : 36 }}
             />
           </Link>
           <button
             onClick={toggleSidebar}
-            className="hidden lg:inline-flex h-7 w-7 items-center justify-center rounded-full hover:bg-white/[0.06] text-white/55 hover:text-white"
+            className="hidden lg:inline-flex h-7 w-7 items-center justify-center rounded-full hover:bg-[var(--chrome-surface)] text-[var(--chrome-muted)] hover:text-[var(--chrome-text)]"
             aria-label="Toggle sidebar"
           >
             <ChevronLeft className={cn("h-4 w-4 transition-transform", sidebarCollapsed && "rotate-180")} />
@@ -131,7 +131,7 @@ export function Sidebar() {
           {groups.map((g, gi) => (
             <div key={gi} className="space-y-1">
               {g.label && !sidebarCollapsed && (
-                <div className="px-3 pt-1 pb-1 text-[10px] uppercase tracking-[0.12em] font-semibold text-white/40">{g.label}</div>
+                <div className="px-3 pt-1 pb-1 text-[10px] uppercase tracking-[0.12em] font-semibold text-[var(--chrome-muted)]/60">{g.label}</div>
               )}
               {g.items.map((it) => {
                 const active = isActive(it.href);
@@ -144,8 +144,8 @@ export function Sidebar() {
                     className={cn(
                       "relative flex h-10 items-center gap-3 rounded-xl pl-3 pr-2 text-sm transition-colors",
                       active
-                        ? "bg-white/[0.06] text-white font-semibold"
-                        : "text-white/65 hover:bg-white/[0.04] hover:text-white"
+                        ? "bg-[var(--chrome-surface)] text-[var(--chrome-text)] font-semibold"
+                        : "text-[var(--chrome-muted)] hover:bg-[var(--chrome-surface)] hover:text-[var(--chrome-text)]"
                     )}
                   >
                     {active && (
@@ -161,19 +161,19 @@ export function Sidebar() {
         </nav>
 
         {/* Footer */}
-        <div className="border-t border-white/[0.08] p-2 flex flex-col gap-1">
+        <div className="border-t border-[var(--chrome-border)] p-2 flex flex-col gap-1">
           <Link
             href="https://help.genone.example/"
             target="_blank"
             rel="noreferrer"
-            className="flex h-10 items-center gap-3 rounded-xl px-3 text-sm text-white/65 hover:bg-white/[0.04] hover:text-white"
+            className="flex h-10 items-center gap-3 rounded-xl px-3 text-sm text-[var(--chrome-muted)] hover:bg-[var(--chrome-surface)] hover:text-[var(--chrome-text)]"
           >
             <HelpCircle className="h-4 w-4 shrink-0" />
             {!sidebarCollapsed && <span>Help center</span>}
           </Link>
           <button
             type="button"
-            className="flex h-10 items-center gap-3 rounded-xl px-3 text-sm text-white/65 hover:bg-white/[0.04] hover:text-white"
+            className="flex h-10 items-center gap-3 rounded-xl px-3 text-sm text-[var(--chrome-muted)] hover:bg-[var(--chrome-surface)] hover:text-[var(--chrome-text)]"
           >
             <MessageCircle className="h-4 w-4 shrink-0" />
             {!sidebarCollapsed && <span>Live chat</span>}

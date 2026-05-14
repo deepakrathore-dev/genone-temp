@@ -19,7 +19,7 @@ export const DropdownMenuContent = React.forwardRef<
       ref={ref}
       sideOffset={sideOffset}
       className={cn(
-        "z-50 min-w-[12rem] overflow-hidden rounded-2xl border border-white/[0.12] bg-[#13121a]/95 backdrop-blur-xl p-1.5 shadow-[var(--shadow-pop)]",
+        "z-50 min-w-[12rem] overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] backdrop-blur-xl p-1.5 shadow-[var(--shadow-pop)]",
         className
       )}
       {...props}
@@ -35,8 +35,8 @@ export const DropdownMenuItem = React.forwardRef<
   <DropdownMenuPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex cursor-pointer select-none items-center gap-2 rounded-lg px-3 py-2 text-sm text-white/85 outline-none transition-colors",
-      "focus:bg-white/[0.08] focus:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "relative flex cursor-pointer select-none items-center gap-2 rounded-lg px-3 py-2 text-sm text-[var(--text-muted)] outline-none transition-colors",
+      "focus:bg-[var(--surface-2)] focus:text-[var(--text)] data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       inset && "pl-9",
       className
     )}
@@ -51,7 +51,7 @@ export const DropdownMenuLabel = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DropdownMenuPrimitive.Label
     ref={ref}
-    className={cn("px-3 py-1.5 text-xs font-semibold text-white/55", className)}
+    className={cn("px-3 py-1.5 text-xs font-semibold text-[var(--text-faint)]", className)}
     {...props}
   />
 ));
@@ -63,7 +63,7 @@ export const DropdownMenuSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DropdownMenuPrimitive.Separator
     ref={ref}
-    className={cn("my-1 h-px bg-white/[0.08]", className)}
+    className={cn("my-1 h-px bg-[var(--border)]", className)}
     {...props}
   />
 ));

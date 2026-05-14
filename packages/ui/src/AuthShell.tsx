@@ -16,9 +16,12 @@ import { cn } from "./cn";
 export function AuthShell({
   children,
   className,
+  contentClassName,
 }: {
   children: React.ReactNode;
   className?: string;
+  /** Override the default `max-w-md` content wrapper (e.g. for wider onboarding steps). */
+  contentClassName?: string;
 }) {
   return (
     <div
@@ -70,33 +73,33 @@ export function AuthShell({
         }}
       />
 
-      {/* Logo top-left — image already contains the G glyph + "GEN ONE FUTURES" text */}
-      <div className="absolute top-8 left-10 z-10 hidden sm:block">
+      {/* Logo top-left - image already contains the G glyph + "GEN ONE FUTURES" text */}
+      <div className="absolute top-6 left-8 z-10 hidden sm:block">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/genone-logo-white.png"
           alt="Gen One Futures"
-          width={110}
-          height={173}
-          style={{ width: 110, height: 173 }}
+          width={64}
+          height={100}
+          style={{ width: 64, height: 100 }}
         />
       </div>
 
       {/* Mobile logo (smaller, centred above content) */}
-      <div className="absolute top-6 left-1/2 -translate-x-1/2 z-10 sm:hidden">
+      <div className="absolute top-5 left-1/2 -translate-x-1/2 z-10 sm:hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/genone-logo-white.png"
           alt="Gen One Futures"
-          width={70}
-          height={110}
-          style={{ width: 70, height: 110 }}
+          width={44}
+          height={70}
+          style={{ width: 44, height: 70 }}
         />
       </div>
 
       {/* Content */}
       <main className="relative z-10 min-h-screen flex items-center justify-center px-4 py-24 sm:py-12">
-        <div className="w-full max-w-md">{children}</div>
+        <div className={cn("w-full", contentClassName ?? "max-w-md")}>{children}</div>
       </main>
     </div>
   );
@@ -189,7 +192,7 @@ export function AuthButton({
 }
 
 /**
- * Custom checkbox matching the screenshot — small rounded square outline.
+ * Custom checkbox matching the screenshot - small rounded square outline.
  */
 export const AuthCheckbox = React.forwardRef<
   HTMLInputElement,

@@ -30,6 +30,7 @@
 html, body { height: 100%; }
 
 html.dark { color-scheme: dark; }
+html.light { color-scheme: light; }
 
 body {
   background-color: var(--bg);
@@ -37,14 +38,24 @@ body {
   font-family: var(--font-dm-sans), "DM Sans Placeholder", system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-attachment: fixed;
 }
 
-/* Brand backdrop on the body: deep ink + faint teal corner washes. */
-body {
+/* Dark mode: deep ink + faint teal corner washes. */
+html.dark body {
   background:
     radial-gradient(60% 50% at 0% 0%, rgba(29, 65, 83, 0.45), transparent 70%),
     radial-gradient(50% 45% at 100% 100%, rgba(29, 65, 83, 0.35), transparent 70%),
     #0C0B10;
+  background-attachment: fixed;
+}
+
+/* Light mode: soft slate wash for the Argon look. */
+html.light body {
+  background:
+    radial-gradient(60% 50% at 0% 0%, rgba(91, 168, 229, 0.10), transparent 70%),
+    radial-gradient(50% 45% at 100% 100%, rgba(29, 65, 83, 0.06), transparent 70%),
+    #f4f6fb;
   background-attachment: fixed;
 }
 
@@ -55,13 +66,13 @@ body {
 *::-webkit-scrollbar { width: 10px; height: 10px; }
 *::-webkit-scrollbar-track { background: transparent; }
 *::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.10);
+  background: var(--border-strong);
   border-radius: 999px;
   border: 2px solid transparent;
   background-clip: content-box;
 }
 *::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.20);
+  background: var(--text-muted);
   background-clip: content-box;
 }
 
@@ -110,16 +121,16 @@ body {
   100% { box-shadow: 0 0 0 0   color-mix(in srgb, var(--success) 0%,  transparent); }
 }
 
-/* Brand surface — translucent panel matching the login card */
+/* Brand surface - translucent panel matching the login card */
 .brand-surface {
-  background-color: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background-color: var(--surface);
+  border: 1px solid var(--border);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
 .brand-surface-2 {
-  background-color: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  background-color: var(--surface-2);
+  border: 1px solid var(--border);
 }
 
 /* Card hover */
@@ -131,7 +142,7 @@ body {
 .card-hover:hover {
   transform: translateY(-1px);
   box-shadow: var(--shadow-lift);
-  border-color: rgba(255, 255, 255, 0.20);
+  border-color: var(--border-strong);
 }
 
 /* Numerics */

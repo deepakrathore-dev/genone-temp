@@ -1,12 +1,11 @@
 "use client";
 import * as React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, Users, Banknote, ShieldAlert, IdCard, Megaphone,
   LineChart, GitMerge, Activity, Settings, ScrollText, ChevronLeft, Menu,
-  Sigma, Coins, Bell, AlertOctagon, Network, UserCog, Repeat,
+  Sigma, Bell, AlertOctagon, Network, UserCog, Repeat,
   ListOrdered, Boxes, Layers, MailOpen, FileBarChart,
 } from "lucide-react";
 import { cn } from "@genone/ui";
@@ -85,7 +84,7 @@ export function Sidebar() {
     <>
       <button
         onClick={() => setMobileOpen(true)}
-        className="lg:hidden fixed top-3 left-3 z-40 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.12] bg-white/[0.05] backdrop-blur text-white"
+        className="lg:hidden fixed top-3 left-3 z-40 inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--chrome-border)] bg-[var(--chrome-surface)] backdrop-blur text-[var(--chrome-text)]"
         aria-label="Open menu"
       >
         <Menu className="h-5 w-5" />
@@ -95,26 +94,26 @@ export function Sidebar() {
       )}
       <aside
         className={cn(
-          "fixed lg:sticky top-0 z-50 h-screen flex flex-col border-r border-white/[0.08] bg-[#0C0B10]/85 backdrop-blur-xl transition-all duration-200 left-0",
+          "fixed lg:sticky top-0 z-50 h-screen flex flex-col border-r border-[var(--chrome-border)] bg-[var(--chrome-bg)]/95 backdrop-blur-xl transition-all duration-200 left-0",
           sidebarCollapsed ? "w-[72px]" : "w-64",
           "lg:translate-x-0",
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <div className="flex h-20 items-center justify-between gap-2 border-b border-white/[0.08] px-4 shrink-0">
+        <div className="flex h-16 items-center justify-between gap-2 border-b border-[var(--chrome-border)] px-4 shrink-0">
           <Link href="/" className="flex items-center gap-2 overflow-hidden" onClick={() => setMobileOpen(false)}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/genone-logo-white.png"
+              src={sidebarCollapsed ? "/genone-logo-white.png" : "/large-logo.png"}
               alt="Gen One Futures"
-              className={cn("shrink-0", sidebarCollapsed ? "h-8 w-auto" : "h-12 w-auto")}
-              style={{ height: sidebarCollapsed ? 32 : 48 }}
+              className={cn("shrink-0", sidebarCollapsed ? "h-8 w-auto" : "h-9 w-auto")}
+              style={{ height: sidebarCollapsed ? 32 : 36 }}
             />
             {!sidebarCollapsed && (
-              <span className="ml-1 inline-flex items-center rounded-full bg-white/[0.06] px-2 py-0.5 text-[10px] uppercase tracking-[0.12em] text-white/70 font-semibold">Admin</span>
+              <span className="ml-1 inline-flex items-center rounded-full bg-[var(--chrome-surface)] px-2 py-0.5 text-[10px] uppercase tracking-[0.12em] text-[var(--chrome-muted)] font-semibold">Admin</span>
             )}
           </Link>
-          <button onClick={toggleSidebar} className="hidden lg:inline-flex h-7 w-7 items-center justify-center rounded-full hover:bg-white/[0.06] text-white/55 hover:text-white" aria-label="Toggle sidebar">
+          <button onClick={toggleSidebar} className="hidden lg:inline-flex h-7 w-7 items-center justify-center rounded-full hover:bg-[var(--chrome-surface)] text-[var(--chrome-muted)] hover:text-[var(--chrome-text)]" aria-label="Toggle sidebar">
             <ChevronLeft className={cn("h-4 w-4 transition-transform", sidebarCollapsed && "rotate-180")} />
           </button>
         </div>
@@ -123,7 +122,7 @@ export function Sidebar() {
           {visibleGroups.map((g, gi) => (
             <div key={gi} className="space-y-1">
               {g.label && !sidebarCollapsed && (
-                <div className="text-[10px] uppercase tracking-[0.12em] font-semibold text-white/40 px-3 pt-2 pb-1">
+                <div className="text-[10px] uppercase tracking-[0.12em] font-semibold text-[var(--chrome-muted)]/60 px-3 pt-2 pb-1">
                   {g.label}
                 </div>
               )}
@@ -143,8 +142,8 @@ export function Sidebar() {
                     className={cn(
                       "relative flex h-10 items-center gap-3 rounded-xl pl-3 pr-2 text-sm transition-colors",
                       active
-                        ? "bg-white/[0.06] text-white font-semibold"
-                        : "text-white/65 hover:bg-white/[0.04] hover:text-white"
+                        ? "bg-[var(--chrome-surface)] text-[var(--chrome-text)] font-semibold"
+                        : "text-[var(--chrome-muted)] hover:bg-[var(--chrome-surface)] hover:text-[var(--chrome-text)]"
                     )}
                   >
                     <Icon className="h-4 w-4 shrink-0" />

@@ -55,7 +55,7 @@ export function RetentionCohort({ rows, isLoading }: { rows: CohortMonth[]; isLo
                     return (
                       <td key={h} className="pr-2 py-1">
                         <div className="h-14 rounded-md border border-dashed border-[var(--border)] bg-transparent flex items-center justify-center text-[var(--text-faint)]">
-                          —
+                          -
                         </div>
                       </td>
                     );

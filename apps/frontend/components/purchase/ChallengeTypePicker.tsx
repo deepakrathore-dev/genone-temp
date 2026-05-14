@@ -1,12 +1,6 @@
 "use client";
 import { cn } from "@genone/ui";
-import { Shield, Activity } from "lucide-react";
 import type { ChallengeType } from "@genone/types";
-
-const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
-  Standard: Activity,
-  Static: Shield,
-};
 
 export function ChallengeTypePicker({
   types,
@@ -21,38 +15,28 @@ export function ChallengeTypePicker({
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
       {types.map((t) => {
         const active = value === t.id;
-        const Icon = ICONS[t.name] ?? Activity;
         return (
           <button
             key={t.id}
             type="button"
             onClick={() => onChange(t.id)}
+            aria-pressed={active}
             className={cn(
-              "group relative text-left rounded-2xl border p-4 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5BA8E5]/40",
+              "group relative text-left rounded-2xl border p-5 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]",
               active
-                ? "border-[#5BA8E5] bg-[#5BA8E5]/[0.08] shadow-[0_0_0_1px_rgba(91,168,229,0.35)]"
-                : "border-white/[0.10] bg-white/[0.03] hover:bg-white/[0.05] hover:border-white/[0.20]"
+                ? "border-[var(--primary)] bg-[var(--primary-soft)]/40 shadow-[0_0_0_1px_var(--primary)]"
+                : "border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-2)] hover:border-[var(--border-strong)]"
             )}
           >
-            <div className="flex items-start gap-3">
-              <span
-                className={cn(
-                  "inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border",
-                  active
-                    ? "border-[#5BA8E5]/40 bg-[#5BA8E5]/[0.12] text-[#5BA8E5]"
-                    : "border-white/[0.10] bg-white/[0.04] text-white/75"
-                )}
-              >
-                <Icon className="h-5 w-5" />
-              </span>
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-2">
-                  <div className="text-sm font-semibold text-white">{t.name}</div>
-                  {active && <span className="text-[10px] uppercase tracking-wider text-[#5BA8E5]">Selected</span>}
-                </div>
-                <p className="mt-1 text-xs text-white/65 leading-relaxed line-clamp-2">{t.description}</p>
-              </div>
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-base font-semibold text-[var(--text)]">{t.name}</span>
+              {active ? (
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--primary)]">Selected</span>
+              ) : (
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-faint)]">Select</span>
+              )}
             </div>
+            <p className="mt-2 text-sm text-[var(--text-muted)] leading-relaxed">{t.description}</p>
           </button>
         );
       })}

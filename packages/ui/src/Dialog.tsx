@@ -68,13 +68,13 @@ export const DialogContent = React.forwardRef<
         className={cn(
           "pointer-events-auto relative my-auto",
           "w-full max-w-[28rem] sm:max-w-[32rem]",
-          "rounded-3xl border border-white/[0.12] bg-[#13121a]/95 backdrop-blur-xl shadow-[var(--shadow-pop)]",
+          "rounded-3xl border border-[var(--border)] bg-[var(--surface)] backdrop-blur-xl shadow-[var(--shadow-pop)]",
           panelClassName
         )}
       >
         <DialogPrimitive.Close
           aria-label="Close dialog"
-          className="absolute top-4 right-4 z-10 inline-flex h-8 w-8 items-center justify-center rounded-full text-white/55 transition hover:text-white hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+          className="absolute top-4 right-4 z-10 inline-flex h-8 w-8 items-center justify-center rounded-full text-[var(--text-muted)] transition hover:text-[var(--text)] hover:bg-[var(--surface-2)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]"
         >
           <X className="h-4 w-4" aria-hidden="true" />
         </DialogPrimitive.Close>
@@ -109,7 +109,7 @@ export const DialogTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
-    className={cn("text-lg font-semibold leading-tight tracking-tight text-white", className)}
+    className={cn("text-lg font-semibold leading-tight tracking-tight text-[var(--text)]", className)}
     {...props}
   />
 ));
@@ -121,7 +121,7 @@ export const DialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn("text-sm text-white/65 leading-relaxed", className)}
+    className={cn("text-sm text-[var(--text-muted)] leading-relaxed", className)}
     {...props}
   />
 ));

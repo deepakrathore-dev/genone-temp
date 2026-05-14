@@ -15,7 +15,7 @@ export function StatTile({ label, value, delta, hint, className }: StatTileProps
   return (
     <div
       className={cn(
-        "card-hover rounded-2xl border border-white/[0.10] bg-white/[0.03] backdrop-blur-md p-4 shadow-[var(--shadow-card)]",
+        "card-hover rounded-2xl border border-[var(--border)] bg-[var(--surface)] backdrop-blur-md p-4 shadow-[var(--shadow-card)]",
         className
       )}
     >
@@ -28,7 +28,7 @@ export function StatTile({ label, value, delta, hint, className }: StatTileProps
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.18 }}
-            className="num-display text-2xl font-semibold tracking-tight text-white"
+            className="num-display text-2xl font-semibold tracking-tight text-[var(--text)]"
           >
             {value}
           </motion.div>
@@ -46,7 +46,7 @@ export function StatTile({ label, value, delta, hint, className }: StatTileProps
           </span>
         )}
       </div>
-      {hint && <div className="mt-1.5 text-xs text-white/55 leading-snug">{hint}</div>}
+      {hint && <div className="mt-1.5 text-xs text-[var(--text-muted)] leading-snug">{hint}</div>}
     </div>
   );
 }
