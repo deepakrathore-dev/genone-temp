@@ -117,8 +117,13 @@ function PurchaseInner() {
       </div>
 
       {/* Pinned top: Challenge type + Order summary stay visible while the rest scrolls. */}
-      {/* Use a ::before pseudo to bleed the opaque bg full-width past the layout padding. */}
-      <div className="relative lg:sticky lg:top-16 lg:z-20 lg:pt-4 lg:pb-5 lg:before:content-[''] lg:before:absolute lg:before:inset-y-0 lg:before:-left-8 lg:before:-right-8 lg:before:bg-[var(--bg)] lg:before:border-b lg:before:border-[var(--border)] lg:before:shadow-[0_10px_24px_-12px_rgba(0,0,0,0.5)] lg:before:-z-10">
+      {/* Bleed the opaque bg full-width past the layout padding via a pseudo-element. */}
+      {/* will-change isolates this into its own compositor layer so scrolling content below */}
+      {/* doesn't force a repaint of this region every frame. */}
+      <div
+        className="relative lg:sticky lg:top-16 lg:z-20 lg:pt-4 lg:pb-5 lg:before:content-[''] lg:before:absolute lg:before:inset-y-0 lg:before:-left-8 lg:before:-right-8 lg:before:bg-[var(--bg)] lg:before:border-b lg:before:border-[var(--border)] lg:before:-z-10"
+        style={{ willChange: "transform", contain: "layout paint" }}
+      >
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-5">
           <Step number={1} title="Challenge type" caption="Different rule profiles for different trading styles.">
             <ChallengeTypePicker

@@ -1,5 +1,4 @@
 "use client";
-import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "./cn";
 
@@ -15,7 +14,7 @@ export function StatTile({ label, value, delta, hint, className }: StatTileProps
   return (
     <div
       className={cn(
-        "card-hover rounded-2xl border border-[var(--border)] bg-[var(--surface)] backdrop-blur-md p-4 shadow-[var(--shadow-card)]",
+        "card-hover rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-[var(--shadow-card)]",
         className
       )}
     >
