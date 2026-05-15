@@ -157,7 +157,7 @@ function ApplyState() {
           icon={DollarSign}
           label="Payouts"
           value="Monthly, 15th"
-          hint="Bank transfer or USDC/USDT. $100 minimum."
+          hint="Bank transfer. $100 minimum."
         />
         <ProgramTile
           icon={Hourglass}
@@ -391,7 +391,7 @@ function DashboardState({ affiliate }: { affiliate: AffiliateRow }) {
             </CardHeader>
             <CardContent className="space-y-2 text-sm">
               <Row label="Next payout" value="15th of next month" />
-              <Row label="Method" value="Bank transfer or USDC/USDT" />
+              <Row label="Method" value="Bank transfer" />
               <Row label="Minimum" value="$100" mono />
             </CardContent>
           </Card>

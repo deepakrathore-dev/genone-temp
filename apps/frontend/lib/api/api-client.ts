@@ -198,6 +198,21 @@ export const api = {
       } satisfies AffiliateRow;
     }),
 
+  // Public application — no auth. Cold creators who don't have a trader account yet.
+  // On approval, admin sends them a one-click onboarding link that creates a trader
+  // account and links it to this affiliate row.
+  applyForAffiliatePublic: (
+    payload: AffiliateApplication & { fullName: string; email: string }
+  ) =>
+    post<{ id: string; status: "PENDING" }>(
+      "/public/affiliate/apply",
+      payload,
+      () => ({
+        id: `aff_cold_${Date.now()}`,
+        status: "PENDING",
+      })
+    ),
+
   // ---------- Proptech catalog (challenge types + challenges) ----------
   getChallengeTypes: () =>
     get<ChallengeType[]>("/challenge-types", () => mock.challengeTypes.filter((t) => t.active)),

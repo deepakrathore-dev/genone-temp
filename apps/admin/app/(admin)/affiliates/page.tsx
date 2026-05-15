@@ -6,11 +6,11 @@ import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
   Badge, Button, Skeleton, formatCurrency, formatNumber, formatDate, StatTile,
 } from "@genone/ui";
-import { Download, ExternalLink, UserCheck } from "lucide-react";
+import { Download, ExternalLink, UserCheck, MailPlus } from "lucide-react";
 import { toast } from "sonner";
 import { ConfirmActionDialog } from "@/components/global/ConfirmActionDialog";
 
-type AffiliateAction = "approve" | "suspend" | "reject" | "adjust";
+type AffiliateAction = "approve" | "suspend" | "reject" | "adjust" | "onboard";
 
 interface PendingAction {
   action: AffiliateAction;
@@ -150,10 +150,19 @@ export default function AffiliatesPage() {
                         {a.status}
                       </Badge>
                     </TableCell>
-                    <TableCell className="flex gap-1 justify-end">
+                    <TableCell className="flex gap-1 justify-end flex-wrap">
                       {a.status === "PENDING" && (
                         <Button size="sm" variant="success" onClick={() => setPending({ action: "approve", id: a.id, name: a.name })}>
                           Approve
+                        </Button>
+                      )}
+                      {a.status === "ACTIVE" && !a.userId && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => setPending({ action: "onboard", id: a.id, name: a.name })}
+                        >
+                          <MailPlus className="h-3.5 w-3.5" /> Send onboarding link
                         </Button>
                       )}
                       {a.status === "ACTIVE" && (
@@ -212,6 +221,18 @@ export default function AffiliatesPage() {
         reasonPlaceholder="e.g. Self-referrals detected across three accounts"
         onConfirm={(reason) => {
           toast.success(`${pending?.name ?? "Affiliate"} suspended${reason ? ` — ${reason}` : ""}`);
+          setPending(null);
+        }}
+      />
+      <ConfirmActionDialog
+        open={pending?.action === "onboard"}
+        onOpenChange={(o) => !o && setPending(null)}
+        title="Send onboarding link"
+        description={`Email ${pending?.name ?? "this partner"} a one-click link to set up a trader account. Once they finish signup, the trader account will be linked to this affiliate record automatically.`}
+        confirmLabel="Send link"
+        tone="primary"
+        onConfirm={() => {
+          toast.success(`Onboarding link sent to ${pending?.name ?? "partner"}`);
           setPending(null);
         }}
       />

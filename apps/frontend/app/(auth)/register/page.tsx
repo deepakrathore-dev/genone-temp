@@ -112,6 +112,12 @@ export default function RegisterPage() {
               Sign in
             </Link>
           </p>
+          <p className="text-center text-xs text-white/55">
+            Creator or content partner?{" "}
+            <Link href="/become-an-affiliate" className="text-white/85 hover:text-white underline-offset-4 hover:underline">
+              Apply to the partner programme
+            </Link>
+          </p>
         </form>
       </AuthCard>
     </AuthShell>

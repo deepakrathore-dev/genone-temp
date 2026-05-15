@@ -106,6 +106,13 @@ export function useApplyForAffiliate() {
   });
 }
 
+export function useApplyForAffiliatePublic() {
+  return useMutation({
+    mutationFn: api.applyForAffiliatePublic,
+    onError: (e) => toast.error(e instanceof Error ? e.message : "Failed to submit application"),
+  });
+}
+
 export function useMarkNotificationRead() {
   const qc = useQueryClient();
   return useMutation({
