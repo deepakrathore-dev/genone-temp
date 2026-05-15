@@ -94,6 +94,18 @@ export function useCancelMySubscription() {
   });
 }
 
+export function useApplyForAffiliate() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: api.applyForAffiliate,
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: queryKeys.myAffiliate });
+      toast.success("Application submitted — we'll review within 2 business days.");
+    },
+    onError: (e) => toast.error(e instanceof Error ? e.message : "Failed to submit application"),
+  });
+}
+
 export function useMarkNotificationRead() {
   const qc = useQueryClient();
   return useMutation({

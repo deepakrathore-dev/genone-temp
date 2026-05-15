@@ -9,8 +9,9 @@ import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
   Badge, Button, StatTile, Skeleton, formatCurrency, formatDate,
 } from "@genone/ui";
-import { Repeat, RotateCcw, X } from "lucide-react";
-import type { SubscriptionStatus } from "@genone/types";
+import { RotateCcw, X } from "lucide-react";
+import type { SubscriptionStatus, Subscription } from "@genone/types";
+import { ConfirmActionDialog } from "@/components/global/ConfirmActionDialog";
 
 const STATUS_VARIANT: Record<SubscriptionStatus, "success" | "warning" | "danger" | "neutral"> = {
   ACTIVE: "success",
@@ -34,6 +35,7 @@ function Inner() {
   const canWrite = useCan("subscriptions.write");
   const retry = useRetrySubscription();
   const cancel = useCancelSubscription();
+  const [pendingCancel, setPendingCancel] = React.useState<Subscription | null>(null);
 
   const active = (subs ?? []).filter((s) => s.status === "ACTIVE");
   const mrrCents = active.reduce((sum, s) => sum + s.priceCents, 0);
@@ -88,7 +90,7 @@ function Inner() {
                       <TableCell className="font-mono text-xs">{formatDate(s.startedAt)}</TableCell>
                       <TableCell>
                         {canWrite && (
-                          <Button size="sm" variant="ghost" onClick={() => cancel.mutate(s.id)}>
+                          <Button size="sm" variant="ghost" onClick={() => setPendingCancel(s)}>
                             <X className="h-3.5 w-3.5" /> Cancel
                           </Button>
                         )}
@@ -176,6 +178,26 @@ function Inner() {
           </CardContent></Card>
         </TabsContent>
       </Tabs>
+
+      <ConfirmActionDialog
+        open={!!pendingCancel}
+        onOpenChange={(o) => !o && setPendingCancel(null)}
+        title="Cancel subscription"
+        description={
+          pendingCancel
+            ? `End ${pendingCancel.productName} for user ${pendingCancel.userId}. Billing stops immediately and the user keeps access through ${formatDate(pendingCancel.nextBillingAt)}.`
+            : "End this subscription."
+        }
+        confirmLabel="Cancel subscription"
+        tone="danger"
+        requireReason
+        reasonLabel="Reason"
+        reasonPlaceholder="e.g. User requested via support ticket #4821"
+        onConfirm={() => {
+          if (pendingCancel) cancel.mutate(pendingCancel.id);
+          setPendingCancel(null);
+        }}
+      />
     </div>
   );
 }

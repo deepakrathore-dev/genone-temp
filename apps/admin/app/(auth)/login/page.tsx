@@ -1,10 +1,11 @@
 "use client";
 import * as React from "react";
+import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Eye, EyeOff, ShieldCheck } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import {
   AuthShell, AuthCard, AuthInput, AuthLabel, AuthButton, AuthCheckbox,
 } from "@genone/ui";
@@ -28,7 +29,6 @@ const ROLE_NAME: Record<Exclude<UserRole, "TRADER">, { id: string; name: string;
 const schema = z.object({
   email: z.string().email("Enter a valid email"),
   password: z.string().min(8, "Enter your password"),
-  totp: z.string().length(6, "6-digit code"),
   role: z.enum(["SUPER_ADMIN", "OPS", "AFFILIATE_MANAGER", "READ_ONLY"]),
   remember: z.boolean().optional(),
 });
@@ -37,11 +37,12 @@ export default function AdminLoginPage() {
   const router = useRouter();
   const signIn = useAuth((s) => s.signIn);
   const [showPassword, setShowPassword] = React.useState(false);
+  const [roleOpen, setRoleOpen] = React.useState(false);
   const {
-    register, handleSubmit, watch, formState: { errors, isSubmitting },
+    register, handleSubmit, watch, control, formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(schema),
-    defaultValues: { email: "", password: "", totp: "", role: "SUPER_ADMIN" as const, remember: true },
+    defaultValues: { email: "", password: "", role: "SUPER_ADMIN" as const, remember: true },
   });
 
   const selectedRole = watch("role");
@@ -53,7 +54,6 @@ export default function AdminLoginPage() {
         <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-white">
           Admin Portal
         </h1>
-       
       </div>
 
       <AuthCard heading="Login">
@@ -95,7 +95,7 @@ export default function AdminLoginPage() {
               <button
                 type="button"
                 onClick={() => setShowPassword((v) => !v)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-white/55 hover:text-white/90 focus:outline-none"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-white/55 hover:text-white/90 focus:outline-none cursor-pointer"
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -105,42 +105,21 @@ export default function AdminLoginPage() {
           </div>
 
           <div>
-            <AuthLabel>Authentication code</AuthLabel>
-            <AuthInput
-              inputMode="numeric"
-              maxLength={6}
-              placeholder="123456"
-              className="tracking-[0.5em] text-center font-[family-name:var(--font-jetbrains-mono)]"
-              {...register("totp")}
-            />
-            {errors.totp && <p className="mt-1.5 text-xs text-red-300">{errors.totp.message}</p>}
-          </div>
-
-          <div>
             <AuthLabel>Role</AuthLabel>
-            <div className="relative">
-              <select
-                {...register("role")}
-                className="w-full h-12 rounded-full pl-5 pr-10 appearance-none bg-white/[0.04] text-white border border-white/20 hover:border-white/30 focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/15 transition-colors text-sm"
-              >
-                {ROLE_OPTIONS.map((r) => (
-                  <option key={r.value} value={r.value} className="bg-[#0C0B10] text-white">
-                    {r.label}
-                  </option>
-                ))}
-              </select>
-              <svg
-                viewBox="0 0 20 20"
-                className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-white/55"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M5 8l5 5 5-5" />
-              </svg>
-            </div>
+            <Controller
+              name="role"
+              control={control}
+              render={({ field }) => (
+                <RoleSelect
+                  value={field.value}
+                  onChange={field.onChange}
+                  options={ROLE_OPTIONS}
+                  open={roleOpen}
+                  onOpenChange={setRoleOpen}
+                  placeholder="Select a role"
+                />
+              )}
+            />
             <p className="mt-1.5 text-xs text-white/55 leading-snug">{hint}</p>
           </div>
 
@@ -148,11 +127,183 @@ export default function AdminLoginPage() {
             <AuthCheckbox label="Keep me signed in" defaultChecked {...register("remember")} />
           </div>
 
-          <AuthButton type="submit" disabled={isSubmitting}>
+          <AuthButton type="submit" disabled={isSubmitting} className="cursor-pointer">
             Sign In
           </AuthButton>
         </form>
       </AuthCard>
     </AuthShell>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* RoleSelect                                                          */
+/*                                                                     */
+/* AuthCard has `overflow-hidden` (for its rounded corners), which     */
+/* clips any popover rendered inside it. We render the menu through a  */
+/* portal so it escapes the card, and position it from the trigger's   */
+/* bounding rect. We also flip upward if there isn't enough room       */
+/* below the trigger.                                                  */
+/* ------------------------------------------------------------------ */
+
+interface RoleOption {
+  value: Exclude<UserRole, "TRADER">;
+  label: string;
+  hint: string;
+}
+
+function RoleSelect({
+  value, onChange, options, open, onOpenChange, placeholder,
+}: {
+  value: Exclude<UserRole, "TRADER">;
+  onChange: (v: Exclude<UserRole, "TRADER">) => void;
+  options: RoleOption[];
+  open: boolean;
+  onOpenChange: (o: boolean) => void;
+  placeholder: string;
+}) {
+  const triggerRef = React.useRef<HTMLButtonElement>(null);
+  const menuRef = React.useRef<HTMLUListElement>(null);
+  const [coords, setCoords] = React.useState<{ top: number; left: number; width: number; flip: boolean } | null>(null);
+  // `useSyncExternalStore` is the React 19 way to read a client-only value
+  // (document availability) without a setState-in-effect hop.
+  const mounted = React.useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
+
+  const selected = options.find((o) => o.value === value);
+
+  // Compute position whenever the menu opens.
+  React.useLayoutEffect(() => {
+    if (!open || !triggerRef.current) return;
+    const rect = triggerRef.current.getBoundingClientRect();
+    const menuMaxHeight = Math.min(window.innerHeight * 0.6, 320);
+    const spaceBelow = window.innerHeight - rect.bottom - 16;
+    const spaceAbove = rect.top - 16;
+    const flip = spaceBelow < menuMaxHeight && spaceAbove > spaceBelow;
+    setCoords({
+      top: flip ? rect.top - 8 : rect.bottom + 8,
+      left: rect.left,
+      width: rect.width,
+      flip,
+    });
+  }, [open]);
+
+  // Re-position on scroll / resize while open.
+  React.useEffect(() => {
+    if (!open) return;
+    const onReflow = () => {
+      if (!triggerRef.current) return;
+      const rect = triggerRef.current.getBoundingClientRect();
+      const menuMaxHeight = Math.min(window.innerHeight * 0.6, 320);
+      const spaceBelow = window.innerHeight - rect.bottom - 16;
+      const spaceAbove = rect.top - 16;
+      const flip = spaceBelow < menuMaxHeight && spaceAbove > spaceBelow;
+      setCoords({
+        top: flip ? rect.top - 8 : rect.bottom + 8,
+        left: rect.left,
+        width: rect.width,
+        flip,
+      });
+    };
+    window.addEventListener("scroll", onReflow, true);
+    window.addEventListener("resize", onReflow);
+    return () => {
+      window.removeEventListener("scroll", onReflow, true);
+      window.removeEventListener("resize", onReflow);
+    };
+  }, [open]);
+
+  // Close on outside click / Escape.
+  React.useEffect(() => {
+    if (!open) return;
+    const onDown = (e: MouseEvent | TouchEvent) => {
+      const target = e.target as Node;
+      if (
+        triggerRef.current?.contains(target) ||
+        menuRef.current?.contains(target)
+      ) return;
+      onOpenChange(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onOpenChange(false);
+    };
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("touchstart", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("touchstart", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open, onOpenChange]);
+
+  return (
+    <>
+      <button
+        ref={triggerRef}
+        type="button"
+        onClick={() => onOpenChange(!open)}
+        className="relative w-full h-12 rounded-full pl-5 pr-12 flex items-center justify-between bg-white/[0.04] text-white border border-white/20 hover:border-white/30 focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/15 transition-colors text-sm cursor-pointer"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+      >
+        <span className="truncate text-left">{selected?.label ?? placeholder}</span>
+        <svg
+          viewBox="0 0 20 20"
+          className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-white/55 transition-transform"
+          style={{ transform: open ? "translateY(-50%) rotate(180deg)" : undefined }}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M5 8l5 5 5-5" />
+        </svg>
+      </button>
+
+      {mounted && open && coords && createPortal(
+        <ul
+          ref={menuRef}
+          role="listbox"
+          className="fixed z-[100] max-h-[min(60vh,20rem)] overflow-y-auto rounded-2xl border border-white/15 bg-[#13121a]/95 backdrop-blur-xl shadow-[0_24px_60px_-12px_rgba(0,0,0,0.5)] p-1.5 space-y-0.5"
+          style={{
+            top: coords.flip ? undefined : coords.top,
+            bottom: coords.flip ? window.innerHeight - coords.top : undefined,
+            left: coords.left,
+            width: coords.width,
+          }}
+        >
+          {options.map((r) => {
+            const active = value === r.value;
+            return (
+              <li key={r.value}>
+                <button
+                  type="button"
+                  role="option"
+                  aria-selected={active}
+                  onClick={() => {
+                    onChange(r.value);
+                    onOpenChange(false);
+                  }}
+                  className={`w-full text-left px-3 py-2.5 rounded-xl cursor-pointer transition-colors ${
+                    active
+                      ? "bg-white/[0.10] text-white"
+                      : "text-white/85 hover:bg-white/[0.06] hover:text-white"
+                  }`}
+                >
+                  <div className="text-sm font-medium">{r.label}</div>
+                  <div className="text-[11px] text-white/55 leading-relaxed mt-0.5">{r.hint}</div>
+                </button>
+              </li>
+            );
+          })}
+        </ul>,
+        document.body
+      )}
+    </>
   );
 }

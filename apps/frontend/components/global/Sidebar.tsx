@@ -1,12 +1,11 @@
 "use client";
 import * as React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, CandlestickChart, Calendar, Banknote, Trophy, Wallet,
   Bell, MessageCircle, Boxes, ChevronLeft, Menu, HelpCircle, Plus, Repeat, Globe,
-  UserCircle,
+  UserCircle, Megaphone,
 } from "lucide-react";
 import { cn } from "@genone/ui";
 import { useUi } from "@/lib/stores/ui.store";
@@ -42,6 +41,7 @@ export function Sidebar() {
       items: [
         { label: "Leaderboard", href: "/leaderboard", icon: Trophy },
         { label: "Subscriptions", href: "/subscriptions", icon: Repeat },
+        { label: "Affiliate program", href: "/affiliate", icon: Megaphone },
         { label: "Community", href: "/community", icon: Globe },
       ],
     },

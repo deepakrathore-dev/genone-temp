@@ -11,6 +11,7 @@ import {
 } from "@genone/ui";
 import { Plus, Pencil, Trash2, Boxes } from "lucide-react";
 import type { ChallengeType } from "@genone/types";
+import { ConfirmActionDialog } from "@/components/global/ConfirmActionDialog";
 
 export default function ChallengeTypesPage() {
   return (
@@ -26,6 +27,7 @@ function Inner() {
   const canWrite = useCan("proptech.write");
   const [creating, setCreating] = React.useState(false);
   const [editing, setEditing] = React.useState<ChallengeType | null>(null);
+  const [removingType, setRemovingType] = React.useState<ChallengeType | null>(null);
   const del = useDeleteChallengeType();
 
   // Live count of challenges per type (preferred over the static field)
@@ -76,8 +78,10 @@ function Inner() {
               <TableBody>
                 {(data ?? []).map((t) => (
                   <TableRow key={t.id}>
-                    <TableCell className="font-medium">{t.name}</TableCell>
-                    <TableCell className="text-sm text-[var(--text-muted)] max-w-md">{t.description}</TableCell>
+                    <TableCell className="font-medium whitespace-nowrap">{t.name}</TableCell>
+                    <TableCell className="text-sm text-[var(--text-muted)] whitespace-normal max-w-[420px] leading-relaxed">
+                      {t.description}
+                    </TableCell>
                     <TableCell><Badge variant="primary">{counts[t.id] ?? 0}</Badge></TableCell>
                     <TableCell>{t.active ? <Badge variant="success">Active</Badge> : <Badge variant="neutral">Inactive</Badge>}</TableCell>
                     <TableCell className="font-mono text-xs">{formatDate(t.createdAt)}</TableCell>
@@ -90,12 +94,7 @@ function Inner() {
                           <Button
                             size="sm"
                             variant="ghost"
-                            onClick={() => {
-                              if ((counts[t.id] ?? 0) > 0) {
-                                if (!confirm(`${t.name} has ${counts[t.id]} active challenges. Archive them first or this type will be hidden but its challenges remain available.`)) return;
-                              }
-                              del.mutate(t.id);
-                            }}
+                            onClick={() => setRemovingType(t)}
                           >
                             <Trash2 className="h-3.5 w-3.5" /> Remove
                           </Button>
@@ -109,6 +108,25 @@ function Inner() {
           )}
         </CardContent>
       </Card>
+
+      <ConfirmActionDialog
+        open={!!removingType}
+        onOpenChange={(o) => !o && setRemovingType(null)}
+        title="Remove challenge type"
+        description={
+          removingType
+            ? (counts[removingType.id] ?? 0) > 0
+              ? `${removingType.name} still has ${counts[removingType.id]} active challenge${counts[removingType.id] === 1 ? "" : "s"}. Removing this type hides it from purchase flows; the underlying challenges stay available until you archive them individually.`
+              : `Remove ${removingType.name}. It's not attached to any active challenges.`
+            : ""
+        }
+        confirmLabel="Remove type"
+        tone="danger"
+        onConfirm={() => {
+          if (removingType) del.mutate(removingType.id);
+          setRemovingType(null);
+        }}
+      />
 
       <TypeDialog
         open={creating}

@@ -6,11 +6,11 @@ import {
   Card, CardContent, CardHeader, CardTitle,
   Tabs, TabsList, TabsTrigger, TabsContent,
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
-  Badge, Button, Input, Label, Skeleton, CountryChip,
+  Badge, Button, Input, Label, Skeleton, CountryChip, cn,
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
   formatCurrency, formatDate,
 } from "@genone/ui";
-import { ShieldAlert, Wallet } from "lucide-react";
+import { ShieldAlert, Wallet, ShieldCheck, ShieldX, Mail, Phone, MapPin, KeyRound, Bell } from "lucide-react";
 
 export default function UserDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = React.use(params);
@@ -52,11 +52,146 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
         </TabsList>
 
         <TabsContent value="overview">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <Stat label="Wallet" value={formatCurrency(user.walletCreditCents)} />
-            <Stat label="Loyalty attempts" value={String(user.loyaltyAttempts)} />
-            <Stat label="Loyalty discount" value={`${user.loyaltyTierPct}%`} />
-            <Stat label="Joined" value={formatDate(user.createdAt)} />
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <Stat label="Wallet" value={formatCurrency(user.walletCreditCents)} />
+              <Stat label="Loyalty attempts" value={String(user.loyaltyAttempts)} />
+              <Stat label="Loyalty discount" value={`${user.loyaltyTierPct}%`} />
+              <Stat label="Joined" value={formatDate(user.createdAt)} />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {/* Contact */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-sm flex items-center gap-2">
+                    <Mail className="h-3.5 w-3.5 text-[var(--text-muted)]" /> Contact
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Row label="Full name" value={user.fullName} />
+                  <Row label="Email" value={user.email} status={user.emailVerified ? "verified" : "pending"} />
+                  <Row label="Phone" value={user.phone} status={user.phoneVerified ? "verified" : "pending"} icon={Phone} />
+                  <Row label="Date of birth" value={user.dateOfBirth ? formatDate(user.dateOfBirth) : "—"} />
+                  <Row label="Country" value={user.country} extra={<CountryChip code={user.country} size="xs" />} />
+                  <Row label="Locale" value={user.locale} />
+                  <Row label="Timezone" value={user.timezone} />
+                </CardContent>
+              </Card>
+
+              {/* Address */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-sm flex items-center gap-2">
+                    <MapPin className="h-3.5 w-3.5 text-[var(--text-muted)]" /> Address
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Row label="Street" value={user.addressLine1} />
+                  {user.addressLine2 && <Row label="Apt / Suite" value={user.addressLine2} />}
+                  <Row label="City" value={user.city} />
+                  <Row label="Region" value={user.region} />
+                  <Row label="Postal code" value={user.postalCode} />
+                </CardContent>
+              </Card>
+
+              {/* KYC + compliance */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-sm flex items-center gap-2">
+                    {user.kycStatus === "VERIFIED" ? (
+                      <ShieldCheck className="h-3.5 w-3.5 text-[var(--success)]" />
+                    ) : (
+                      <ShieldX className="h-3.5 w-3.5 text-[var(--warning)]" />
+                    )}{" "}
+                    KYC & compliance
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Row
+                    label="Status"
+                    extra={
+                      <Badge variant={user.kycStatus === "VERIFIED" ? "success" : user.kycStatus === "PENDING" ? "warning" : "neutral"}>
+                        {user.kycStatus}
+                      </Badge>
+                    }
+                  />
+                  {user.kycVerifiedAt && <Row label="Verified at" value={formatDate(user.kycVerifiedAt)} />}
+                  <Row
+                    label="PEP flag"
+                    extra={
+                      <Badge variant={user.pepFlag ? "danger" : "neutral"}>
+                        {user.pepFlag ? "Flagged" : "Clear"}
+                      </Badge>
+                    }
+                  />
+                  <Row
+                    label="Sanctions"
+                    extra={
+                      <Badge variant={user.sanctionsCleared ? "success" : "danger"}>
+                        {user.sanctionsCleared ? "Cleared" : "Blocked"}
+                      </Badge>
+                    }
+                  />
+                  <Row
+                    label="Account status"
+                    extra={
+                      <Badge variant={user.suspended ? "danger" : "success"}>
+                        {user.suspended ? "Suspended" : "Active"}
+                      </Badge>
+                    }
+                  />
+                </CardContent>
+              </Card>
+
+              {/* Security */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-sm flex items-center gap-2">
+                    <KeyRound className="h-3.5 w-3.5 text-[var(--text-muted)]" /> Security
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Row
+                    label="2FA"
+                    extra={
+                      <Badge variant={user.totpEnabled ? "success" : "warning"}>
+                        {user.totpEnabled ? "Enabled" : "Not configured"}
+                      </Badge>
+                    }
+                  />
+                  <Row label="Last login" value={user.lastLoginAt ? formatDate(user.lastLoginAt, "datetime") : "—"} />
+                  <Row label="Last login IP" value={user.lastLoginIp ?? "—"} mono />
+                  {user.riskDisclosure && (
+                    <>
+                      <Row label="Disclosure version" value={user.riskDisclosure.version} mono />
+                      <Row label="Disclosure accepted" value={formatDate(user.riskDisclosure.acceptedAt, "datetime")} />
+                      <Row label="Disclosure IP" value={user.riskDisclosure.ip} mono />
+                    </>
+                  )}
+                </CardContent>
+              </Card>
+
+              {/* Notifications */}
+              {user.notificationPrefs && (
+                <Card className="md:col-span-2">
+                  <CardHeader>
+                    <CardTitle className="text-sm flex items-center gap-2">
+                      <Bell className="h-3.5 w-3.5 text-[var(--text-muted)]" /> Notification preferences
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-2 md:grid-cols-5 gap-3 text-xs">
+                      <PrefChip on={!!user.notificationPrefs.passFailEmails} label="Pass / fail emails" />
+                      <PrefChip on={!!user.notificationPrefs.payoutEmails} label="Payout emails" />
+                      <PrefChip on={!!user.notificationPrefs.retentionEmails} label="Retention emails" />
+                      <PrefChip on={!!user.notificationPrefs.productAnnouncements} label="Product announcements" />
+                      <PrefChip on={!!user.notificationPrefs.loyaltyUpdates} label="Loyalty updates" />
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
           </div>
         </TabsContent>
 
@@ -175,6 +310,56 @@ function Stat({ label, value }: { label: string; value: string }) {
       <div className="text-xs uppercase tracking-wider text-[var(--text-muted)]">{label}</div>
       <div className="mt-1 text-xl font-mono font-semibold">{value}</div>
     </CardContent></Card>
+  );
+}
+
+function Row({
+  label, value, extra, mono, status, icon: Icon,
+}: {
+  label: string;
+  value?: string;
+  extra?: React.ReactNode;
+  mono?: boolean;
+  status?: "verified" | "pending";
+  icon?: React.ComponentType<{ className?: string }>;
+}) {
+  return (
+    <div className="flex items-baseline justify-between gap-3 py-1.5 first:pt-0 last:pb-0 border-b border-[var(--border)] last:border-b-0">
+      <span className="text-xs text-[var(--text-muted)] flex items-center gap-1.5">
+        {Icon && <Icon className="h-3 w-3" />}
+        {label}
+      </span>
+      <span className="flex items-center gap-2 text-right min-w-0">
+        {value && (
+          <span className={cn("text-sm text-[var(--text)] truncate", mono && "font-mono text-xs")}>{value}</span>
+        )}
+        {status && (
+          <Badge variant={status === "verified" ? "success" : "warning"}>
+            {status === "verified" ? "Verified" : "Pending"}
+          </Badge>
+        )}
+        {extra}
+      </span>
+    </div>
+  );
+}
+
+function PrefChip({ on, label }: { on: boolean; label: string }) {
+  return (
+    <div
+      className={cn(
+        "rounded-lg border px-2.5 py-2 transition-colors",
+        on
+          ? "border-[var(--success)]/30 bg-[var(--success-soft)] text-[var(--success)]"
+          : "border-[var(--border)] bg-[var(--surface-2)] text-[var(--text-muted)]"
+      )}
+    >
+      <div className="flex items-center gap-1.5">
+        <span aria-hidden className={cn("h-1.5 w-1.5 rounded-full", on ? "bg-[var(--success)]" : "bg-[var(--text-faint)]")} />
+        <span className="font-semibold uppercase tracking-wider text-[10px]">{on ? "On" : "Off"}</span>
+      </div>
+      <div className="mt-0.5 text-[11px] leading-snug text-[var(--text)]">{label}</div>
+    </div>
   );
 }
 

@@ -1,4 +1,5 @@
 "use client";
+import * as React from "react";
 import { useKycQueue } from "@/lib/queries";
 import Link from "next/link";
 import {
@@ -7,9 +8,16 @@ import {
   Badge, Button, Skeleton, CountryChip, formatDate,
 } from "@genone/ui";
 import { toast } from "sonner";
+import { ConfirmActionDialog } from "@/components/global/ConfirmActionDialog";
+
+type PendingAction =
+  | { kind: "approve"; userId: string; userName: string }
+  | { kind: "reject";  userId: string; userName: string };
 
 export default function KycPage() {
   const { data, isLoading } = useKycQueue();
+  const [pending, setPending] = React.useState<PendingAction | null>(null);
+
   return (
     <div className="space-y-4">
       <div>
@@ -38,8 +46,12 @@ export default function KycPage() {
                     <TableCell><Badge variant="warning">{u.kycStatus}</Badge></TableCell>
                     <TableCell className="font-mono text-xs">{formatDate(u.createdAt)}</TableCell>
                     <TableCell className="flex gap-1 justify-end">
-                      <Button size="sm" variant="success" onClick={() => toast.success("Approved")}>Approve</Button>
-                      <Button size="sm" variant="danger" onClick={() => toast.success("Rejected")}>Reject</Button>
+                      <Button size="sm" variant="success" onClick={() => setPending({ kind: "approve", userId: u.id, userName: u.fullName })}>
+                        Approve
+                      </Button>
+                      <Button size="sm" variant="danger" onClick={() => setPending({ kind: "reject", userId: u.id, userName: u.fullName })}>
+                        Reject
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -49,6 +61,34 @@ export default function KycPage() {
           )}
         </CardContent>
       </Card>
+
+      <ConfirmActionDialog
+        open={pending?.kind === "approve"}
+        onOpenChange={(o) => !o && setPending(null)}
+        title="Approve KYC verification"
+        description={`Mark ${pending?.userName ?? "this user"} as verified. They'll be eligible for payouts immediately.`}
+        confirmLabel="Approve user"
+        tone="success"
+        onConfirm={() => {
+          toast.success(`${pending?.userName ?? "User"} approved`);
+          setPending(null);
+        }}
+      />
+      <ConfirmActionDialog
+        open={pending?.kind === "reject"}
+        onOpenChange={(o) => !o && setPending(null)}
+        title="Reject KYC verification"
+        description={`Reject ${pending?.userName ?? "this user"}'s KYC submission. They'll be asked to re-submit with corrected documents.`}
+        confirmLabel="Reject user"
+        tone="danger"
+        requireReason
+        reasonLabel="Rejection reason"
+        reasonPlaceholder="e.g. Document does not match name on file"
+        onConfirm={(reason) => {
+          toast.success(`${pending?.userName ?? "User"} rejected${reason ? ` — ${reason}` : ""}`);
+          setPending(null);
+        }}
+      />
     </div>
   );
 }

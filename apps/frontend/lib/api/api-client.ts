@@ -1,6 +1,9 @@
 import * as mock from "@genone/mock-data";
 import type {
   Account,
+  AffiliateRow,
+  AffiliateReferral,
+  AffiliateApplication,
   CalendarDay,
   Challenge,
   ChallengeType,
@@ -152,6 +155,48 @@ export const api = {
     }),
   cancelMySubscription: (id: string) =>
     post<{ ok: true }>(`/subscriptions/${id}/cancel`, {}, () => ({ ok: true })),
+
+  // ---------- Affiliate programme (REQ-065, REQ-066, REQ-068) ----------
+  getMyAffiliate: () =>
+    get<AffiliateRow | null>("/me/affiliate", () => {
+      const found = mock.affiliates.find((a) => a.userId === CURRENT_USER_ID);
+      return found ?? null;
+    }),
+
+  getMyAffiliateReferrals: () =>
+    get<AffiliateReferral[]>("/me/affiliate/referrals", () => {
+      const aff = mock.affiliates.find((a) => a.userId === CURRENT_USER_ID);
+      if (!aff) return [];
+      return mock.affiliateReferrals
+        .filter((r) => r.affiliateId === aff.id)
+        .sort((a, b) => b.signupAt.localeCompare(a.signupAt));
+    }),
+
+  applyForAffiliate: (payload: AffiliateApplication) =>
+    post<AffiliateRow>("/me/affiliate/apply", payload, () => {
+      const me = mock.users.find((u) => u.id === CURRENT_USER_ID)!;
+      // Synthesise a pending application response — admin queue receives it server-side.
+      return {
+        id: `aff_my_${me.id}`,
+        userId: me.id,
+        name: me.fullName,
+        email: me.email,
+        code: "PENDING",
+        tierPct: 15,
+        monthSignups: 0,
+        monthClicks: 0,
+        totalCommissionCents: 0,
+        pendingCommissionCents: 0,
+        totalSignups: 0,
+        appliedAt: new Date().toISOString(),
+        approvedAt: null,
+        audienceSize: payload.audienceSize,
+        primaryPlatform: payload.primaryPlatform,
+        socialUrl: payload.socialUrl,
+        notes: payload.notes,
+        status: "PENDING",
+      } satisfies AffiliateRow;
+    }),
 
   // ---------- Proptech catalog (challenge types + challenges) ----------
   getChallengeTypes: () =>

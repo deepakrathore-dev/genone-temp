@@ -6,7 +6,7 @@ import {
   LayoutDashboard, Users, Banknote, ShieldAlert, IdCard, Megaphone,
   LineChart, GitMerge, Activity, Settings, ScrollText, ChevronLeft, Menu,
   Sigma, Bell, AlertOctagon, Network, UserCog, Repeat,
-  ListOrdered, Boxes, Layers, MailOpen, FileBarChart,
+  ListOrdered, Boxes, MailOpen, FileBarChart,
 } from "lucide-react";
 import { cn } from "@genone/ui";
 import { useUi } from "@/lib/stores/ui.store";
@@ -34,7 +34,6 @@ const GROUPS: NavGroup[] = [
     items: [
       { label: "Challenge Types", href: "/proptech/challenge-types", icon: ListOrdered, permission: "proptech.view" },
       { label: "Challenges", href: "/proptech/challenges", icon: Boxes, permission: "proptech.view" },
-      { label: "Phase", href: "/proptech/phase", icon: Layers, permission: "proptech.view" },
       { label: "Email Templates", href: "/proptech/email-templates", icon: MailOpen, permission: "proptech.view" },
     ],
   },

@@ -379,14 +379,44 @@ export interface SymbolAnalyticsRow {
 
 export interface AffiliateRow {
   id: string;
+  /** Linked trader user. When set, the trader sees the affiliate dashboard. */
+  userId?: string;
   name: string;
   email: string;
   code: string;
   tierPct: number;
   monthSignups: number;
+  monthClicks: number;
   totalCommissionCents: number;
   pendingCommissionCents: number;
+  /** Cumulative referred signups (lifetime). */
+  totalSignups: number;
+  /** Application form fields. */
+  appliedAt: ISODate;
+  approvedAt?: ISODate | null;
+  audienceSize?: number;
+  primaryPlatform?: "YouTube" | "TikTok" | "X" | "Instagram" | "Discord" | "Other";
+  socialUrl?: string;
+  notes?: string;
   status: "PENDING" | "ACTIVE" | "SUSPENDED";
+}
+
+export interface AffiliateReferral {
+  id: string;
+  affiliateId: string;
+  referredUserInitials: string;
+  signupAt: ISODate;
+  firstPurchaseAt?: ISODate | null;
+  totalPurchasesCents: number;
+  commissionEarnedCents: number;
+  status: "SIGNED_UP" | "PURCHASED" | "FUNDED";
+}
+
+export interface AffiliateApplication {
+  audienceSize: number;
+  primaryPlatform: AffiliateRow["primaryPlatform"];
+  socialUrl: string;
+  notes?: string;
 }
 
 export type TimeWindow = "TODAY" | "WEEK" | "MONTH" | "ALL_TIME";

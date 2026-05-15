@@ -17,6 +17,8 @@ export const queryKeys = {
   subscriptionProducts: ["subscription-products"] as const,
   challengeTypes: ["challenge-types"] as const,
   challenges: ["challenges"] as const,
+  myAffiliate: ["me", "affiliate"] as const,
+  myAffiliateReferrals: ["me", "affiliate", "referrals"] as const,
 };
 
 export function useMe() {
@@ -82,4 +84,15 @@ export function useChallengeTypes() {
 
 export function useChallenges() {
   return useQuery({ queryKey: queryKeys.challenges, queryFn: api.getChallenges });
+}
+
+export function useMyAffiliate() {
+  return useQuery({ queryKey: queryKeys.myAffiliate, queryFn: api.getMyAffiliate });
+}
+
+export function useMyAffiliateReferrals() {
+  return useQuery({
+    queryKey: queryKeys.myAffiliateReferrals,
+    queryFn: api.getMyAffiliateReferrals,
+  });
 }

@@ -3,6 +3,7 @@ import type {
   AdminUser,
   AdminUserSummary,
   AffiliateRow,
+  AffiliateReferral,
   AuditEntry,
   CalendarDay,
   Challenge,
@@ -529,23 +530,114 @@ function buildPurchases(users: User[]): PurchaseRecord[] {
   return out;
 }
 
-function buildAffiliates(): AffiliateRow[] {
-  const names = ["FuturesAlpha", "TraderTV", "Scalp Daily", "PropProphet", "MarketMomentum", "GapWizard", "Charts & Coffee", "DeltaEdge"];
-  return names.map((name, i) => {
+function buildAffiliates(users: User[]): AffiliateRow[] {
+  const partners = [
+    { name: "FuturesAlpha",   platform: "YouTube"   as const, audience: 142_000, social: "https://youtube.com/@futuresalpha" },
+    { name: "TraderTV",       platform: "TikTok"    as const, audience: 86_000,  social: "https://tiktok.com/@tradertv" },
+    { name: "Scalp Daily",    platform: "YouTube"   as const, audience: 51_000,  social: "https://youtube.com/@scalpdaily" },
+    { name: "PropProphet",    platform: "X"         as const, audience: 33_400,  social: "https://x.com/propprophet" },
+    { name: "MarketMomentum", platform: "YouTube"   as const, audience: 27_800,  social: "https://youtube.com/@marketmomentum" },
+    { name: "GapWizard",      platform: "Discord"   as const, audience: 12_300,  social: "https://discord.gg/gapwizard" },
+    { name: "Charts & Coffee",platform: "Instagram" as const, audience: 19_600,  social: "https://instagram.com/chartsandcoffee" },
+    { name: "DeltaEdge",      platform: "TikTok"    as const, audience: 47_100,  social: "https://tiktok.com/@deltaedge" },
+  ];
+  const out: AffiliateRow[] = partners.map((p, i) => {
     const monthSignups = randInt(2, 80);
     const tierPct = monthSignups >= 50 ? 25 : monthSignups >= 20 ? 20 : 15;
+    const status: AffiliateRow["status"] = chance(0.85) ? "ACTIVE" : pick(["PENDING", "SUSPENDED"] as const);
+    const appliedAt = todayISO(-randInt(30, 220));
     return {
       id: `aff_${String(i + 1).padStart(4, "0")}`,
-      name,
-      email: `${name.toLowerCase().replace(/\s/g, "")}@partner.com`,
-      code: `${name.slice(0, 4).toUpperCase()}${i + 1}`,
+      name: p.name,
+      email: `${p.name.toLowerCase().replace(/\s|&/g, "")}@partner.com`,
+      code: `${p.name.replace(/\s|&/g, "").slice(0, 4).toUpperCase()}${i + 1}`,
       tierPct,
       monthSignups,
+      monthClicks: monthSignups * randInt(8, 30),
       totalCommissionCents: randInt(50_000, 4_000_000),
       pendingCommissionCents: randInt(0, 600_000),
-      status: chance(0.85) ? "ACTIVE" : pick(["PENDING", "SUSPENDED"] as const),
+      totalSignups: monthSignups + randInt(20, 600),
+      appliedAt,
+      approvedAt: status === "PENDING" ? null : todayISO(-randInt(5, 200)),
+      audienceSize: p.audience,
+      primaryPlatform: p.platform,
+      socialUrl: p.social,
+      status,
     } satisfies AffiliateRow;
   });
+
+  // Seed the demo trader (usr_0001) as an ACTIVE affiliate, plus a second trader as PENDING.
+  const demoTrader = users.find((u) => u.id === "usr_0001");
+  if (demoTrader) {
+    out.push({
+      id: `aff_my_${demoTrader.id}`,
+      userId: demoTrader.id,
+      name: demoTrader.fullName,
+      email: demoTrader.email,
+      code: demoTrader.affiliateCode ?? `${demoTrader.initials.replace(/\W/g, "")}`,
+      tierPct: 20,
+      monthSignups: 24,
+      monthClicks: 612,
+      totalCommissionCents: 184_500,
+      pendingCommissionCents: 32_400,
+      totalSignups: 89,
+      appliedAt: todayISO(-95),
+      approvedAt: todayISO(-92),
+      audienceSize: 18_500,
+      primaryPlatform: "YouTube",
+      socialUrl: "https://youtube.com/@brianmurphy",
+      status: "ACTIVE",
+    });
+  }
+  const secondTrader = users.find((u) => u.id === "usr_0002");
+  if (secondTrader) {
+    out.push({
+      id: `aff_my_${secondTrader.id}`,
+      userId: secondTrader.id,
+      name: secondTrader.fullName,
+      email: secondTrader.email,
+      code: "PENDING",
+      tierPct: 15,
+      monthSignups: 0,
+      monthClicks: 0,
+      totalCommissionCents: 0,
+      pendingCommissionCents: 0,
+      totalSignups: 0,
+      appliedAt: todayISO(-3),
+      approvedAt: null,
+      audienceSize: 4_200,
+      primaryPlatform: "X",
+      socialUrl: "https://x.com/sample",
+      status: "PENDING",
+    });
+  }
+  return out;
+}
+
+function buildAffiliateReferrals(affiliates: AffiliateRow[], users: User[]): AffiliateReferral[] {
+  const out: AffiliateReferral[] = [];
+  const activeAffiliates = affiliates.filter((a) => a.status === "ACTIVE");
+  let referralCounter = 1;
+  for (const a of activeAffiliates) {
+    const count = a.userId ? 12 : randInt(2, 10);
+    for (let i = 0; i < count; i++) {
+      const u = pick(users);
+      const purchased = chance(0.6);
+      const funded = purchased && chance(0.35);
+      const purchaseCents = purchased ? randInt(12_900, 60_000) : 0;
+      out.push({
+        id: `aref_${String(referralCounter++).padStart(5, "0")}`,
+        affiliateId: a.id,
+        referredUserInitials: u.initials,
+        signupAt: todayISO(-randInt(1, 90)),
+        firstPurchaseAt: purchased ? todayISO(-randInt(0, 60)) : null,
+        totalPurchasesCents: purchaseCents,
+        commissionEarnedCents: Math.round((purchaseCents * a.tierPct) / 100),
+        status: funded ? "FUNDED" : purchased ? "PURCHASED" : "SIGNED_UP",
+      });
+    }
+  }
+  return out;
 }
 
 function buildCohortRetention(): CohortRow[] {
@@ -696,7 +788,8 @@ const calendarData = buildCalendar(accountsData);
 const kpiData = buildKpis();
 const auditData = buildAudit(usersData);
 const purchasesData = buildPurchases(usersData);
-const affiliatesData = buildAffiliates();
+const affiliatesData = buildAffiliates(usersData);
+const affiliateReferralsData = buildAffiliateReferrals(affiliatesData, usersData);
 const cohortRetentionData = buildCohortRetention();
 const payoutCohortData = buildPayoutCohort();
 const forecastData = buildForecast();
@@ -795,6 +888,7 @@ export const kpis: Kpi[] = kpiData;
 export const audit: AuditEntry[] = auditData;
 export const purchases: PurchaseRecord[] = purchasesData;
 export const affiliates: AffiliateRow[] = affiliatesData;
+export const affiliateReferrals: AffiliateReferral[] = affiliateReferralsData;
 export const cohortRetention: CohortRow[] = cohortRetentionData;
 export const payoutCohort: CohortRow[] = payoutCohortData;
 export const forecast: ForecastBucket[] = forecastData;
