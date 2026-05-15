@@ -11,74 +11,51 @@ export function LeaderboardTable({ rows }: { rows: LeaderboardRow[] }) {
   return (
     <Card className="overflow-hidden">
       <CardContent className="p-0">
-        <div className="hidden md:block overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Rank</TableHead>
-                <TableHead>Trader</TableHead>
-                <TableHead className="text-right">Total P&L</TableHead>
-                <TableHead className="text-right">Win rate</TableHead>
-                <TableHead className="text-right">Trades</TableHead>
-                <TableHead className="text-right">Avg win</TableHead>
-                <TableHead className="text-right">Avg loss</TableHead>
-                <TableHead className="text-right">Profit factor</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {rows.map((r) => (
-                <TableRow key={r.userId}>
-                  <TableCell>
-                    <RankPill rank={r.rank} />
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-3 min-w-0">
-                      <Avatar row={r} size={36} />
-                      <div className="min-w-0">
-                        <div className="font-medium text-[var(--text)] truncate">{r.initials}</div>
-                        <div className="flex items-center gap-1.5 mt-0.5">
-                          <CountryChip code={r.country} size="xs" />
-                        </div>
+        {/* Full table — scrolls horizontally on mobile so every column is reachable. */}
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Rank</TableHead>
+              <TableHead>Trader</TableHead>
+              <TableHead className="text-right">Total P&L</TableHead>
+              <TableHead className="text-right">Win rate</TableHead>
+              <TableHead className="text-right">Trades</TableHead>
+              <TableHead className="text-right">Avg win</TableHead>
+              <TableHead className="text-right">Avg loss</TableHead>
+              <TableHead className="text-right">Profit factor</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {rows.map((r) => (
+              <TableRow key={r.userId}>
+                <TableCell>
+                  <RankPill rank={r.rank} />
+                </TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-3 min-w-0">
+                    <Avatar row={r} size={36} />
+                    <div className="min-w-0">
+                      <div className="font-medium text-[var(--text)]">{r.initials}</div>
+                      <div className="flex items-center gap-1.5 mt-0.5">
+                        <CountryChip code={r.country} size="xs" />
                       </div>
                     </div>
-                  </TableCell>
-                  <TableCell className={cn("text-right font-mono font-semibold tabular-nums", r.totalPnlCents >= 0 ? "text-[var(--success)]" : "text-[var(--danger)]")}>
-                    {formatCurrency(r.totalPnlCents, { compact: true, sign: true })}
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <WinRateBar pct={r.winRatePct} />
-                  </TableCell>
-                  <TableCell className="text-right font-mono tabular-nums">{formatNumber(r.trades)}</TableCell>
-                  <TableCell className="text-right font-mono text-xs text-[var(--success)] tabular-nums">{formatCurrency(r.avgWinCents)}</TableCell>
-                  <TableCell className="text-right font-mono text-xs text-[var(--danger)] tabular-nums">{formatCurrency(r.avgLossCents)}</TableCell>
-                  <TableCell className="text-right font-mono font-semibold tabular-nums">{r.profitFactor.toFixed(2)}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-
-        {/* Mobile */}
-        <ul className="md:hidden divide-y divide-[var(--border)]">
-          {rows.map((r) => (
-            <li key={r.userId} className="p-4 flex items-center gap-3">
-              <RankPill rank={r.rank} />
-              <Avatar row={r} size={40} />
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-medium text-[var(--text)]">{r.initials}</span>
-                  <CountryChip code={r.country} size="xs" />
-                </div>
-                <div className="text-[11px] font-mono text-[var(--text-muted)] mt-0.5">
-                  {r.winRatePct}% WR · {r.trades} trades · PF {r.profitFactor.toFixed(2)}
-                </div>
-              </div>
-              <div className={cn("text-sm font-mono font-semibold tabular-nums", r.totalPnlCents >= 0 ? "text-[var(--success)]" : "text-[var(--danger)]")}>
-                {formatCurrency(r.totalPnlCents, { compact: true })}
-              </div>
-            </li>
-          ))}
-        </ul>
+                  </div>
+                </TableCell>
+                <TableCell className={cn("text-right font-mono font-semibold tabular-nums", r.totalPnlCents >= 0 ? "text-[var(--success)]" : "text-[var(--danger)]")}>
+                  {formatCurrency(r.totalPnlCents, { compact: true, sign: true })}
+                </TableCell>
+                <TableCell className="text-right">
+                  <WinRateBar pct={r.winRatePct} />
+                </TableCell>
+                <TableCell className="text-right font-mono tabular-nums">{formatNumber(r.trades)}</TableCell>
+                <TableCell className="text-right font-mono text-xs text-[var(--success)] tabular-nums">{formatCurrency(r.avgWinCents)}</TableCell>
+                <TableCell className="text-right font-mono text-xs text-[var(--danger)] tabular-nums">{formatCurrency(r.avgLossCents)}</TableCell>
+                <TableCell className="text-right font-mono font-semibold tabular-nums">{r.profitFactor.toFixed(2)}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </CardContent>
     </Card>
   );

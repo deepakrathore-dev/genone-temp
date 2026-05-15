@@ -25,55 +25,36 @@ export function PayoutHistoryTable({ payouts }: { payouts: Payout[] }) {
 
   return (
     <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] overflow-hidden">
-      {/* Desktop — horizontally scrollable if columns don't all fit. */}
-      <div className="hidden md:block overflow-x-auto">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>#</TableHead>
-              <TableHead>Requested</TableHead>
-              <TableHead>Amount</TableHead>
-              <TableHead>Method</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Timeline</TableHead>
+      {/* Full table — scrolls horizontally on mobile so every column is reachable. */}
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>#</TableHead>
+            <TableHead>Requested</TableHead>
+            <TableHead>Amount</TableHead>
+            <TableHead>Method</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead>Timeline</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {payouts.map((p) => (
+            <TableRow key={p.id}>
+              <TableCell className="font-mono text-xs">#{p.sequence}</TableCell>
+              <TableCell className="font-mono text-xs">{format(new Date(p.requestedAt), "MMM d, yyyy")}</TableCell>
+              <TableCell className="font-mono font-semibold">{formatCurrency(p.amountCents)}</TableCell>
+              <TableCell className="text-xs text-[var(--text-muted)]">{p.method}</TableCell>
+              <TableCell><Badge variant={STATUS[p.status].variant}>{STATUS[p.status].label}</Badge></TableCell>
+              <TableCell>
+                <Timeline payout={p} />
+                {p.rejectionReason && (
+                  <div className="text-[11px] text-danger mt-1 font-mono">{p.rejectionReason}</div>
+                )}
+              </TableCell>
             </TableRow>
-          </TableHeader>
-          <TableBody>
-            {payouts.map((p) => (
-              <TableRow key={p.id}>
-                <TableCell className="font-mono text-xs">#{p.sequence}</TableCell>
-                <TableCell className="font-mono text-xs">{format(new Date(p.requestedAt), "MMM d, yyyy")}</TableCell>
-                <TableCell className="font-mono font-semibold">{formatCurrency(p.amountCents)}</TableCell>
-                <TableCell className="text-xs text-[var(--text-muted)]">{p.method}</TableCell>
-                <TableCell><Badge variant={STATUS[p.status].variant}>{STATUS[p.status].label}</Badge></TableCell>
-                <TableCell>
-                  <Timeline payout={p} />
-                  {p.rejectionReason && (
-                    <div className="text-[11px] text-danger mt-1 font-mono">{p.rejectionReason}</div>
-                  )}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
-
-      {/* Mobile */}
-      <ul className="md:hidden divide-y divide-[var(--border)]">
-        {payouts.map((p) => (
-          <li key={p.id} className="p-3 space-y-1.5">
-            <div className="flex items-center justify-between">
-              <span className="font-mono font-semibold">{formatCurrency(p.amountCents)}</span>
-              <Badge variant={STATUS[p.status].variant}>{STATUS[p.status].label}</Badge>
-            </div>
-            <div className="text-xs text-[var(--text-muted)] font-mono">
-              #{p.sequence} · {format(new Date(p.requestedAt), "MMM d, yyyy")} · {p.method}
-            </div>
-            <Timeline payout={p} />
-            {p.rejectionReason && <div className="text-[11px] text-danger font-mono">{p.rejectionReason}</div>}
-          </li>
-        ))}
-      </ul>
+          ))}
+        </TableBody>
+      </Table>
     </div>
   );
 }

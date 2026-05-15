@@ -51,73 +51,50 @@ export function TradesTable({ trades }: { trades: Trade[] }) {
         <Button variant="outline" size="sm" onClick={exportCsv}><Download className="h-3.5 w-3.5" /> Export CSV</Button>
       </div>
 
-      {/* Desktop table — horizontally scrollable if columns don't all fit. */}
-      <div className="hidden md:block overflow-x-auto">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <Th label="Time" k="ts" sortKey={sortKey} sortDir={sortDir} onSort={onSort} />
-              <Th label="Instrument" k="instrument" sortKey={sortKey} sortDir={sortDir} onSort={onSort} />
-              <Th label="Side" k="side" sortKey={sortKey} sortDir={sortDir} onSort={onSort} />
-              <Th label="Size" k="size" sortKey={sortKey} sortDir={sortDir} onSort={onSort} />
-              <TableHead>Entry</TableHead>
-              <TableHead>Exit</TableHead>
-              <Th label="P&L" k="pnlCents" sortKey={sortKey} sortDir={sortDir} onSort={onSort} />
-              <TableHead>Source</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {slice.map((t) => (
-              <TableRow key={t.id}>
-                <TableCell className="font-mono text-xs">{format(new Date(t.ts), "MMM d, HH:mm")}</TableCell>
-                <TableCell className="font-mono">{t.instrument}</TableCell>
-                <TableCell>
-                  <Badge variant={t.side === "BUY" ? "success" : "danger"}>{t.side}</Badge>
-                </TableCell>
-                <TableCell className="font-mono">{t.size}</TableCell>
-                <TableCell className="font-mono text-xs">{(t.entryPriceCents / 100).toFixed(2)}</TableCell>
-                <TableCell className="font-mono text-xs">{(t.exitPriceCents / 100).toFixed(2)}</TableCell>
-                <TableCell className={cn("font-mono font-semibold tabular-nums", pnlColor(t.pnlCents))}>
-                  {formatCurrency(t.pnlCents, { sign: true })}
-                </TableCell>
-                <TableCell>
-                  {t.source === "PLATFORM_LIQUIDATION" ? (
-                    <Badge variant="warning" className="gap-1"><Zap className="h-3 w-3" /> Auto-close</Badge>
-                  ) : (
-                    <span className="text-xs text-[var(--text-muted)]">Trader</span>
-                  )}
-                </TableCell>
-              </TableRow>
-            ))}
-            {slice.length === 0 && (
-              <TableRow>
-                <TableCell colSpan={8} className="text-center text-xs text-[var(--text-muted)] py-8">No trades match the filters.</TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
-
-      {/* Mobile cards */}
-      <ul className="md:hidden divide-y divide-[var(--border)]">
-        {slice.map((t) => (
-          <li key={t.id} className="px-3 py-3 flex items-center gap-3">
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 text-sm font-medium">
+      {/* Full table on every viewport — horizontally scrollable on mobile so every column is reachable. */}
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <Th label="Time" k="ts" sortKey={sortKey} sortDir={sortDir} onSort={onSort} />
+            <Th label="Instrument" k="instrument" sortKey={sortKey} sortDir={sortDir} onSort={onSort} />
+            <Th label="Side" k="side" sortKey={sortKey} sortDir={sortDir} onSort={onSort} />
+            <Th label="Size" k="size" sortKey={sortKey} sortDir={sortDir} onSort={onSort} />
+            <TableHead>Entry</TableHead>
+            <TableHead>Exit</TableHead>
+            <Th label="P&L" k="pnlCents" sortKey={sortKey} sortDir={sortDir} onSort={onSort} />
+            <TableHead>Source</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {slice.map((t) => (
+            <TableRow key={t.id}>
+              <TableCell className="font-mono text-xs">{format(new Date(t.ts), "MMM d, HH:mm")}</TableCell>
+              <TableCell className="font-mono">{t.instrument}</TableCell>
+              <TableCell>
                 <Badge variant={t.side === "BUY" ? "success" : "danger"}>{t.side}</Badge>
-                <span className="font-mono">{t.instrument}</span>
-                {t.source === "PLATFORM_LIQUIDATION" && <Zap className="h-3 w-3 text-[var(--warning)]" />}
-              </div>
-              <div className="text-[11px] text-[var(--text-muted)] font-mono">
-                {t.size} ct · {format(new Date(t.ts), "MMM d, HH:mm")}
-              </div>
-            </div>
-            <div className={cn("text-sm font-mono font-semibold tabular-nums", pnlColor(t.pnlCents))}>
-              {formatCurrency(t.pnlCents, { sign: true })}
-            </div>
-          </li>
-        ))}
-      </ul>
+              </TableCell>
+              <TableCell className="font-mono">{t.size}</TableCell>
+              <TableCell className="font-mono text-xs">{(t.entryPriceCents / 100).toFixed(2)}</TableCell>
+              <TableCell className="font-mono text-xs">{(t.exitPriceCents / 100).toFixed(2)}</TableCell>
+              <TableCell className={cn("font-mono font-semibold tabular-nums", pnlColor(t.pnlCents))}>
+                {formatCurrency(t.pnlCents, { sign: true })}
+              </TableCell>
+              <TableCell>
+                {t.source === "PLATFORM_LIQUIDATION" ? (
+                  <Badge variant="warning" className="gap-1"><Zap className="h-3 w-3" /> Auto-close</Badge>
+                ) : (
+                  <span className="text-xs text-[var(--text-muted)]">Trader</span>
+                )}
+              </TableCell>
+            </TableRow>
+          ))}
+          {slice.length === 0 && (
+            <TableRow>
+              <TableCell colSpan={8} className="text-center text-xs text-[var(--text-muted)] py-8">No trades match the filters.</TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
 
       {/* Pagination */}
       <div className="flex items-center justify-between gap-2 p-3 border-t border-[var(--border)] text-xs text-[var(--text-muted)]">
