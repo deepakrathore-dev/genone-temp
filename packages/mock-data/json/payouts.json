@@ -142,7 +142,7 @@
         "dailyCap": "Below daily cap"
       }
     },
-    "method": "CRYPTO"
+    "method": "BANK"
   },
   {
     "id": "pay_00044",
@@ -171,7 +171,7 @@
         "dailyCap": "Below daily cap"
       }
     },
-    "method": "CRYPTO"
+    "method": "BANK"
   },
   {
     "id": "pay_00006",
@@ -287,7 +287,7 @@
         "dailyCap": "Below daily cap"
       }
     },
-    "method": "CRYPTO"
+    "method": "BANK"
   },
   {
     "id": "pay_00015",
@@ -549,7 +549,7 @@
         "dailyCap": "Below daily cap"
       }
     },
-    "method": "CRYPTO"
+    "method": "BANK"
   },
   {
     "id": "pay_00014",
@@ -781,7 +781,7 @@
         "dailyCap": "Below daily cap"
       }
     },
-    "method": "CRYPTO"
+    "method": "BANK"
   },
   {
     "id": "pay_00010",
@@ -984,7 +984,7 @@
         "dailyCap": "Below daily cap"
       }
     },
-    "method": "CRYPTO"
+    "method": "BANK"
   },
   {
     "id": "pay_00051",
@@ -1246,7 +1246,7 @@
         "dailyCap": "Below daily cap"
       }
     },
-    "method": "CRYPTO"
+    "method": "BANK"
   },
   {
     "id": "pay_00011",
@@ -1333,7 +1333,7 @@
         "dailyCap": "Below daily cap"
       }
     },
-    "method": "CRYPTO"
+    "method": "BANK"
   },
   {
     "id": "pay_00004",

@@ -348,7 +348,7 @@ function buildPayouts(accounts: Account[]): Payout[] {
             dailyCap: "Below daily cap",
           },
         },
-        method: chance(0.85) ? "BANK" : "CRYPTO",
+        method: chance(0.85) ? "BANK" : "BANK",
       });
       pId++;
     }

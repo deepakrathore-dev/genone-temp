@@ -141,7 +141,5 @@ without rework:
   `/profile/accounts` (REQ-237 was designed for this).
 - Multi-step / phased evaluations would extend the `RuleSnapshot` interface, not the
   account shape - every account already carries its own rule snapshot per REQ-108.
-- Crypto payouts already have `method: "BANK" | "CRYPTO"` in the Payout type - only the
-  payout-method picker on the trader's request form needs to surface it.
 - AI companion / behaviour classification gets a new module under `app/(trader)/` and a
   new query in `lib/queries/`. No re-architecture.

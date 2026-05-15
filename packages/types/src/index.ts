@@ -265,7 +265,7 @@ export interface Payout {
   disbursedAt?: ISODate | null;
   rejectionReason?: string;
   gateStatus: GateStatus;
-  method: "BANK" | "CRYPTO";
+  method: "BANK" | "BANK";
 }
 
 export type NotificationKind = "SYSTEM" | "ALERT" | "PASS" | "FAIL" | "PAYOUT" | "LOYALTY";
