@@ -1,0 +1,25 @@
+# ── Terraform state ───────────────────────────────────────────────────────────
+# State files contain sensitive data (DB passwords, IPs, etc.)
+# Never commit these to git.
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+
+# ── Terraform working directory ───────────────────────────────────────────────
+.terraform/
+.terraform.lock.hcl
+
+# ── Variable files with real secrets ──────────────────────────────────────────
+# terraform.tfvars holds real passwords and keys — never commit it.
+# terraform.tfvars.example IS committed — it's the safe template.
+terraform.tfvars
+
+# ── Crash logs ────────────────────────────────────────────────────────────────
+crash.log
+crash.*.log
+
+# ── Override files ────────────────────────────────────────────────────────────
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
