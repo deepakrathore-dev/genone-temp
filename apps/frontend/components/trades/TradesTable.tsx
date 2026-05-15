@@ -51,8 +51,8 @@ export function TradesTable({ trades }: { trades: Trade[] }) {
         <Button variant="outline" size="sm" onClick={exportCsv}><Download className="h-3.5 w-3.5" /> Export CSV</Button>
       </div>
 
-      {/* Desktop table */}
-      <div className="hidden md:block">
+      {/* Desktop table — horizontally scrollable if columns don't all fit. */}
+      <div className="hidden md:block overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>

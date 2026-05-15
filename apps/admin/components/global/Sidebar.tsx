@@ -95,34 +95,67 @@ export function Sidebar() {
       <aside
         className={cn(
           "fixed lg:sticky top-0 z-50 h-screen flex flex-col border-r border-[var(--chrome-border)] bg-[var(--chrome-bg)]/95 backdrop-blur-xl transition-all duration-200 left-0",
-          sidebarCollapsed ? "w-[72px]" : "w-64",
+          "w-64",
+          sidebarCollapsed && "lg:w-[72px]",
           "lg:translate-x-0",
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <div className="flex h-16 items-center justify-between gap-2 border-b border-[var(--chrome-border)] px-4 shrink-0">
-          <Link href="/" className="flex items-center gap-2 overflow-hidden" onClick={() => setMobileOpen(false)}>
+        <div className={cn(
+          "flex h-16 items-center border-b border-[var(--chrome-border)] shrink-0 gap-2",
+          sidebarCollapsed ? "px-4 lg:px-0 lg:justify-center" : "px-4 justify-between"
+        )}>
+          {/* Desktop collapsed: logo IS the expand toggle. */}
+          {sidebarCollapsed ? (
+            <button
+              type="button"
+              onClick={toggleSidebar}
+              className="hidden lg:inline-flex h-10 w-10 items-center justify-center rounded-xl hover:bg-[var(--chrome-surface)] transition-colors"
+              aria-label="Expand sidebar"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/genone-logo-white.png" alt="Gen One Futures" className="h-8 w-auto" style={{ height: 32 }} />
+            </button>
+          ) : (
+            <Link href="/" className="hidden lg:flex items-center gap-2 overflow-hidden" onClick={() => setMobileOpen(false)}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/large-logo.png" alt="Gen One Futures" className="h-9 w-auto" style={{ height: 36 }} />
+              
+            </Link>
+          )}
+
+          {/* Mobile: always full logo + Admin pill. */}
+          <Link href="/" onClick={() => setMobileOpen(false)} className="lg:hidden flex items-center gap-2" aria-label="Gen One Admin">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={sidebarCollapsed ? "/genone-logo-white.png" : "/large-logo.png"}
-              alt="Gen One Futures"
-              className={cn("shrink-0", sidebarCollapsed ? "h-8 w-auto" : "h-9 w-auto")}
-              style={{ height: sidebarCollapsed ? 32 : 36 }}
-            />
-            {!sidebarCollapsed && (
-              <span className="ml-1 inline-flex items-center rounded-full bg-[var(--chrome-surface)] px-2 py-0.5 text-[10px] uppercase tracking-[0.12em] text-[var(--chrome-muted)] font-semibold">Admin</span>
-            )}
+            <img src="/large-logo.png" alt="Gen One Futures" className="h-9 w-auto" style={{ height: 36 }} />
+            <span className="ml-1 inline-flex items-center rounded-full bg-[var(--chrome-surface)] px-2 py-0.5 text-[10px] uppercase tracking-[0.12em] text-[var(--chrome-muted)] font-semibold">Admin</span>
           </Link>
-          <button onClick={toggleSidebar} className="hidden lg:inline-flex h-7 w-7 items-center justify-center rounded-full hover:bg-[var(--chrome-surface)] text-[var(--chrome-muted)] hover:text-[var(--chrome-text)]" aria-label="Toggle sidebar">
-            <ChevronLeft className={cn("h-4 w-4 transition-transform", sidebarCollapsed && "rotate-180")} />
+
+          {/* Desktop expanded: chevron collapses the sidebar. */}
+          {!sidebarCollapsed && (
+            <button onClick={toggleSidebar} className="hidden lg:inline-flex h-7 w-7 items-center justify-center rounded-full hover:bg-[var(--chrome-surface)] text-[var(--chrome-muted)] hover:text-[var(--chrome-text)]" aria-label="Collapse sidebar">
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+          )}
+
+          {/* Mobile close button. */}
+          <button
+            onClick={() => setMobileOpen(false)}
+            className="lg:hidden h-9 w-9 inline-flex items-center justify-center rounded-full text-[var(--chrome-muted)] hover:text-[var(--chrome-text)] hover:bg-[var(--chrome-surface)] ml-auto"
+            aria-label="Close menu"
+          >
+            <ChevronLeft className="h-4 w-4" />
           </button>
         </div>
 
         <nav className="flex-1 overflow-y-auto p-2 space-y-4">
           {visibleGroups.map((g, gi) => (
             <div key={gi} className="space-y-1">
-              {g.label && !sidebarCollapsed && (
-                <div className="text-[10px] uppercase tracking-[0.12em] font-semibold text-[var(--chrome-muted)]/60 px-3 pt-2 pb-1">
+              {g.label && (
+                <div className={cn(
+                  "text-[10px] uppercase tracking-[0.12em] font-semibold text-[var(--chrome-muted)]/60 px-3 pt-2 pb-1",
+                  sidebarCollapsed && "lg:hidden"
+                )}>
                   {g.label}
                 </div>
               )}
@@ -147,7 +180,7 @@ export function Sidebar() {
                     )}
                   >
                     <Icon className="h-4 w-4 shrink-0" />
-                    {!sidebarCollapsed && <span className="truncate">{it.label}</span>}
+                    <span className={cn("truncate", sidebarCollapsed && "lg:hidden")}>{it.label}</span>
                   </Link>
                 );
               })}

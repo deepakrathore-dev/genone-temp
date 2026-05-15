@@ -134,15 +134,15 @@ export function TradingCalendar({ accountId, days }: { accountId: string; days: 
             </div>
           </div>
 
-          {/* Weekday header */}
-          <div className="grid grid-cols-7 gap-1 text-[11px] uppercase tracking-wider text-[var(--text-faint)] font-semibold">
+          {/* Weekday header — hidden on mobile, the list view is friendlier under ~640px. */}
+          <div className="hidden md:grid grid-cols-7 gap-1 text-[11px] uppercase tracking-wider text-[var(--text-faint)] font-semibold">
             {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d) => (
               <div key={d} className="px-2 py-1">{d}</div>
             ))}
           </div>
 
-          {/* Day grid */}
-          <div className="grid grid-cols-7 gap-1.5">
+          {/* Day grid — desktop only. Mobile uses the list below. */}
+          <div className="hidden md:grid grid-cols-7 gap-1.5">
             {Array.from({ length: firstDayOfWeek }).map((_, i) => (
               <div key={`pad-${i}`} className="h-24 rounded-xl border border-dashed border-[var(--border)] bg-[var(--surface-2)]/40" />
             ))}
@@ -237,20 +237,33 @@ export function TradingCalendar({ accountId, days }: { accountId: string; days: 
             })}
           </div>
 
-          {/* Mobile vertical list */}
-          <ul className="sm:hidden divide-y divide-[var(--border)]">
+          {/* Mobile vertical list — shown wherever the 7-col grid is hidden. */}
+          <ul className="md:hidden divide-y divide-[var(--border)] rounded-xl border border-[var(--border)] bg-[var(--surface)] overflow-hidden">
             {daysInMonth.filter(isDayVisible).map((d) => (
               <li key={d.date}>
                 <button
                   onClick={() => goToTradesForDay(d.date)}
-                  className="w-full flex items-center justify-between gap-3 py-3 text-left"
+                  className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-[var(--surface-2)] transition-colors"
                 >
-                  <div>
-                    <div className="text-sm font-medium">{format(parseISO(d.date), "EEE, MMM d")}</div>
-                    <div className="text-xs text-[var(--text-muted)] font-mono">{d.tradesCount} trade{d.tradesCount === 1 ? "" : "s"}</div>
+                  <span
+                    aria-hidden
+                    className="h-2 w-2 rounded-full shrink-0"
+                    style={{
+                      background:
+                        d.pnlCents > 0 ? "var(--success)"
+                        : d.pnlCents < 0 ? "var(--danger)"
+                        : "var(--text-faint)",
+                    }}
+                  />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-medium text-[var(--text)]">{format(parseISO(d.date), "EEE, MMM d")}</div>
+                    <div className="text-xs text-[var(--text-muted)] font-mono">
+                      {d.tradesCount} trade{d.tradesCount === 1 ? "" : "s"}
+                      {d.events.length > 0 && ` · ${d.events.map((e) => EVENT_META[e].label).join(", ")}`}
+                    </div>
                   </div>
                   <div className={cn(
-                    "text-sm font-mono font-semibold",
+                    "text-sm font-mono font-semibold tabular-nums",
                     d.pnlCents > 0 ? "text-[var(--success)]" : d.pnlCents < 0 ? "text-[var(--danger)]" : "text-[var(--text-muted)]"
                   )}>
                     {formatCurrency(d.pnlCents, { sign: true })}

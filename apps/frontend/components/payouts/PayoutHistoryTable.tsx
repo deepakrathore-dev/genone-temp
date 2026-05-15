@@ -25,8 +25,8 @@ export function PayoutHistoryTable({ payouts }: { payouts: Payout[] }) {
 
   return (
     <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] overflow-hidden">
-      {/* Desktop */}
-      <div className="hidden md:block">
+      {/* Desktop — horizontally scrollable if columns don't all fit. */}
+      <div className="hidden md:block overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>

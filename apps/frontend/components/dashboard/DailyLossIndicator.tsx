@@ -46,8 +46,8 @@ export function DailyLossIndicator({ account }: { account: Account }) {
           </span>
         </div>
 
-        <div className="grid grid-cols-[160px_1fr] gap-5 items-center">
-          <div className="relative h-40 w-40 mx-auto">
+        <div className="flex flex-col items-stretch gap-5 sm:grid sm:grid-cols-[140px_1fr] sm:items-center">
+          <div className="relative h-36 w-36 sm:h-36 sm:w-36 mx-auto">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie

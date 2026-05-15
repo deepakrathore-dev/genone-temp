@@ -77,26 +77,44 @@ export default function WalletPage() {
           <CardTitle>Credit history</CardTitle>
         </CardHeader>
         <CardContent className="p-0">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Date</TableHead>
-                <TableHead>Source</TableHead>
-                <TableHead className="text-right">Amount</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {CREDIT_HISTORY.map((h, i) => (
-                <TableRow key={i}>
-                  <TableCell className="font-mono text-xs">{h.date}</TableCell>
-                  <TableCell className="text-sm">{h.source}</TableCell>
-                  <TableCell className={`text-right font-mono ${h.amountCents > 0 ? "text-success" : "text-danger"}`}>
-                    {formatCurrency(h.amountCents, { sign: true })}
-                  </TableCell>
+          {/* Desktop — horizontally scrollable if needed */}
+          <div className="hidden md:block overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Date</TableHead>
+                  <TableHead>Source</TableHead>
+                  <TableHead className="text-right">Amount</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {CREDIT_HISTORY.map((h, i) => (
+                  <TableRow key={i}>
+                    <TableCell className="font-mono text-xs whitespace-nowrap">{h.date}</TableCell>
+                    <TableCell className="text-sm">{h.source}</TableCell>
+                    <TableCell className={`text-right font-mono whitespace-nowrap ${h.amountCents > 0 ? "text-success" : "text-danger"}`}>
+                      {formatCurrency(h.amountCents, { sign: true })}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+
+          {/* Mobile — card list */}
+          <ul className="md:hidden divide-y divide-[var(--border)]">
+            {CREDIT_HISTORY.map((h, i) => (
+              <li key={i} className="px-4 py-3 flex items-start justify-between gap-3">
+                <div className="min-w-0 flex-1">
+                  <div className="text-sm text-[var(--text)] truncate">{h.source}</div>
+                  <div className="text-[11px] text-[var(--text-muted)] font-mono mt-0.5">{h.date}</div>
+                </div>
+                <div className={`text-sm font-mono font-semibold tabular-nums shrink-0 ${h.amountCents > 0 ? "text-success" : "text-danger"}`}>
+                  {formatCurrency(h.amountCents, { sign: true })}
+                </div>
+              </li>
+            ))}
+          </ul>
         </CardContent>
       </Card>
     </div>

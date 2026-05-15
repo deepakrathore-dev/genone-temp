@@ -52,7 +52,7 @@ export function AccountSwitcher() {
       <DropdownMenuTrigger asChild>
         <button
           className={cn(
-            "inline-flex h-10 items-center gap-2 rounded-full border border-[var(--chrome-border)] bg-[var(--chrome-surface)] px-3 text-sm font-medium text-[var(--chrome-text)] hover:bg-[var(--chrome-surface)]/80 transition-colors min-w-[180px] max-w-[280px]"
+            "inline-flex h-10 items-center gap-2 rounded-full border border-[var(--chrome-border)] bg-[var(--chrome-surface)] px-3 text-sm font-medium text-[var(--chrome-text)] hover:bg-[var(--chrome-surface)]/80 transition-colors max-w-[280px] min-w-0 sm:min-w-[180px] flex-shrink"
           )}
         >
           {current ? (

@@ -11,7 +11,7 @@ export function LeaderboardTable({ rows }: { rows: LeaderboardRow[] }) {
   return (
     <Card className="overflow-hidden">
       <CardContent className="p-0">
-        <div className="hidden md:block">
+        <div className="hidden md:block overflow-x-auto">
           <Table>
             <TableHeader>
               <TableRow>
